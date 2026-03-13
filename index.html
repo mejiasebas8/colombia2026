@@ -199,6 +199,17 @@
     .policy-icon { flex-shrink: 0; width: 16px; text-align: center; }
     .policy-text { flex: 1; }
 
+    .card-ai {
+      display: flex; gap: 6px; align-items: flex-start;
+      margin-top: 10px; padding: 8px 10px; border-radius: calc(var(--radius) - 2px);
+      background: hsl(var(--muted)); font-size: 0.68rem; line-height: 1.45;
+      color: hsl(var(--foreground));
+    }
+    .card-ai-label {
+      flex-shrink: 0; font-weight: 700; font-size: 0.6rem; text-transform: uppercase;
+      letter-spacing: 0.05em; color: hsl(var(--muted-foreground)); white-space: nowrap;
+    }
+
     .card-cta {
       display: flex; align-items: center; justify-content: center; gap: 4px;
       margin-top: 12px; padding-top: 12px; border-top: 1px solid hsl(var(--border));
@@ -549,6 +560,7 @@ const candidates = [
     },
     trade: ["Diversificar comercio mas alla de EE.UU., abrir mercados en China para productos colombianos","Estado debe controlar sectores estrategicos de la economia — posible restriccion a IED en ciertas industrias","Colombia como 'potencia agroalimentaria y biodiversa' — exportaciones basadas en agricultura y biodiversidad, no extractivas","Conectar economias rurales a mercados nacionales e internacionales via infraestructura vial terciaria","Sin posiciones especificas sobre aranceles, TLCs o zonas francas"],
     international: ["Continuidad con politica exterior de Petro: 'Daria continuidad a la politica del Presidente Petro'","Defiende dialogo politico con el regimen de Maduro; mantener relaciones diplomaticas con Venezuela","Opuesto a intervencion militar de EE.UU.: 'amenaza directa contra la paz regional'","Acuso a EE.UU. de intentar influir en elecciones de Colombia 2026","Favorable a expansion de lazos economicos y diplomaticos con China","Enfoque no alineado, cooperacion Sur-Sur"],
+    ai_oneliner: "Sin propuestas de IA publicadas — plataforma enfocada en reforma social y transicion energetica.",
     ai_tech: ["Sin propuestas especificas publicadas sobre IA, transformacion digital, criptomonedas/fintech o desarrollo de la industria tecnologica","Brecha notable en su plataforma publica"],
     education_stem: ["Sin propuestas especificas sobre educacion STEM, reforma del SENA, o desarrollo de fuerza laboral","Declaraciones enfocadas en garantizar acceso educativo para hijos de victimas del conflicto"]
   },
@@ -573,6 +585,7 @@ const candidates = [
     },
     trade: ["VP Jose Manuel Restrepo (ex-Min. Comercio y Hacienda) manejaria 'toda la agenda internacional' incluyendo atraccion de IED","Venezuela como oportunidad comercial: 'Una Venezuela libre necesitaria reconstruirse — Colombia podria ser el gran proveedor'","Agenda de promocion comercial 'Venezuela 2.0'","Cuatro motores economicos priorizados: hidrocarburos/mineria, infraestructura, agricultura, turismo","Eliminacion de 4x1.000 y impuestos a gasolina como incentivo a inversion"],
     international: ["Romperia relaciones diplomaticas con Venezuela, Cuba y Nicaragua: 'Con ninguna tirania del mundo'","Reunion privada con el Secretario de Estado Marco Rubio en enero 2026","Fuerte alineacion pro-EE.UU. en seguridad y contranacoticos","Describio a su VP Restrepo como 'el Marco Rubio' de su gobierno","Cooperacion militar con EE.UU. e Israel"],
+    ai_oneliner: "Sin propuestas de IA — plataforma centrada en seguridad, reduccion del Estado y reactivacion extractiva.",
     ai_tech: ["Sin propuestas especificas publicadas sobre IA, transformacion digital o politica tecnologica","Brecha notable en su plataforma pese a ser uno de los lideres en encuestas"],
     education_stem: ["Sin propuestas especificas sobre educacion STEM, reforma del SENA, o desarrollo de fuerza laboral","Plataforma enfocada casi exclusivamente en seguridad, salud y reforma fiscal"]
   },
@@ -597,6 +610,7 @@ const candidates = [
     },
     trade: ["Incentivos a la inversion y estabilidad juridica para impulsar crecimiento y empleo formal","Exportar combustibles minerales-energeticos para financiar desarrollo y transicion energetica","Transformar Ecopetrol para extraccion de gas offshore para exportacion","Modificar Ley Escalera de Formalidad: regimen simplificado para mipymes con acceso a credito","10,000 km de vias terciarias para conectar productores agricolas a mercados"],
     international: ["Fuerte alineacion pro-EE.UU., critica a Petro por 'danar relaciones internacionales'","Apoyo a administracion temporal de EE.UU. en Venezuela mientras se convocan elecciones","Plan Colombia 2.0: cooperacion de seguridad internacional actualizada","Cooperacion binacional de seguridad (no incursion militar directa de EE.UU. en Colombia)","Buscaria consejo del expresidente Alvaro Uribe","No clasifica situacion Israel-Palestina como genocidio"],
+    ai_oneliner: "IA, robotica y programacion desde la educacion basica; IA en justicia y seguridad (drones, inteligencia).",
     ai_tech: ["Integrar IA, automatizacion, robotica y programacion desde la educacion basica","IA en justicia: tecnologia para mejorar capacidad de respuesta judicial","Framework de seguridad 4R incluye tecnologia, drones y sistemas de inteligencia","Compromiso de acceso a internet en todas las escuelas"],
     education_stem: ["Programas STEM desde primaria: automatizacion, IA, robotica y programacion","Vouchers educativos ('bonos escolares') para que familias elijan entre instituciones publicas y privadas","Cursos de capacitacion por competencias de corto plazo para insercion laboral directa","Revivir programa 'Ser Pilo Paga' + Generacion E para aliviar deuda Icetex","Desarrollo de energia nuclear requeriria formacion tecnica asociada"]
   },
@@ -621,6 +635,7 @@ const candidates = [
     },
     trade: ["'Pacto fiscal' para fortalecer instituciones y reducir carga tributaria sobre renta y propiedad","Estrategia de 'construir mercado' para crecimiento economico","Asistencia tecnica y precios garantizados para comercializacion agricola","Corredores ferroviarios regionales para mejorar logistica comercial"],
     international: ["Posicion pragmatica de centro: contra la izquierda de Petro y la derecha de Uribe","Como alcaldesa, agradecio a Petro por restablecer relaciones con Venezuela, apoyando solidaridad con migrantes venezolanos","Sin plataforma detallada de politica exterior sobre EE.UU., China, UE o alianzas de defensa"],
+    ai_oneliner: "Tecnologia para seguridad y justicia; sin propuestas especificas de IA, fintech o economia digital.",
     ai_tech: ["Comando contra crimen organizado con 'nueva inversion en tecnologia'","Ministerio de Seguridad y Justicia Ciudadana con mas recursos y tecnologia","Sin propuestas especificas sobre IA, criptomonedas o fintech"],
     education_stem: ["1 millon de becas de educacion superior con componentes de emprendimiento e innovacion","Convertir SENA en universidad: estudiantes tecnicos pueden continuar a grado profesional sin cambiar de institucion","Contratos de aprendizaje de un ano para que graduados obtengan primer empleo y experiencia requerida","Mantener matricula cero en universidades publicas, aumentar inscripcion en programas tecnicos y tecnologicos con garantia de empleo","Fortalecio aprendizaje STEM con educacion socioemocional y civica en todas las escuelas publicas de Bogota durante su alcaldia"]
   },
@@ -645,6 +660,7 @@ const candidates = [
     },
     trade: ["Construir estructura exportadora 'mas diversificada y competitiva', reduciendo dependencia del petroleo y carbon","'Quiero una Colombia donde la inversion responsable sea respetada'","Apoyar acceso de productos colombianos a mercados globales via agencias de promocion de exportaciones","Incentivar exportadores pioneros en nuevas categorias de producto","Ampliar oferta exportable"],
     international: ["Reconoce necesidad de 'transformacion democratica en Venezuela'","Sin posiciones detalladas sobre EE.UU., China, UE o alianzas de defensa"],
+    ai_oneliner: "Triplicar I+D al 1% del PIB; tecnologia anti-extorsion en carceles. Sin plan amplio de IA.",
     ai_tech: ["Apoya proyectos piloto de fracking basados en evidencia cientifica","Tecnologia para bloquear comunicaciones ilegales desde carceles contra extorsion","Sin propuestas especificas amplias sobre IA, economia digital o criptomonedas"],
     education_stem: ["BANDERA: Triplicar gasto en I+D del 0.3% al 1% del PIB en cuatro anos, via fondo publico-privado para ciencia, tecnologia, innovacion y emprendimiento — el compromiso de I+D mas especifico entre todos los candidatos","Universidad Publica Digital para llevar educacion de calidad a municipios lejanos de ciudades universitarias","Flexibilizar planes de estudio, calendarios y horarios para que estudiantes con sobre-edad, mujeres con cargas de cuidado y poblaciones diversas puedan trabajar y estudiar","1.5 millones de empleos formales a traves de desarrollo sectorial en agricultura, industria y servicios con nueva tecnologia","Cobertura total de primera infancia","Mayor gasto en infancia, ciencia y tecnologia"]
   },
@@ -669,6 +685,7 @@ const candidates = [
     },
     trade: ["Atraer IED con 'estabilidad y reglas claras'","Venezuela como oportunidad: refinar petroleo venezolano en Cucuta y Barrancabermeja para bajar precios de combustible domestico","'Abrir la frontera es urgente para reactivar el comercio'","Infraestructura moderna — 'puentes, trenes, puertos y aeropuertos' — para competitividad internacional","Acuerdos inteligentes con otros paises: transferencia de tecnologia y capacitacion","Sectores clave: agricultura, turismo, infraestructura, construccion, mineria, energias limpias"],
     international: ["Pidio al gobierno Petro 'cuidar las relaciones internacionales con EE.UU., Europa y China'","Insto al gobierno a abrir frontera con Ecuador","Traeria al expresidente Juan Manuel Santos como asesor de seguridad, paz y relaciones internacionales","Propuso ofrecer a Petro la Cancilleria para 'renegociar la guerra contra las drogas'","Compromiso pragmatico con Venezuela: apoya reapertura fronteriza para comercio"],
+    ai_oneliner: "Drones inteligentes y vigilancia avanzada para seguridad; telemedicina. Sin plan amplio de IA.",
     ai_tech: ["Desplegar drones inteligentes y sistemas de vigilancia avanzada; repotenciar 140 helicopteros","Implementar telemedicina","Sin propuestas especificas amplias sobre IA, economia digital o criptomonedas"],
     education_stem: ["Programa F-18: bono-seguro educativo garantizando acceso universitario a los 18 anos","Formacion tecnica desde la educacion secundaria","Expansion de matricula universitaria gratuita","Alineacion de carreras con sectores productivos","Capital semilla para emprendimiento juvenil"]
   },
@@ -693,6 +710,7 @@ const candidates = [
     },
     trade: ["Como canciller, creo aperturas comerciales, oportunidades de inversion y alianzas internacionales","Inversion extranjera 'bajo modelos distintos' para enfrentar desafios fiscales","Expansion de mercados de carbono (~1M hectareas) con digitalizacion","Aprovechar biodiversidad de Colombia para mercados internacionales","Turismo de naturaleza como motor de desarrollo"],
     international: ["Alianzas estrategicas con EE.UU. y Reino Unido para seguridad transnacional e inteligencia coordinada","Defiende 'relaciones de Estado' (institucionales, no personales/politicas) con Venezuela y EE.UU.","Critico del 'Frente Amplio' de Petro como 'inexistente' y declaro que 'la paz total fracaso'","Diplomacia de biodiversidad: aprovechar estatus de Colombia como 'pais mas biodiverso del mundo'"],
+    ai_oneliner: "Sin propuestas de IA — plataforma centrada en diplomacia, biodiversidad y equidad territorial.",
     ai_tech: ["Sin propuestas especificas publicadas sobre IA, transformacion digital o politica tecnologica"],
     education_stem: ["Sin propuestas especificas. Plataforma enfocada en equidad territorial y desarrollo regional"]
   },
@@ -717,6 +735,7 @@ const candidates = [
     },
     trade: ["Consolidar a Colombia como productor energetico estrategico","Mayor produccion de hidrocarburos como camino a crecimiento","VP Reyes: certeza juridica para inversionistas, detener ciclo de reformas cada 18 meses","Meta de duplicar ingresos colombianos via reduccion de carga tributaria y expansion productiva"],
     international: ["Sin posiciones especificas detalladas sobre relaciones bilaterales u organizaciones multilaterales"],
+    ai_oneliner: "Plan PotencIA: 1M colombianos capacitados en IA, primera Facultad de IA, SenaTIC con 35K estudiantes.",
     ai_tech: ["AREA MAS FUERTE — como ex-Ministro TIC:","Plan PotencIA: convertir a Colombia en potencia digital con conectividad, ecosistemas de innovacion y educacion tecnologica","1 millon de colombianos capacitados en habilidades de IA","Anuncio la primera Facultad de Inteligencia Artificial en Colombia","Programa SenaTIC con SENA: 35,000 estudiantes de bachillerato tecnico graduandose con certificacion en nube, IA, programacion, ciberseguridad y analitica de datos","Educacion digital como puente entre talento colombiano e industria global","Mecanizacion agricola y avance tecnologico para areas rurales","Eliminacion de intermediarios en recursos hospitalarios via tecnologia"],
     education_stem: ["Programa SenaTIC (detallado arriba): 35,000 estudiantes con certificaciones en habilidades digitales (nube, IA, programacion, ciberseguridad, analitica de datos)","Primera Facultad de IA en Colombia","Formacion Harvard/MIT informa su filosofia de educacion-como-desarrollo","Educacion digital como pilar central de su plataforma"]
   },
@@ -739,6 +758,7 @@ const candidates = [
     },
     trade: ["Continuidad probable con enfoque del gobierno Petro","Sin propuestas comerciales o de IED especificas publicadas"],
     international: ["Mantendria enfoque de politica exterior del gobierno Petro","Sin posiciones especificas detalladas"],
+    ai_oneliner: "Sin propuestas de IA o tecnologia — plataforma centrada en derechos laborales y reforma social.",
     ai_tech: ["Sin propuestas especificas publicadas sobre IA o tecnologia"],
     education_stem: ["Plataforma centrada en derechos laborales, redistribucion social y consolidacion de reformas del gobierno Petro"]
   },
@@ -763,6 +783,7 @@ const candidates = [
     },
     trade: ["Clausula constitucional de estabilidad tributaria por 10 anos para atraer IED","Expansion de programas 'obras por impuestos' para incentivos de inversion","IVA al 7% espera triplicar recaudo via efecto multiplicador en 1-1.5 anos","Impuesto corporativo de 35% a 22-24% para competitividad","Compras digitales del gobierno: subastas inversas, analitica de precios, controles anti-fraude","Reactivar petroleo/gas: Colombia importa gas 35% mas costoso externamente"],
     international: ["Expandir Plan Colombia de $600M a $2,000M en asistencia de EE.UU.","Cooperacion de seguridad con EE.UU. e Israel para lucha antinarcoticos","Obtener apoyo militar, de inteligencia y social de la UE","Restaurar exportaciones de carbon a Israel valoradas en $400M anuales","Abordo el aumento arancelario del 10% impuesto a bienes colombianos (aranceles Trump)","Frontera con Venezuela: mantener comercio legitimo, prevenir cruces de grupos armados","Desplegar 120,000 reservistas para recuperacion territorial"],
+    ai_oneliner: "IA para seguridad (drones, reconocimiento facial) y salud (pulseras inteligentes, telemedicina).",
     ai_tech: ["IA y vigilancia: drones, camaras de reconocimiento facial, sistemas de IA y sensores para seguridad","Tecnologia de salud: pulseras inteligentes, atencion medica remota, monitoreo de signos vitales","Compras digitales del gobierno: plataformas con analitica de precios y controles anti-fraude","Recupero $39B COP como contralor a traves de supervision habilitada por tecnologia"],
     education_stem: ["Subsidiar tasas de credito Icetex con ahorros de austeridad","Educacion y oportunidades de empleo como prioridad de primeros 100 dias","Reconstruir Mi Casa Ya y programas de vivienda social"]
   },
@@ -785,6 +806,7 @@ const candidates = [
     },
     trade: ["Reduccion de impuestos como incentivo general a inversion","Sin propuestas especificas de IED, acuerdos comerciales o aranceles"],
     international: ["Expandir Plan Colombia de $600M a $2,000M en asistencia de EE.UU.","Obtener apoyo militar, de inteligencia y social de la UE","Restaurar exportaciones de carbon a Israel valoradas en $400M anuales","Abordo el aumento arancelario del 10% sobre bienes colombianos","Frontera con Venezuela: mantener comercio legitimo, desplegar fuerza militar contra grupos ilegales"],
+    ai_oneliner: "Sin propuestas de IA — prioriza seguridad, reduccion de impuestos y relacion con EE.UU.",
     ai_tech: ["Sin propuestas especificas publicadas sobre IA o politica tecnologica"],
     education_stem: ["Educacion entre prioridades de primeros 100 dias, pero sin propuestas STEM o vocacionales detalladas"]
   },
@@ -808,6 +830,7 @@ const candidates = [
     },
     trade: ["Perfil empresarial (SBOLab venture builder) sugiere orientacion pro-mercado","Fundacion Fin Social: microfinanzas y emprendimiento para poblaciones vulnerables","Sin propuestas especificas de comercio, IED o aranceles publicadas"],
     international: ["Propone salir de la Corte Penal Internacional (Estatuto de Roma)","Enviar prisioneros potencialmente a instalaciones estilo El Salvador","Reformas constitucionales sugieren enfoque nacionalista de soberania","Sin posiciones especificas sobre EE.UU., China, UE o Venezuela"],
+    ai_oneliner: "Emprendedor tech (SBOLab), pero sin propuestas especificas de IA en su plataforma de campana.",
     ai_tech: ["Experiencia en emprendimiento tecnologico (SBOLab) pero sin propuestas especificas de IA, digital o cripto en su plataforma de campana"],
     education_stem: ["Educacion basada en valores y convivencia civica desde la infancia, inspirada en modelos japoneses","Via Fundacion Fin Social: educacion financiera y acceso a credito para pequenos empresarios","Sin propuestas especificas de STEM, SENA, universidades o I+D"]
   }
@@ -833,6 +856,10 @@ candidates.forEach(c => {
       <div class="card-bio">${c.bio}</div>
       <div class="policies-title">Propuestas Clave</div>
       ${c.policies.map(p => `<div class="policy-item"><span class="policy-icon">${p.icon}</span><span class="policy-text">${p.text}</span></div>`).join('')}
+      <div class="card-ai">
+        <span class="card-ai-label">&#129302; IA:</span>
+        <span>${c.ai_oneliner}</span>
+      </div>
       <div class="card-cta">
         ver propuestas detalladas
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
