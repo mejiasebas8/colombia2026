@@ -224,6 +224,7 @@
       overflow: hidden;
       transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
       position: relative;
+      cursor: pointer;
     }
     .card::before {
       content: '';
@@ -318,6 +319,196 @@
     .policy-icon { flex-shrink: 0; width: 18px; text-align: center; }
     .policy-text { flex: 1; }
 
+    .card-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      transition: color 0.2s;
+    }
+    .card:hover .card-cta { color: #1e40af; }
+    .card-cta svg { width: 14px; height: 14px; transition: transform 0.2s; }
+    .card:hover .card-cta svg { transform: translateX(3px); }
+
+    /* ========== MODAL ========== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 16px;
+      overflow-y: auto;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--card);
+      border-radius: 24px;
+      max-width: 720px;
+      width: 100%;
+      position: relative;
+      animation: modalIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      margin: auto;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--text-mid);
+      transition: all 0.2s;
+      z-index: 2;
+    }
+    .modal-close:hover { background: #f5f5f5; color: var(--text); }
+
+    .modal-header {
+      padding: 32px 32px 0;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .modal-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #475569;
+      flex-shrink: 0;
+    }
+    .modal-header-info h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .modal-header-info .modal-party {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      margin-top: 2px;
+    }
+    .modal-header-info .modal-vp {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+    .modal-bio {
+      padding: 20px 32px;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.65;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-body { padding: 24px 32px 32px; }
+
+    .modal-section {
+      margin-bottom: 24px;
+    }
+    .modal-section:last-child { margin-bottom: 0; }
+    .modal-section-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .modal-policy-item {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+    .modal-policy-item .icon { flex-shrink: 0; width: 20px; text-align: center; }
+
+    .modal-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .modal-stat {
+      background: #f8f8f8;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .modal-stat .value {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .modal-stat .label {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    .modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .modal-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: #f8f8f8;
+    }
+    .modal-tag.pro { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+    .modal-tag.con { background: var(--left-bg); border-color: var(--left-border); color: var(--left); }
+    .modal-tag.neutral { background: var(--center-bg); border-color: var(--center-border); color: var(--center); }
+
+    @media (max-width: 600px) {
+      .modal-header { padding: 24px 20px 0; flex-direction: column; align-items: center; text-align: center; }
+      .modal-bio { padding: 16px 20px; }
+      .modal-body { padding: 20px 20px 24px; }
+      .modal-overlay { padding: 20px 8px; }
+    }
+
     /* How to vote section */
     .vote-section {
       background: var(--card);
@@ -373,6 +564,38 @@
     .date-card .date { font-size: 1.3rem; font-weight: 800; color: var(--green); }
     .date-card .label { font-size: 0.8rem; color: var(--text-mid); margin-top: 4px; }
 
+    /* Macro context banner */
+    .macro-banner {
+      background: #0a0a0a;
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      color: white;
+    }
+    .macro-banner h3 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 16px;
+    }
+    .macro-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+    }
+    .macro-stat .value { font-size: 1.4rem; font-weight: 800; }
+    .macro-stat .label { font-size: 0.72rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+    .macro-stat .value.red { color: #f87171; }
+    .macro-stat .value.green { color: #4ade80; }
+    .macro-stat .value.yellow { color: #FCD116; }
+    .macro-source {
+      margin-top: 14px;
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.3);
+    }
+
     /* Disclaimer */
     .disclaimer {
       text-align: center;
@@ -410,7 +633,7 @@
     <div class="flag-glow"></div>
     <h1>Elecciones Colombia 2026</h1>
     <p class="subtitle">Candidatos Presidenciales &mdash; Primera Vuelta</p>
-    <p class="tagline">16 candidatos &middot; Una decision &middot; Tu voto importa</p>
+    <p class="tagline">14 candidatos &middot; Una decision &middot; Tu voto importa</p>
     <div class="date-badge">31 de Mayo, 2026</div>
   </div>
 </header>
@@ -428,352 +651,27 @@
 <!-- Candidates -->
 <main class="container">
   <h2 class="section-title">Los Candidatos</h2>
-  <p class="section-desc">Conoce a los 16 aspirantes a la Presidencia de Colombia, sus propuestas clave, y sus formulas vicepresidenciales. Filtra por espectro politico para comparar.</p>
+  <p class="section-desc">Conoce a los aspirantes a la Presidencia de Colombia, sus propuestas clave, presupuestos y planes economicos. Haz clic en cualquier candidato para ver sus propuestas detalladas.</p>
 
-  <div class="candidates-grid" id="grid">
-
-    <!-- 1. Ivan Cepeda -->
-    <div class="card" data-spectrum="left">
-      <div class="card-top">
-        <div class="avatar">IC</div>
-        <div>
-          <div class="card-name">Ivan Cepeda</div>
-          <div class="card-party">Pacto Historico</div>
-          <div class="card-vp">VP: Aida Quilcue</div>
-          <span class="spectrum-tag tag-left">Izquierda</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Senador y activista de derechos civiles. Su padre, tambien senador, fue asesinado por paramilitares en 1994. Elegido a la Camara (2010) y Senado (2014). Lidera en encuestas con ~32%.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#9878;</span><span class="policy-text">Continuar reformas laborales y economicas del gobierno Petro</span></div>
-        <div class="policy-item"><span class="policy-icon">&#9774;</span><span class="policy-text">Enfoque de negociacion con grupos insurgentes, no solo militar</span></div>
-        <div class="policy-item"><span class="policy-icon">&#127795;</span><span class="policy-text">Protecciones ambientales reforzadas y transicion energetica</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128269;</span><span class="policy-text">Medidas agresivas anti-corrupcion</span></div>
-      </div>
+  <!-- Macro Context -->
+  <div class="macro-banner">
+    <h3>Contexto Macroeconomico Colombia 2026 (Oxford Economics)</h3>
+    <div class="macro-stats">
+      <div class="macro-stat"><div class="value green">3.5%</div><div class="label">PIB 2026 (est.)</div></div>
+      <div class="macro-stat"><div class="value red">6.3%</div><div class="label">Inflacion 2026</div></div>
+      <div class="macro-stat"><div class="value red">7.1%</div><div class="label">Deficit Fiscal (% PIB)</div></div>
+      <div class="macro-stat"><div class="value yellow">~64%</div><div class="label">Deuda Publica (% PIB)</div></div>
+      <div class="macro-stat"><div class="value">$547B</div><div class="label">Presupuesto Nacional (COP)</div></div>
+      <div class="macro-stat"><div class="value">10.5%</div><div class="label">Tasa de Interes (est.)</div></div>
     </div>
-
-    <!-- 2. Paloma Valencia -->
-    <div class="card" data-spectrum="right">
-      <div class="card-top">
-        <div class="avatar">PV</div>
-        <div>
-          <div class="card-name">Paloma Valencia</div>
-          <div class="card-party">Centro Democratico</div>
-          <div class="card-vp">VP: Juan Daniel Oviedo</div>
-          <span class="spectrum-tag tag-right">Derecha</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Abogada y filosofa, nieta del expresidente Guillermo Leon Valencia. Senadora desde 2014 por el Centro Democratico. Gano la Gran Consulta con mas de 3.2 millones de votos. Primera mujer candidata del uribismo.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#128274;</span><span class="policy-text">Estrategia 4R de seguridad: reducir ingresos criminales del narcotrafico</span></div>
-        <div class="policy-item"><span class="policy-icon">&#127968;</span><span class="policy-text">"Casa Semilla": viviendas ampliables con muros antisismicos</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128218;</span><span class="policy-text">Reforma SENA: educacion para la 4ta Revolucion Industrial</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128739;</span><span class="policy-text">10,000 km de vias terciarias rurales con tecnologia de bajo costo</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128176;</span><span class="policy-text">Impuesto unico simplificado para mipymes</span></div>
-      </div>
-    </div>
-
-    <!-- 3. Abelardo de la Espriella -->
-    <div class="card" data-spectrum="far-right">
-      <div class="card-top">
-        <div class="avatar">AE</div>
-        <div>
-          <div class="card-name">Abelardo de la Espriella</div>
-          <div class="card-party">Defensores de la Patria</div>
-          <div class="card-vp">VP: Jose Manuel Restrepo</div>
-          <span class="spectrum-tag tag-far-right">Derecha Dura</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Abogado penalista y empresario de alto perfil. Segundo en encuestas con ~18%. Modelo inspirado en Bukele (El Salvador). Tiene ciudadania estadounidense. Ha representado clientes controversiales.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#128170;</span><span class="policy-text">"Mano dura": bombardeos a narcotrafico, mega-carceles de maxima seguridad</span></div>
-        <div class="policy-item"><span class="policy-icon">&#127981;</span><span class="policy-text">Expansion de produccion de combustibles fosiles</span></div>
-        <div class="policy-item"><span class="policy-icon">&#9878;</span><span class="policy-text">Reduccion drastica del Estado</span></div>
-        <div class="policy-item"><span class="policy-icon">&#127463;</span><span class="policy-text">Cooperacion militar con EE.UU. e Israel</span></div>
-      </div>
-    </div>
-
-    <!-- 4. Claudia Lopez -->
-    <div class="card" data-spectrum="center">
-      <div class="card-top">
-        <div class="avatar">CL</div>
-        <div>
-          <div class="card-name">Claudia Lopez</div>
-          <div class="card-party">Consulta de las Soluciones</div>
-          <div class="card-vp">VP: Leonardo Huerta</div>
-          <span class="spectrum-tag tag-center">Centro</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Ex-alcaldesa de Bogota (2020-2023). Primera mujer y primera persona abiertamente LGBT en dirigir la capital. Politologa con maestria de Columbia y Northwestern. Gano la Consulta de las Soluciones.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#128274;</span><span class="policy-text">Fiscalia Antimafia: tratar criminales como crimen organizado, no negociar</span></div>
-        <div class="policy-item"><span class="policy-icon">&#127973;</span><span class="policy-text">Pago directo a prestadores de salud, modelo mixto publico-privado</span></div>
-        <div class="policy-item"><span class="policy-icon">&#127891;</span><span class="policy-text">Un millon de becas para educacion y empleo</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128105;</span><span class="policy-text">"Manzanas del Cuidado" nacional: lavanderia, guarderia, formacion</span></div>
-      </div>
-    </div>
-
-    <!-- 5. Sergio Fajardo -->
-    <div class="card" data-spectrum="center">
-      <div class="card-top">
-        <div class="avatar">SF</div>
-        <div>
-          <div class="card-name">Sergio Fajardo</div>
-          <div class="card-party">Dignidad y Compromiso</div>
-          <div class="card-vp">VP: Edna Bonilla</div>
-          <span class="spectrum-tag tag-center">Centro</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Matematico y exprofesor universitario. Alcalde de Medellin (2004-2008), gobernador de Antioquia (2012-2016). Reconocido por transformar la educacion en Medellin. Tercer intento presidencial.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#128269;</span><span class="policy-text">Anti-corrupcion: transparencia radical y rendicion de cuentas</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128274;</span><span class="policy-text">Modernizar inteligencia y entrenamiento policial</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128218;</span><span class="policy-text">Titulacion rural de tierras e infraestructura campesina</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128101;</span><span class="policy-text">Programas anti-reclutamiento: alternativas para jovenes</span></div>
-      </div>
-    </div>
-
-    <!-- 6. Roy Barreras -->
-    <div class="card" data-spectrum="center-left">
-      <div class="card-top">
-        <div class="avatar">RB</div>
-        <div>
-          <div class="card-name">Roy Barreras</div>
-          <div class="card-party">La Fuerza de la Paz</div>
-          <div class="card-vp">VP: Martha Lucia Zamora</div>
-          <span class="spectrum-tag tag-center-left">Centro-Izquierda</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Medico, escritor y exsenador. Exembajador en el Reino Unido. Clave en la negociacion del Acuerdo de Paz con las FARC. Gano la consulta del Frente por la Vida con 257,037 votos.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#127973;</span><span class="policy-text">Salud: tecnologia, medicina preventiva, dignificar personal medico</span></div>
-        <div class="policy-item"><span class="policy-icon">&#127959;</span><span class="policy-text">Grandes proyectos de puertos, aeropuertos y tren</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128188;</span><span class="policy-text">Reactivacion economica via construccion como motor de empleo</span></div>
-        <div class="policy-item"><span class="policy-icon">&#9774;</span><span class="policy-text">Consolidacion de procesos de paz y seguridad territorial</span></div>
-      </div>
-    </div>
-
-    <!-- 7. Luis Gilberto Murillo -->
-    <div class="card" data-spectrum="center-left">
-      <div class="card-top">
-        <div class="avatar">LM</div>
-        <div>
-          <div class="card-name">Luis Gilberto Murillo</div>
-          <div class="card-party">Independiente</div>
-          <div class="card-vp">VP: Luz Maria Zapata</div>
-          <span class="spectrum-tag tag-center-left">Centro-Izquierda</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Excanciller y exembajador de Colombia en EE.UU. Ingeniero de minas con experiencia en politica ambiental internacional. Fue parte del gobierno Petro antes de lanzar su candidatura independiente.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#127758;</span><span class="policy-text">Politica exterior activa y relaciones con EE.UU.</span></div>
-        <div class="policy-item"><span class="policy-icon">&#127795;</span><span class="policy-text">Desarrollo sostenible y transicion energetica justa</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128101;</span><span class="policy-text">Inclusion de comunidades afrocolombianas e indigenas</span></div>
-        <div class="policy-item"><span class="policy-icon">&#9878;</span><span class="policy-text">Reforma institucional con enfoque territorial</span></div>
-      </div>
-    </div>
-
-    <!-- 8. Miguel Uribe Londono -->
-    <div class="card" data-spectrum="right">
-      <div class="card-top">
-        <div class="avatar">MU</div>
-        <div>
-          <div class="card-name">Miguel Uribe Londono</div>
-          <div class="card-party">Partido Democrata Colombiano</div>
-          <div class="card-vp">VP: Luisa Fernanda Villegas</div>
-          <span class="spectrum-tag tag-right">Derecha</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Politico y abogado. Se distancio del Centro Democratico para recibir el aval del Partido Democrata Colombiano. Enfocado en temas de seguridad y orden publico.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#128274;</span><span class="policy-text">Fortalecimiento de la fuerza publica y seguridad ciudadana</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128176;</span><span class="policy-text">Politica economica pro-empresa y atraccion de inversion</span></div>
-        <div class="policy-item"><span class="policy-icon">&#9878;</span><span class="policy-text">Reduccion de burocracia estatal</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128218;</span><span class="policy-text">Educacion como motor de movilidad social</span></div>
-      </div>
-    </div>
-
-    <!-- 9. Clara Lopez -->
-    <div class="card" data-spectrum="left">
-      <div class="card-top">
-        <div class="avatar">CL</div>
-        <div>
-          <div class="card-name">Clara Lopez</div>
-          <div class="card-party">Esperanza Democratica</div>
-          <div class="card-vp">VP: Maria Consuelo Del Rio</div>
-          <span class="spectrum-tag tag-left">Izquierda</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Exsenadora, exministra de Trabajo, y exconcejala de Bogota. Abogada con amplia trayectoria en defensa de derechos sociales. Ha sido candidata presidencial anteriormente.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#128101;</span><span class="policy-text">Defensa de derechos sociales y laborales</span></div>
-        <div class="policy-item"><span class="policy-icon">&#9878;</span><span class="policy-text">Fortalecimiento del Estado social de derecho</span></div>
-        <div class="policy-item"><span class="policy-icon">&#127973;</span><span class="policy-text">Salud publica universal de calidad</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128269;</span><span class="policy-text">Lucha contra la desigualdad economica</span></div>
-      </div>
-    </div>
-
-    <!-- 10. Mauricio Lizcano -->
-    <div class="card" data-spectrum="center">
-      <div class="card-top">
-        <div class="avatar">ML</div>
-        <div>
-          <div class="card-name">Mauricio Lizcano</div>
-          <div class="card-party">Independiente</div>
-          <div class="card-vp">VP: Adriana Ramirez</div>
-          <span class="spectrum-tag tag-center">Centro</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Exministro de Tecnologias de la Informacion y las Comunicaciones. Salio del gobierno Petro para lanzar su candidatura. Enfoque en modernizacion tecnologica del pais.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#128187;</span><span class="policy-text">Transformacion digital del gobierno y conectividad rural</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128188;</span><span class="policy-text">Emprendimiento tecnologico y economia digital</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128218;</span><span class="policy-text">Educacion STEM y formacion para el futuro</span></div>
-        <div class="policy-item"><span class="policy-icon">&#127959;</span><span class="policy-text">Infraestructura de telecomunicaciones nacional</span></div>
-      </div>
-    </div>
-
-    <!-- 11. Juan Fernando Cristo -->
-    <div class="card" data-spectrum="center-left">
-      <div class="card-top">
-        <div class="avatar">JC</div>
-        <div>
-          <div class="card-name">Juan Fernando Cristo</div>
-          <div class="card-party">Independiente</div>
-          <div class="card-vp">VP: Por confirmar</div>
-          <span class="spectrum-tag tag-center-left">Centro-Izquierda</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Exministro del Interior del gobierno Petro. Exsenador de larga trayectoria. Clave en el proceso constituyente y reformas legislativas. Abogado especializado en derecho publico.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#9878;</span><span class="policy-text">Reforma institucional y fortalecimiento democratico</span></div>
-        <div class="policy-item"><span class="policy-icon">&#9774;</span><span class="policy-text">Continuidad del proceso de paz con ajustes pragmaticos</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128101;</span><span class="policy-text">Politica social con enfoque territorial</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128269;</span><span class="policy-text">Transparencia y lucha contra la corrupcion</span></div>
-      </div>
-    </div>
-
-    <!-- 12. Luis Carlos Reyes -->
-    <div class="card" data-spectrum="center">
-      <div class="card-top">
-        <div class="avatar">LR</div>
-        <div>
-          <div class="card-name">Luis Carlos Reyes</div>
-          <div class="card-party">Independiente</div>
-          <div class="card-vp">VP: Por confirmar</div>
-          <span class="spectrum-tag tag-center">Centro</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Exdirector de la DIAN y exministro de Comercio. Economista con experiencia en politica fiscal y comercio internacional. Tecnoctrata con perfil institucional.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#128176;</span><span class="policy-text">Reforma tributaria para simplificar y ampliar la base</span></div>
-        <div class="policy-item"><span class="policy-icon">&#127758;</span><span class="policy-text">Apertura comercial y atraccion de inversion extranjera</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128200;</span><span class="policy-text">Modernizacion de la administracion publica</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128188;</span><span class="policy-text">Formalizacion economica y emprendimiento</span></div>
-      </div>
-    </div>
-
-    <!-- 13. Daniel Palacios -->
-    <div class="card" data-spectrum="right">
-      <div class="card-top">
-        <div class="avatar">DP</div>
-        <div>
-          <div class="card-name">Daniel Palacios</div>
-          <div class="card-party">Independiente</div>
-          <div class="card-vp">VP: Por confirmar</div>
-          <span class="spectrum-tag tag-right">Derecha</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Exministro del Interior en el gobierno de Ivan Duque. Abogado con experiencia en gestion publica y politica de seguridad. Perfil tecnico y de orden publico.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#128274;</span><span class="policy-text">Restablecer autoridad estatal en zonas de conflicto</span></div>
-        <div class="policy-item"><span class="policy-icon">&#9878;</span><span class="policy-text">Eficiencia en la gestion publica y reduccion del gasto</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128176;</span><span class="policy-text">Politica economica de mercado con responsabilidad fiscal</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128274;</span><span class="policy-text">Lucha frontal contra el narcotrafico</span></div>
-      </div>
-    </div>
-
-    <!-- 14. Felipe Cordoba -->
-    <div class="card" data-spectrum="right">
-      <div class="card-top">
-        <div class="avatar">FC</div>
-        <div>
-          <div class="card-name">Felipe Cordoba</div>
-          <div class="card-party">Independiente</div>
-          <div class="card-vp">VP: Por confirmar</div>
-          <span class="spectrum-tag tag-right">Derecha</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Excontralor General de la Republica. Abogado con experiencia en control fiscal y supervision de recursos publicos. Anteriormente respaldado por el Partido Conservador.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#128269;</span><span class="policy-text">Control fiscal riguroso y lucha anti-corrupcion</span></div>
-        <div class="policy-item"><span class="policy-icon">&#9878;</span><span class="policy-text">Eficiencia en el uso de recursos publicos</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128176;</span><span class="policy-text">Disciplina fiscal y estabilidad macroeconomica</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128274;</span><span class="policy-text">Fortalecimiento institucional</span></div>
-      </div>
-    </div>
-
-    <!-- 15. Maurice Armitage -->
-    <div class="card" data-spectrum="center">
-      <div class="card-top">
-        <div class="avatar">MA</div>
-        <div>
-          <div class="card-name">Maurice Armitage</div>
-          <div class="card-party">Independiente</div>
-          <div class="card-vp">VP: Por confirmar</div>
-          <span class="spectrum-tag tag-center">Centro</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Exalcalde de Cali (2016-2019) y empresario exitoso. Fundador de MAC S.A. Conocido por su gestion pragmatica y enfoque empresarial en la administracion publica.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#128188;</span><span class="policy-text">Gestion publica con mentalidad empresarial</span></div>
-        <div class="policy-item"><span class="policy-icon">&#127959;</span><span class="policy-text">Infraestructura y desarrollo urbano</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128176;</span><span class="policy-text">Generacion de empleo a traves del sector privado</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128274;</span><span class="policy-text">Seguridad ciudadana y convivencia</span></div>
-      </div>
-    </div>
-
-    <!-- 16. Santiago Botero -->
-    <div class="card" data-spectrum="right">
-      <div class="card-top">
-        <div class="avatar">SB</div>
-        <div>
-          <div class="card-name">Santiago Botero</div>
-          <div class="card-party">Colombia Pa Lante Unida</div>
-          <div class="card-vp">VP: Carlos Fernando Cuevas</div>
-          <span class="spectrum-tag tag-right">Derecha</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-bio">Empresario e ingeniero agronomo. Candidato del movimiento "Colombia, Pa Lante Unida". Enfoque en desarrollo agricola y productividad del campo colombiano.</div>
-        <div class="policies-title">Propuestas Clave</div>
-        <div class="policy-item"><span class="policy-icon">&#127806;</span><span class="policy-text">Desarrollo agroindustrial y soberania alimentaria</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128176;</span><span class="policy-text">Apoyo al emprendimiento rural y urbano</span></div>
-        <div class="policy-item"><span class="policy-icon">&#128739;</span><span class="policy-text">Infraestructura vial para el campo</span></div>
-        <div class="policy-item"><span class="policy-icon">&#9878;</span><span class="policy-text">Reduccion de tramites y regulaciones</span></div>
-      </div>
-    </div>
-
+    <div class="macro-source">Fuente: Oxford Economics, Feb 2026 &middot; Presupuesto: $327B funcionamiento, $112B deuda, $82B inversion</div>
   </div>
+
+  <div class="candidates-grid" id="grid"></div>
 
   <!-- How to Vote -->
   <div class="vote-section">
-    <h2>&#127463;&#127476; Como Votar</h2>
+    <h2>&#127464;&#127476; Como Votar</h2>
     <p style="color:var(--text-mid); margin-bottom:24px; font-size:0.9rem;">Tu voto es tu voz. Asi puedes participar en las elecciones presidenciales de 2026:</p>
     <div class="steps">
       <div class="step">
@@ -828,6 +726,7 @@
   <a href="https://www.infobae.com/colombia/" target="_blank">Infobae Colombia</a> &middot;
   <a href="https://www.eltiempo.com" target="_blank">El Tiempo</a> &middot;
   <a href="https://www.americasquarterly.org" target="_blank">Americas Quarterly</a> &middot;
+  <a href="https://www.portafolio.co" target="_blank">Portafolio</a> &middot;
   <a href="https://www.as-coa.org" target="_blank">AS/COA</a></p>
 </div>
 
@@ -835,130 +734,1097 @@
   <p>Elecciones Colombia 2026 &middot; Informacion Ciudadana &middot; Tu voto decide el futuro</p>
 </footer>
 
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modal-close">&times;</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
 <script>
-  // ========== Particle Background ==========
-  const canvas = document.getElementById('particles');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  const COLORS = ['#FCD116', '#003893', '#CE1126', 'rgba(255,255,255,0.3)'];
-
-  function resizeCanvas() {
-    canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-    canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+// ========== CANDIDATE DATA ==========
+const candidates = [
+  {
+    id: "cepeda",
+    name: "Ivan Cepeda",
+    initials: "IC",
+    party: "Pacto Historico",
+    vp: "Aida Quilcue",
+    spectrum: "left",
+    spectrumLabel: "Izquierda",
+    tagClass: "tag-left",
+    polls: "~32%",
+    bio: "Senador y activista de derechos civiles. Su padre, tambien senador, fue asesinado por paramilitares en 1994. Elegido a la Camara (2010) y Senado (2014). Lidera en encuestas.",
+    policies: [
+      { icon: "&#9878;", text: "Continuar reformas laborales y economicas del gobierno Petro" },
+      { icon: "&#9774;", text: "Enfoque de negociacion con grupos insurgentes, no solo militar" },
+      { icon: "&#127795;", text: "Protecciones ambientales reforzadas y transicion energetica" },
+      { icon: "&#128269;", text: "Medidas agresivas anti-corrupcion" }
+    ],
+    economic: {
+      model: "Economia dirigida por el Estado con redistribucion social",
+      modelTags: ["Estado intervencionista", "Redistributivo", "Anti-austeridad neoliberal"],
+      tax: [
+        "Ley de Austeridad Republicana: reducir gastos suntuarios del gobierno para redirigir a bienestar social",
+        "Reduccion del salario presidencial y de gabinete progresivamente",
+        "Sin reforma tributaria detallada nueva anunciada"
+      ],
+      budget: [
+        "Prioridad: bienestar social y reduccion de pobreza",
+        "Redirigir ahorros de austeridad gubernamental a programas sociales",
+        "Cortar gastos de lujo del gobierno (vehiculos, viajes, contratos innecesarios)"
+      ],
+      infrastructure: [
+        "Construccion de acueductos rurales y plantas de purificacion",
+        "Acceso universal al agua potable como prioridad",
+        "Sin montos especificos de infraestructura divulgados"
+      ],
+      social: [
+        "Reforma agraria y distribucion de tierras",
+        "Continuar y profundizar programas sociales del gobierno Petro",
+        "Apoyo a victimas del conflicto armado"
+      ],
+      energy: [
+        "Prohibir nuevas licencias de exploracion de hidrocarburos",
+        "Prohibir exploracion de yacimientos no convencionales",
+        "Detener proyectos piloto de fracking y desarrollo offshore",
+        "Transicion energetica completa en 15 anos"
+      ],
+      employment: [
+        "Apoya aumento del 23% en salario minimo",
+        "Creacion de empleo via intervencion estatal y economia productiva"
+      ],
+      trade: [
+        "Continuidad del enfoque del gobierno Petro",
+        "Cooperacion Sur-Sur"
+      ],
+      fiscal: [
+        "Oxford Economics: bonos a 10 anos ~12.5%, peso se debilita",
+        "Impacto fiscal negativo por prohibicion de exploracion (petroleo = 35% de exportaciones)",
+        "Escenario de continuidad mantiene estres fiscal"
+      ],
+      stats: [
+        { value: "~32%", label: "Encuestas" },
+        { value: "15 anos", label: "Transicion energetica" },
+        { value: "12.5%", label: "Bonos 10Y (est.)" }
+      ]
+    }
+  },
+  {
+    id: "valencia",
+    name: "Paloma Valencia",
+    initials: "PV",
+    party: "Centro Democratico",
+    vp: "Juan Daniel Oviedo",
+    spectrum: "right",
+    spectrumLabel: "Derecha",
+    tagClass: "tag-right",
+    polls: "Gano Gran Consulta (3.2M votos)",
+    bio: "Abogada y filosofa, nieta del expresidente Guillermo Leon Valencia. Senadora desde 2014 por el Centro Democratico. Gano la Gran Consulta con mas de 3.2 millones de votos. Primera mujer candidata del uribismo.",
+    policies: [
+      { icon: "&#128274;", text: "Estrategia 4R de seguridad: reducir ingresos criminales del narcotrafico" },
+      { icon: "&#127968;", text: "'Casa Semilla': viviendas ampliables con muros antisismicos" },
+      { icon: "&#128218;", text: "Reforma SENA: educacion para la 4ta Revolucion Industrial" },
+      { icon: "&#128739;", text: "10,000 km de vias terciarias rurales con tecnologia de bajo costo" }
+    ],
+    economic: {
+      model: "Libre mercado con eficiencia estatal. Colombia como potencia energetica.",
+      modelTags: ["Libre mercado", "Pro-empresa", "Reduccion del Estado"],
+      tax: [
+        "Impuesto unico simplificado para micro, pequenas y medianas empresas (mipymes)",
+        "'Bajar los impuestos y reducir el Estado'",
+        "Simplificar el cumplimiento tributario para PYMEs"
+      ],
+      budget: [
+        "Fusionar ministerios, reducir cada uno en 20%",
+        "Redirigir ahorros a inversion social",
+        "Desarrollo del sector energetico como motor economico"
+      ],
+      infrastructure: [
+        "10,000 km de vias terciarias mejoradas con tecnologia de bajo costo",
+        "Conectividad rural para fortalecer el transporte agropecuario"
+      ],
+      social: [
+        "'Casa Semilla': viviendas ampliables con muros antisismicos y materiales locales",
+        "Vouchers educativos para familias de bajos ingresos (eleccion entre instituciones publicas/privadas)",
+        "IA, automatizacion, robotica y programacion desde educacion basica",
+        "Reforma pensional: contribucion desde el nacimiento, ahorro devuelto como pension o vivienda",
+        "Horarios flexibles, teletrabajo y cuidado compartido para madres cabeza de hogar"
+      ],
+      energy: [
+        "Colombia como 'potencia energetica': eolica, solar, hidroelectrica, nuclear y geotermica",
+        "Reactivar exploracion y produccion de hidrocarburos",
+        "Aprovechar recursos naturales con recursos propios"
+      ],
+      employment: [
+        "Facilitar acceso al credito para empresas",
+        "Combatir extorsion y 'gota a gota' (prestamos informales)",
+        "Fomentar asociaciones empresariales"
+      ],
+      trade: [
+        "Postura pro-inversion extranjera",
+        "Reactivar la confianza de los inversionistas"
+      ],
+      fiscal: [
+        "Reduccion del Estado (20% por ministerio) como mecanismo de disciplina fiscal",
+        "Oxford Economics: bonos ~9.5%, peso se fortalece, superavit primario 1.3% para 2028",
+        "Deuda publica se estabiliza en 64% del PIB (2027-2029)"
+      ],
+      stats: [
+        { value: "3.2M", label: "Votos consulta" },
+        { value: "-20%", label: "Reduccion ministerios" },
+        { value: "10,000km", label: "Vias terciarias" },
+        { value: "9.5%", label: "Bonos 10Y (est.)" }
+      ]
+    }
+  },
+  {
+    id: "espriella",
+    name: "Abelardo de la Espriella",
+    initials: "AE",
+    party: "Defensores de la Patria",
+    vp: "Jose Manuel Restrepo",
+    spectrum: "far-right",
+    spectrumLabel: "Derecha Dura",
+    tagClass: "tag-far-right",
+    polls: "~18%",
+    bio: "Abogado penalista y empresario de alto perfil. Modelo inspirado en Bukele (El Salvador). VP: Jose Manuel Restrepo (exministro de Hacienda). Tiene ciudadania estadounidense.",
+    policies: [
+      { icon: "&#128170;", text: "'Mano dura': bombardeos a narcotrafico, mega-carceles de maxima seguridad" },
+      { icon: "&#127981;", text: "Expansion de produccion de combustibles fosiles" },
+      { icon: "&#9878;", text: "Reduccion drastica del Estado en un 40%" },
+      { icon: "&#127463;", text: "Cooperacion militar con EE.UU. e Israel" }
+    ],
+    economic: {
+      model: "Libre mercado, pro-empresa, reduccion masiva del Estado. Cuatro motores: hidrocarburos/mineria, infraestructura, agricultura y turismo.",
+      modelTags: ["Libre mercado", "Reduccion masiva del Estado", "Pro-hidrocarburos"],
+      tax: [
+        "Eliminar el impuesto del 4x1.000 (gravamen a movimientos financieros)",
+        "Eliminar impuestos a la gasolina",
+        "Bajar impuestos a empresas para estimular crecimiento",
+        "Sin reforma tributaria nueva: enfoque en reduccion"
+      ],
+      budget: [
+        "Cortar el aparato estatal en un 40%",
+        "Reducir ministerios de la cifra actual a 9 o 10",
+        "90 decretos el primer dia cubriendo seguridad, salud y economia"
+      ],
+      infrastructure: [
+        "Infraestructura como uno de cuatro 'motores economicos'",
+        "Sin montos especificos divulgados"
+      ],
+      social: [
+        "'Colombia pais de propietarios': credito de vivienda al 2% maximo, plazo 30 anos, casas de dos pisos con negocio en primer piso",
+        "$10 billones COP de inversion de emergencia en salud (medicamentos, pagos a personal medico, obligaciones pendientes)",
+        "Plan de choque para estabilizacion del sistema de salud"
+      ],
+      energy: [
+        "Reactivacion total de exploracion y explotacion de hidrocarburos y mineria",
+        "Retorno a produccion agresiva de petroleo y gas",
+        "Erradicacion de coca con fumigacion aerea"
+      ],
+      employment: [
+        "Enfoque en microempresarios, comerciantes, trabajadores independientes",
+        "El crecimiento debe beneficiar a quienes mas lo necesitan"
+      ],
+      trade: [
+        "Pro-inversion extranjera",
+        "VP Jose Manuel Restrepo senala manejo economico ortodoxo",
+        "Restaurar confianza inversionista"
+      ],
+      fiscal: [
+        "Reduccion del 40% del Estado como herramienta fiscal principal",
+        "Reactivacion de hidrocarburos para ingresos fiscales",
+        "Oxford Economics: bonos ~9.5%, peso se fortalece, superavit primario 1.3% para 2028"
+      ],
+      stats: [
+        { value: "~18%", label: "Encuestas" },
+        { value: "-40%", label: "Reduccion del Estado" },
+        { value: "$10B", label: "COP emergencia salud" },
+        { value: "90", label: "Decretos dia 1" }
+      ]
+    }
+  },
+  {
+    id: "clopez",
+    name: "Claudia Lopez",
+    initials: "CL",
+    party: "Consulta de las Soluciones",
+    vp: "Leonardo Huerta",
+    spectrum: "center",
+    spectrumLabel: "Centro",
+    tagClass: "tag-center",
+    polls: "Gano Consulta de las Soluciones",
+    bio: "Ex-alcaldesa de Bogota (2020-2023). Primera mujer y primera persona abiertamente LGBT en dirigir la capital. Politologa con maestria de Columbia y Northwestern.",
+    policies: [
+      { icon: "&#128274;", text: "Fiscalia Antimafia: tratar criminales como crimen organizado, no negociar" },
+      { icon: "&#127973;", text: "Pago directo a prestadores de salud, modelo mixto publico-privado" },
+      { icon: "&#127891;", text: "Un millon de becas para educacion y empleo" },
+      { icon: "&#128105;", text: "'Manzanas del Cuidado' nacional: lavanderia, guarderia, formacion" }
+    ],
+    economic: {
+      model: "Economia mixta con disciplina fiscal. Recuperacion de credibilidad institucional. Tributacion progresiva con incentivos pro-empresa.",
+      modelTags: ["Economia mixta", "Disciplina fiscal", "Pragmatica"],
+      tax: [
+        "Impuestos progresivos, transparentes y oportunos",
+        "Reducir impuestos a empresas para impulsar produccion y empleo",
+        "Contribucion de seguridad solo de los 5,000 colombianos mas ricos",
+        "Reducir impuesto de renta en 2 puntos si PIB crece al 4% e inversion privada al 20%"
+      ],
+      budget: [
+        "Disciplina fiscal: mas ingresos, recortes de gastos, eficiencia presupuestal",
+        "Gasto social enfocado en educacion, vivienda y empoderamiento economico de mujeres",
+        "'No va a alcanzar para todo' - enfoque fiscal pragmatico"
+      ],
+      infrastructure: [
+        "Proyectos de emergencia de agua, saneamiento y electrificacion en el Pacifico y suroeste",
+        "Rehabilitacion de vias secundarias y terciarias",
+        "Centros logisticos y proyectos ferroviarios en Cundinamarca-Boyaca"
+      ],
+      social: [
+        "1 millon de becas combinando educacion y trabajo para jovenes y mujeres",
+        "600,000 subsidios de vivienda (reactivar Mi Casa Ya) - generador de empleo masivo",
+        "'Manzanas del cuidado': infraestructura para que mujeres puedan estudiar/trabajar",
+        "Programas de apoyo a microempresas",
+        "Sistemas de cuidado publico y gratuito"
+      ],
+      energy: [
+        "Enfoque en desarrollo regional sostenible",
+        "Sin politica energetica detallada publicada"
+      ],
+      employment: [
+        "1 millon de becas educacion-trabajo para reducir fuga de talento",
+        "Fortalecimiento de microempresas como motor de creacion de empleo",
+        "Empoderamiento economico de la mujer central en estrategia de empleo"
+      ],
+      trade: [
+        "Ambiente pro-inversion a traves de menores impuestos corporativos",
+        "Recuperacion de credibilidad institucional para atraer capital"
+      ],
+      fiscal: [
+        "Disciplina fiscal como pilar",
+        "Mas ingresos + recortes + eficiencia presupuestal",
+        "Reduccion tributaria condicional vinculada a metas de crecimiento"
+      ],
+      stats: [
+        { value: "1M", label: "Becas educacion-trabajo" },
+        { value: "600K", label: "Subsidios vivienda" },
+        { value: "-2pp", label: "Renta si PIB crece 4%" },
+        { value: "5,000", label: "Top contribuyentes seguridad" }
+      ]
+    }
+  },
+  {
+    id: "fajardo",
+    name: "Sergio Fajardo",
+    initials: "SF",
+    party: "Dignidad y Compromiso",
+    vp: "Edna Bonilla",
+    spectrum: "center",
+    spectrumLabel: "Centro",
+    tagClass: "tag-center",
+    polls: "Tercer intento presidencial",
+    bio: "Matematico y exprofesor universitario. Alcalde de Medellin (2004-2008), gobernador de Antioquia (2012-2016). Reconocido por transformar la educacion en Medellin.",
+    policies: [
+      { icon: "&#128269;", text: "Anti-corrupcion: transparencia radical y rendicion de cuentas" },
+      { icon: "&#128274;", text: "Modernizar inteligencia y entrenamiento policial" },
+      { icon: "&#128218;", text: "Titulacion rural de tierras e infraestructura campesina" },
+      { icon: "&#128101;", text: "Programas anti-reclutamiento: alternativas para jovenes" }
+    ],
+    economic: {
+      model: "Economia mixta impulsada por educacion, ciencia, tecnologia y productividad. 'Sin justicia social no hay desarrollo.'",
+      modelTags: ["Economia mixta", "Productividad", "Educacion como motor"],
+      tax: [
+        "Reforma fiscal estructural para disminuir tributacion corporativa",
+        "Ampliar la base tributaria (mas personas pagando, a tasas menores)",
+        "Fortalecer principio de progresividad",
+        "Implementar catastro multiproposito",
+        "Eliminar exenciones tributarias injustificadas",
+        "Modernizar la DIAN e incentivar facturacion electronica"
+      ],
+      budget: [
+        "Educacion, ciencia y tecnologia como areas de inversion primaria",
+        "Mejora de productividad como motor de crecimiento"
+      ],
+      infrastructure: [
+        "Consolidar plan de vias 4G",
+        "Recuperar la red ferroviaria",
+        "Construir vias terciarias y caminos veredales",
+        "Infraestructura de integracion regional"
+      ],
+      social: [
+        "Educacion como eje central de transformacion",
+        "Inversion en biotecnologia, ecoturismo, energias renovables y economia digital"
+      ],
+      energy: [
+        "Desarrollo de energias renovables",
+        "Promocion del ecoturismo",
+        "Enfoque equilibrado en transicion energetica"
+      ],
+      employment: [
+        "'Salario suficiente para garantizar una vida justa para las familias'",
+        "Creacion de empleo a traves de ganancias en productividad",
+        "Prioridad: empleo formal"
+      ],
+      trade: [
+        "Apoyar acceso de productos colombianos a mercados globales via agencias de promocion de exportaciones",
+        "Incentivar exportadores pioneros en nuevas categorias de producto",
+        "Ampliar oferta exportable"
+      ],
+      fiscal: [
+        "Reforma fiscal estructural (no parches anuales)",
+        "Menores impuestos corporativos, base mas amplia",
+        "Encaja en escenario 'ortodoxo' de Oxford Economics"
+      ],
+      stats: [
+        { value: "4G", label: "Consolidar plan vial" },
+        { value: "Ferrea", label: "Recuperar red ferroviaria" },
+        { value: "Catastro", label: "Multiproposito" }
+      ]
+    }
+  },
+  {
+    id: "barreras",
+    name: "Roy Barreras",
+    initials: "RB",
+    party: "La Fuerza de la Paz",
+    vp: "Martha Lucia Zamora",
+    spectrum: "center-left",
+    spectrumLabel: "Centro-Izquierda",
+    tagClass: "tag-center-left",
+    polls: "Gano consulta Frente por la Vida (257K votos)",
+    bio: "Medico, escritor y exsenador. Exembajador en el Reino Unido. Clave en la negociacion del Acuerdo de Paz con las FARC.",
+    policies: [
+      { icon: "&#127973;", text: "Salud: tecnologia, medicina preventiva, dignificar personal medico" },
+      { icon: "&#127959;", text: "Grandes proyectos de puertos, aeropuertos y tren" },
+      { icon: "&#128188;", text: "Reactivacion economica via construccion como motor de empleo" },
+      { icon: "&#9774;", text: "Consolidacion de procesos de paz y seguridad territorial" }
+    ],
+    economic: {
+      model: "Centro-izquierda progresista con responsabilidad fiscal. Combina crecimiento con politica social. Se posiciona como 'progresista moderado'.",
+      modelTags: ["Progresista moderado", "Responsabilidad fiscal", "Pro-crecimiento"],
+      tax: [
+        "Sin propuestas tributarias especificas detalladas publicamente",
+        "Advierte contra el populismo y las promesas sin financiamiento"
+      ],
+      budget: [
+        "Primera decision: nombrar Ministro de Hacienda con doctorado en economia 'que a veces diga no'",
+        "Restaurar confianza fiscal",
+        "Reactivar productividad para financiar reduccion de pobreza",
+        "Cancelaria contrato de aviones Gripen del gobierno Petro"
+      ],
+      infrastructure: [
+        "Grandes proyectos de puertos, aeropuertos y ferrocarril",
+        "Construccion como motor de empleo y reactivacion"
+      ],
+      social: [
+        "Reforma del sistema de salud (autor de la ley estatutaria de salud de Colombia)",
+        "Reducir pobreza a traves de crecimiento economico, no solo transferencias"
+      ],
+      energy: [
+        "Restaurar exploracion de hidrocarburos (diferenciacion clave vs. Cepeda)",
+        "Sindicato de trabajadores de Ecopetrol (USO) respaldo a Barreras sobre Cepeda",
+        "Reactivar el rol del petroleo en la economia"
+      ],
+      employment: [
+        "Reactivar sectores productivos: agricultura, turismo, infraestructura, construccion",
+        "Creacion de empleo a traves de reactivacion economica"
+      ],
+      trade: [
+        "Restaurar confianza inversionista",
+        "Advierte que la perdida de confianza ha elevado costos de endeudamiento",
+        "Cumplimiento de regla fiscal y recuperacion de calificacion crediticia"
+      ],
+      fiscal: [
+        "Critico de suspension de regla fiscal y deterioro de calificacion soberana",
+        "Enfasis en restaurar credibilidad fiscal",
+        "MinHacienda que pueda decir 'no' a gastos"
+      ],
+      stats: [
+        { value: "257K", label: "Votos consulta" },
+        { value: "MinHda PhD", label: "Primera decision" },
+        { value: "Pro-petroleo", label: "Reactivar exploracion" }
+      ]
+    }
+  },
+  {
+    id: "murillo",
+    name: "Luis Gilberto Murillo",
+    initials: "LM",
+    party: "Independiente",
+    vp: "Luz Maria Zapata",
+    spectrum: "center-left",
+    spectrumLabel: "Centro-Izquierda",
+    tagClass: "tag-center-left",
+    polls: "Candidato independiente por firmas",
+    bio: "Excanciller y exembajador de Colombia en EE.UU. Ingeniero de minas con experiencia en politica ambiental internacional. Ex gobernador del Choco.",
+    policies: [
+      { icon: "&#127758;", text: "Politica exterior activa y relaciones con EE.UU." },
+      { icon: "&#127795;", text: "Desarrollo sostenible y transicion energetica justa" },
+      { icon: "&#128101;", text: "Inclusion de comunidades afrocolombianas e indigenas" },
+      { icon: "&#9878;", text: "Reforma institucional con enfoque territorial" }
+    ],
+    economic: {
+      model: "Desarrollo impulsado por regiones. 'El desarrollo del pais depende de como se desarrollen esas regiones.' Economia verde y biodiversidad como bases.",
+      modelTags: ["Economia verde", "Descentralizado", "Regional"],
+      tax: [
+        "Sin propuestas tributarias especificas detalladas",
+        "Aboga por atraer inversion extranjera 'bajo diferentes modelos'"
+      ],
+      budget: [
+        "Mayor participacion de entidades territoriales en recursos nacionales",
+        "Descentralizacion del gasto",
+        "Modernizar instituciones estatales del siglo XX"
+      ],
+      infrastructure: [
+        "Infraestructura 'sostenible y regenerativa' que cierre brechas territoriales",
+        "Adaptacion al cambio climatico de infraestructura existente"
+      ],
+      social: [
+        "Servicios basicos universales en regiones desatendidas (especialmente Pacifico/Choco)",
+        "Sacar jovenes de economias ilegales con oportunidades legitimas",
+        "Educacion y salud a traves de transformacion regional"
+      ],
+      energy: [
+        "Creo mercados de carbono que operan en zonas del Pacifico",
+        "Casi 1 millon de hectareas cubiertas por mercados de carbono con potencial de crecimiento via digitalizacion",
+        "Turismo de naturaleza como herramienta de inclusion social",
+        "Biodiversidad como base de desarrollo economico"
+      ],
+      employment: [
+        "Empleo juvenil como alternativa a economias ilegales",
+        "Empleos a traves de construccion de infraestructura sostenible"
+      ],
+      trade: [
+        "Inversion extranjera bajo nuevos modelos",
+        "Aprovechar biodiversidad para mercados internacionales",
+        "Exembajador en Washington - relacion fuerte con EE.UU."
+      ],
+      fiscal: [
+        "Descentralizar gestion fiscal",
+        "Atraer inversion extranjera para llenar brechas fiscales"
+      ],
+      stats: [
+        { value: "~1M ha", label: "Mercados de carbono" },
+        { value: "Regional", label: "Enfoque desarrollo" },
+        { value: "EE.UU.", label: "Relacion estrategica" }
+      ]
+    }
+  },
+  {
+    id: "claralopez",
+    name: "Clara Lopez",
+    initials: "CL",
+    party: "Esperanza Democratica",
+    vp: "Maria Consuelo Del Rio",
+    spectrum: "left",
+    spectrumLabel: "Izquierda",
+    tagClass: "tag-left",
+    polls: "Primera inscrita oficialmente (Ene 31)",
+    bio: "Exsenadora, exministra de Trabajo, y exconcejala de Bogota. Abogada con amplia trayectoria en defensa de derechos sociales.",
+    policies: [
+      { icon: "&#128101;", text: "Defensa de derechos sociales y laborales" },
+      { icon: "&#9878;", text: "Fortalecimiento del Estado social de derecho" },
+      { icon: "&#127973;", text: "Salud publica universal de calidad" },
+      { icon: "&#128269;", text: "Lucha contra la desigualdad economica" }
+    ],
+    economic: {
+      model: "Estado intervencionista con enfasis en redistribucion. Tres ejes: Estado que cuida, economia productiva, y seguridad humana.",
+      modelTags: ["Estado social", "Redistributivo", "Derechos laborales"],
+      tax: [
+        "Orientacion general hacia tributacion progresiva y redistribucion",
+        "Sin reforma tributaria especifica detallada publicamente"
+      ],
+      budget: [
+        "Ampliar y fortalecer el Estado social",
+        "Continuidad con la transformacion social del gobierno Petro"
+      ],
+      infrastructure: [
+        "Sin propuestas especificas de infraestructura detalladas"
+      ],
+      social: [
+        "Ampliar derechos laborales",
+        "Promover equidad economica",
+        "Dignidad en las condiciones laborales",
+        "Expansion de proteccion social"
+      ],
+      energy: [
+        "Sin propuestas energeticas especificas detalladas"
+      ],
+      employment: [
+        "Fortalecer protecciones y derechos laborales",
+        "Dignidad en condiciones laborales",
+        "Combatir desigualdad a traves del empleo"
+      ],
+      trade: [
+        "Sin propuestas comerciales especificas detalladas"
+      ],
+      fiscal: [
+        "Orientacion general hacia expansion del rol del Estado en la economia",
+        "Sin metas fiscales especificas"
+      ],
+      stats: [
+        { value: "3 ejes", label: "Cuidar, Producir, Proteger" },
+        { value: "Social", label: "Enfoque principal" }
+      ]
+    }
+  },
+  {
+    id: "lizcano",
+    name: "Mauricio Lizcano",
+    initials: "ML",
+    party: "Firme con Lizcano / ASI",
+    vp: "Luis Carlos Reyes (ex-Dir. DIAN)",
+    spectrum: "center",
+    spectrumLabel: "Centro",
+    tagClass: "tag-center",
+    polls: "Ex-Ministro TIC",
+    bio: "Exministro de Tecnologias de la Informacion. Salio del gobierno Petro para lanzar su candidatura. VP: Luis Carlos Reyes, exdirector de la DIAN y exministro de Comercio. Educado en Harvard y MIT.",
+    policies: [
+      { icon: "&#128187;", text: "Transformacion digital del gobierno y conectividad rural" },
+      { icon: "&#128188;", text: "Emprendimiento tecnologico y economia digital" },
+      { icon: "&#128218;", text: "Educacion STEM y formacion para el futuro" },
+      { icon: "&#127959;", text: "Infraestructura de telecomunicaciones nacional" }
+    ],
+    economic: {
+      model: "Centrismo pragmatico. Meta: 'duplicar el ingreso de los colombianos.' Formula VP tecnocrata (Reyes: reforma tributaria, DIAN).",
+      modelTags: ["Centrista", "Tecnocratico", "Pro-crecimiento"],
+      tax: [
+        "Disminuir la carga tributaria sobre empresas e individuos",
+        "VP Reyes propone: reducir impuesto corporativo de 35% a 30% gradualmente",
+        "VP Reyes: simplificar sistema tributario, no crear nuevas cargas",
+        "VP Reyes: penas de carcel para evasion tributaria a gran escala",
+        "Trabajadores que ganan menos de $10M COP/mes no pagarian mas"
+      ],
+      budget: [
+        "Reducir el Congreso en un 30% ('mi primera accion como presidente')",
+        "Educacion digital y tecnologia como puentes a la industria global",
+        "Presupuesto programatico, regionalizado y transparente (propuesta VP Reyes)"
+      ],
+      infrastructure: [
+        "Expansion de vivienda como motor economico",
+        "Inversion en infraestructura digital"
+      ],
+      social: [
+        "Tecnificar la agricultura rural",
+        "Eliminar intermediarios en asignacion de recursos hospitalarios",
+        "Educacion digital conectando talento colombiano con industria global"
+      ],
+      energy: [
+        "Aumentar produccion de hidrocarburos",
+        "Consolidar a Colombia como productor energetico estrategico",
+        "VP Reyes: nuevos proyectos de exploracion de hidrocarburos",
+        "VP Reyes: legalizar mercado recreativo de marihuana (ingresos tributarios)"
+      ],
+      employment: [
+        "Duplicar ingresos colombianos (meta aspiracional)",
+        "Economia digital y educacion como herramientas de empleo"
+      ],
+      trade: [
+        "Ambiente pro-inversion",
+        "VP Reyes: certeza juridica para inversionistas"
+      ],
+      fiscal: [
+        "Reducir tamano del aparato estatal",
+        "Bajar impuestos para estimular crecimiento",
+        "VP Reyes: sistema tributario sostenible, detener ciclo de reformas cada 18 meses",
+        "VP Reyes: ampliar base tributaria, tasas mas bajas, combatir evasion agresivamente"
+      ],
+      stats: [
+        { value: "-30%", label: "Reducir Congreso" },
+        { value: "35%→30%", label: "Impuesto corp. (VP)" },
+        { value: "Digital", label: "Transformacion" },
+        { value: "x2", label: "Meta ingresos" }
+      ]
+    }
+  },
+  {
+    id: "cristo",
+    name: "Juan Fernando Cristo",
+    initials: "JC",
+    party: "En Marcha",
+    vp: "Por confirmar",
+    spectrum: "center-left",
+    spectrumLabel: "Centro-Izquierda",
+    tagClass: "tag-center-left",
+    polls: "Ex-Ministro del Interior",
+    bio: "Exministro del Interior del gobierno Petro. Exsenador de larga trayectoria. Clave en reformas legislativas. Abogado especializado en derecho publico.",
+    policies: [
+      { icon: "&#9878;", text: "Reforma institucional y fortalecimiento democratico" },
+      { icon: "&#9774;", text: "Continuidad del proceso de paz con ajustes pragmaticos" },
+      { icon: "&#128101;", text: "Politica social con enfoque territorial" },
+      { icon: "&#128269;", text: "Transparencia y lucha contra la corrupcion" }
+    ],
+    economic: {
+      model: "Progresista con estabilidad institucional. Economia regulada con enfoque en seguridad.",
+      modelTags: ["Progresista", "Institucionalista", "Regulador"],
+      tax: [
+        "Apoya comisiones tecnicas para definir ajustes salariales/tributarios basados en necesidades de trabajadores y empleadores",
+        "Sin reforma tributaria especifica detallada"
+      ],
+      budget: [
+        "Prioridades: seguridad, economia y recuperacion institucional"
+      ],
+      infrastructure: [
+        "Sin propuestas de infraestructura especificas detalladas"
+      ],
+      social: [
+        "Apoyo al aumento del salario minimo del 23.7% por decreto",
+        "Recuperacion economica a traves de intervenciones reguladas"
+      ],
+      energy: [
+        "Sin propuestas energeticas especificas detalladas"
+      ],
+      employment: [
+        "Apoya politicas salariales favorables a los trabajadores",
+        "Enfoque basado en comisiones tecnicas para ajustes salariales"
+      ],
+      trade: [
+        "Sin propuestas comerciales especificas detalladas"
+      ],
+      fiscal: [
+        "Enfoque centro-izquierda general en gestion fiscal",
+        "Sin metas fiscales especificas divulgadas"
+      ],
+      stats: [
+        { value: "23.7%", label: "Apoyo alza salario minimo" },
+        { value: "Tecnico", label: "Comisiones de ajuste" }
+      ]
+    }
+  },
+  {
+    id: "palacios",
+    name: "Daniel Palacios",
+    initials: "DP",
+    party: "Rescatemos a Colombia",
+    vp: "Por confirmar",
+    spectrum: "right",
+    spectrumLabel: "Derecha",
+    tagClass: "tag-right",
+    polls: "Ex-Ministro del Interior (Duque)",
+    bio: "Exministro del Interior en el gobierno de Ivan Duque. Abogado con experiencia en gestion publica y politica de seguridad.",
+    policies: [
+      { icon: "&#128274;", text: "Restablecer autoridad estatal en zonas de conflicto" },
+      { icon: "&#9878;", text: "Eficiencia en la gestion publica y reduccion del gasto" },
+      { icon: "&#128176;", text: "Politica economica de mercado con responsabilidad fiscal" },
+      { icon: "&#128274;", text: "Lucha frontal contra el narcotrafico" }
+    ],
+    economic: {
+      model: "Libre mercado con enfoque en reduccion del costo de vida.",
+      modelTags: ["Libre mercado", "Costo de vida", "Pro-seguridad"],
+      tax: [
+        "Bajar impuestos ampliamente",
+        "Bajar precios de la gasolina (reducir impuestos a combustibles)",
+        "Se opuso a reformas tributarias del gobierno Petro"
+      ],
+      budget: [
+        "Tres pilares: seguridad, salud, reduccion del costo de vida",
+        "Sin montos presupuestarios especificos divulgados"
+      ],
+      infrastructure: [
+        "Sin propuestas de infraestructura especificas detalladas"
+      ],
+      social: [
+        "Reducir costo de vida como politica social",
+        "Mejoras al sistema de salud"
+      ],
+      energy: [
+        "Generalmente pro-hidrocarburos basado en alineacion partidaria"
+      ],
+      employment: [
+        "Mayores oportunidades ciudadanas a traves de menores costos"
+      ],
+      trade: [
+        "Sin propuestas comerciales especificas detalladas"
+      ],
+      fiscal: [
+        "Menores impuestos y precios de gasolina como enfoque fiscal",
+        "Marco fiscal detallado limitado"
+      ],
+      stats: [
+        { value: "3 pilares", label: "Seguridad, Salud, Costos" },
+        { value: "↓ Gasolina", label: "Reducir impuesto combustible" }
+      ]
+    }
+  },
+  {
+    id: "cordoba",
+    name: "Felipe Cordoba",
+    initials: "FC",
+    party: "Independiente (por firmas)",
+    vp: "Por confirmar",
+    spectrum: "right",
+    spectrumLabel: "Derecha",
+    tagClass: "tag-right",
+    polls: "Ex-Contralor General",
+    bio: "Excontralor General de la Republica. Abogado con experiencia en control fiscal y supervision de recursos publicos. Tiene los numeros presupuestarios mas detallados de todos los candidatos.",
+    policies: [
+      { icon: "&#128176;", text: "IVA del 19% al 7% progresivamente" },
+      { icon: "&#128269;", text: "Fusionar 45 entidades estatales: ahorro de $80-100B COP" },
+      { icon: "&#127981;", text: "Reactivar petroleo, gas y proyectos piloto de fracking" },
+      { icon: "&#9878;", text: "Blindaje constitucional: estabilidad tributaria por 10 anos" }
+    ],
+    economic: {
+      model: "Libre mercado con racionalizacion masiva del Estado. El candidato con los numeros presupuestarios mas detallados.",
+      modelTags: ["Libre mercado", "Racionalizacion estatal", "Numeros concretos"],
+      tax: [
+        "BANDERA: Reducir IVA del 19% al 7% progresivamente",
+        "Costo primer ano: ~$65 billones COP",
+        "Mas poder adquisitivo para consumidores, crecimiento empresarial",
+        "Blindaje constitucional para estabilidad tributaria por 10 anos (no cambios constantes)",
+        "Combatir evasion y contrabando para ahorrar ~$100 billones COP"
+      ],
+      budget: [
+        "$80-100 billones COP en ahorros via fusion/racionalizacion de 45 entidades estatales (sin recortes de empleo)",
+        "Presupuesto actual citado: $511B total, $327B funcionamiento, $112B deuda, $82B inversion",
+        "Redirigir ahorros a inversion social"
+      ],
+      infrastructure: [
+        "Expandir programas de 'obras por impuestos'"
+      ],
+      social: [
+        "Redirigir $80-100 billones COP de ahorros a inversion social"
+      ],
+      energy: [
+        "Reactivar exploracion de petroleo y gas",
+        "Desarrollar proyectos piloto de fracking bajo estandares ambientales",
+        "Fortalecer refinerias existentes"
+      ],
+      employment: [
+        "Menor IVA estimula crecimiento empresarial y contratacion",
+        "Movilizar 120,000 reservistas militares para recuperacion territorial"
+      ],
+      trade: [
+        "Cooperacion internacional (EE.UU., Israel)",
+        "Clima pro-inversion"
+      ],
+      fiscal: [
+        "Austeridad + reforma institucional + compras digitales + licitaciones transparentes + controles anti-fraude",
+        "Reduccion de IVA se autofinancia a traves de crecimiento y combate a evasion",
+        "Plan fiscal mas cuantificado entre candidatos"
+      ],
+      stats: [
+        { value: "19%→7%", label: "IVA (progresivo)" },
+        { value: "$80-100B", label: "COP ahorro estatal" },
+        { value: "$65B", label: "COP costo IVA ano 1" },
+        { value: "$100B", label: "COP recuperar evasion" },
+        { value: "45", label: "Entidades a fusionar" },
+        { value: "10 anos", label: "Estabilidad tributaria" }
+      ]
+    }
+  },
+  {
+    id: "botero",
+    name: "Santiago Botero",
+    initials: "SB",
+    party: "Colombia Pa' Lante Unida",
+    vp: "Carlos Fernando Cuevas",
+    spectrum: "right",
+    spectrumLabel: "Derecha",
+    tagClass: "tag-right",
+    polls: "Empresario e ingeniero agronomo",
+    bio: "Empresario de Medellin/Cartagena. Fundador de SBOLab (35+ empresas en tech/finanzas). Enfoque: dirigir el pais como empresa. Autofinancia su campana.",
+    policies: [
+      { icon: "&#128176;", text: "Reducir IVA del 19% al 10%" },
+      { icon: "&#127806;", text: "Desarrollo agroindustrial y soberania alimentaria" },
+      { icon: "&#128739;", text: "Infraestructura vial para el campo" },
+      { icon: "&#9878;", text: "Reduccion de tramites y regulaciones" }
+    ],
+    economic: {
+      model: "Dirigir el pais como empresa. Transparencia, eficiencia, restauracion de credibilidad. 'El problema de la economia comienza con lideres que no dan confianza.'",
+      modelTags: ["Empresarial", "Eficiencia", "Credibilidad"],
+      tax: [
+        "Reducir IVA al 10% (desde 19%)",
+        "Bajar impuestos ampliamente para estimular crecimiento",
+        "Propuesta hipotetica: cortar precio gasolina de $16,000 a $8,000 COP",
+        "Menores impuestos generan mas recaudo via crecimiento (logica curva de Laffer)"
+      ],
+      budget: [
+        "Eliminar ineficiencia estatal y subsidios innecesarios",
+        "Reestructurar gasto gubernamental para reducir desperdicio",
+        "No se trata de cortar programas sociales, sino eliminar desperdicio"
+      ],
+      infrastructure: [
+        "Infraestructura vial para el campo colombiano",
+        "Desarrollo agroindustrial"
+      ],
+      social: [
+        "Aumento significativo del salario minimo (ajustado al costo real de vida)",
+        "Enfatiza 'deberes humanos' junto con derechos"
+      ],
+      energy: [
+        "Sin propuestas energeticas detalladas"
+      ],
+      employment: [
+        "Liderazgo creible atrae inversion y crea empleos automaticamente",
+        "35+ empresas creadas como prueba de capacidad"
+      ],
+      trade: [
+        "Liderazgo fuerte y creible atrae inversion extranjera naturalmente",
+        "Sin paquetes de incentivos especificos necesarios"
+      ],
+      fiscal: [
+        "Gestion fiscal por eficiencia",
+        "Campana autofinanciada (sin deudas politicas)",
+        "Metas fiscales cuantificadas limitadas"
+      ],
+      stats: [
+        { value: "19%→10%", label: "Reduccion IVA" },
+        { value: "35+", label: "Empresas fundadas" },
+        { value: "$8K→$16K", label: "Meta gasolina COP" }
+      ]
+    }
   }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
+];
 
-  class Particle {
-    constructor() { this.reset(); }
-    reset() {
-      this.x = Math.random() * canvas.offsetWidth;
-      this.y = Math.random() * canvas.offsetHeight;
-      this.size = Math.random() * 2.5 + 0.5;
-      this.speedX = (Math.random() - 0.5) * 0.4;
-      this.speedY = (Math.random() - 0.5) * 0.4;
-      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
-      this.opacity = Math.random() * 0.5 + 0.1;
-      this.pulse = Math.random() * Math.PI * 2;
-    }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      this.pulse += 0.02;
-      if (this.x < 0 || this.x > canvas.offsetWidth || this.y < 0 || this.y > canvas.offsetHeight) this.reset();
-    }
-    draw() {
-      const o = this.opacity + Math.sin(this.pulse) * 0.15;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
-      ctx.globalAlpha = Math.max(0, o);
-      ctx.fill();
-      ctx.globalAlpha = 1;
-    }
+// ========== RENDER CARDS ==========
+const grid = document.getElementById('grid');
+candidates.forEach(c => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.spectrum = c.spectrum;
+  card.dataset.id = c.id;
+  card.innerHTML = `
+    <div class="card-top">
+      <div class="avatar">${c.initials}</div>
+      <div>
+        <div class="card-name">${c.name}</div>
+        <div class="card-party">${c.party}</div>
+        <div class="card-vp">VP: ${c.vp}</div>
+        <span class="spectrum-tag ${c.tagClass}">${c.spectrumLabel}</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-bio">${c.bio}</div>
+      <div class="policies-title">Propuestas Clave</div>
+      ${c.policies.map(p => `<div class="policy-item"><span class="policy-icon">${p.icon}</span><span class="policy-text">${p.text}</span></div>`).join('')}
+      <div class="card-cta">
+        Ver propuestas economicas detalladas
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
+      </div>
+    </div>
+  `;
+  card.addEventListener('click', () => openModal(c));
+  grid.appendChild(card);
+});
+
+// ========== MODAL ==========
+const overlay = document.getElementById('modal-overlay');
+const modalContent = document.getElementById('modal-content');
+const modalClose = document.getElementById('modal-close');
+
+function renderList(items, icon) {
+  return items.map(item => `<div class="modal-policy-item"><span class="icon">${icon || '&#8226;'}</span><span>${item}</span></div>`).join('');
+}
+
+function openModal(c) {
+  const e = c.economic;
+  modalContent.innerHTML = `
+    <div class="modal-header">
+      <div class="modal-avatar">${c.initials}</div>
+      <div class="modal-header-info">
+        <h2>${c.name}</h2>
+        <div class="modal-party">${c.party} &middot; <span class="spectrum-tag ${c.tagClass}" style="font-size:0.7rem;">${c.spectrumLabel}</span></div>
+        <div class="modal-vp">Formula VP: ${c.vp}</div>
+        <div style="font-size:0.78rem; color:var(--text-light); margin-top:4px;">${c.polls}</div>
+      </div>
+    </div>
+    <div class="modal-bio">${c.bio}</div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-title">Modelo Economico</div>
+        <p style="font-size:0.88rem; line-height:1.6; margin-bottom:10px;">${e.model}</p>
+        <div class="modal-tags">
+          ${e.modelTags.map(t => `<span class="modal-tag">${t}</span>`).join('')}
+        </div>
+      </div>
+
+      ${e.stats && e.stats.length ? `
+      <div class="modal-section">
+        <div class="modal-section-title">Cifras Clave</div>
+        <div class="modal-stat-grid">
+          ${e.stats.map(s => `<div class="modal-stat"><div class="value">${s.value}</div><div class="label">${s.label}</div></div>`).join('')}
+        </div>
+      </div>` : ''}
+
+      <div class="modal-section">
+        <div class="modal-section-title">&#128176; Politica Tributaria</div>
+        ${renderList(e.tax)}
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">&#128202; Presupuesto y Gasto</div>
+        ${renderList(e.budget)}
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">&#127959; Infraestructura</div>
+        ${renderList(e.infrastructure)}
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">&#128101; Gasto Social (Salud, Educacion, Vivienda)</div>
+        ${renderList(e.social)}
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">&#9889; Energia y Medio Ambiente</div>
+        ${renderList(e.energy)}
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">&#128188; Empleo y Trabajo</div>
+        ${renderList(e.employment)}
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">&#127758; Comercio e Inversion Extranjera</div>
+        ${renderList(e.trade)}
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">&#128200; Politica Fiscal</div>
+        ${renderList(e.fiscal)}
+      </div>
+    </div>
+  `;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+modalClose.addEventListener('click', closeModal);
+overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+// ========== Particle Background ==========
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+const COLORS = ['#FCD116', '#003893', '#CE1126', 'rgba(255,255,255,0.3)'];
+
+function resizeCanvas() {
+  canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+  canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * canvas.offsetWidth;
+    this.y = Math.random() * canvas.offsetHeight;
+    this.size = Math.random() * 2.5 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.4;
+    this.speedY = (Math.random() - 0.5) * 0.4;
+    this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    this.opacity = Math.random() * 0.5 + 0.1;
+    this.pulse = Math.random() * Math.PI * 2;
   }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.pulse += 0.02;
+    if (this.x < 0 || this.x > canvas.offsetWidth || this.y < 0 || this.y > canvas.offsetHeight) this.reset();
+  }
+  draw() {
+    const o = this.opacity + Math.sin(this.pulse) * 0.15;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.globalAlpha = Math.max(0, o);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+}
 
-  for (let i = 0; i < 80; i++) particles.push(new Particle());
+for (let i = 0; i < 80; i++) particles.push(new Particle());
 
-  function drawLines() {
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(255,255,255,${0.04 * (1 - dist / 120)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
+function drawLines() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(255,255,255,${0.04 * (1 - dist / 120)})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
       }
     }
   }
+}
 
-  function animateParticles() {
-    ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-    particles.forEach(p => { p.update(); p.draw(); });
-    drawLines();
-    requestAnimationFrame(animateParticles);
-  }
-  animateParticles();
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+  particles.forEach(p => { p.update(); p.draw(); });
+  drawLines();
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
 
-  // ========== Filter ==========
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('.card').forEach((card, i) => {
-        if (filter === 'all' || card.dataset.spectrum === filter) {
-          card.style.display = '';
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(20px)';
-          setTimeout(() => {
-            card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-          }, i * 50);
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
-
-  // ========== Scroll Reveal ==========
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        observer.unobserve(entry.target);
+// ========== Filter ==========
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.card').forEach((card, i) => {
+      if (filter === 'all' || card.dataset.spectrum === filter) {
+        card.style.display = '';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, i * 50);
+      } else {
+        card.style.display = 'none';
       }
     });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.card, .vote-section, .step').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
   });
+});
 
-  // ========== Counter Animation for Date Badge ==========
-  const badge = document.querySelector('.date-badge');
-  const electionDate = new Date('2026-05-31');
-  function updateCountdown() {
-    const now = new Date();
-    const diff = electionDate - now;
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    if (days > 0) badge.textContent = `31 de Mayo, 2026 — Faltan ${days} dias`;
-    else badge.textContent = '31 de Mayo, 2026';
-  }
-  updateCountdown();
+// ========== Scroll Reveal ==========
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.card, .vote-section, .step, .macro-banner').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+
+// ========== Countdown ==========
+const badge = document.querySelector('.date-badge');
+const electionDate = new Date('2026-05-31');
+function updateCountdown() {
+  const now = new Date();
+  const diff = electionDate - now;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  if (days > 0) badge.textContent = `31 de Mayo, 2026 — Faltan ${days} dias`;
+  else badge.textContent = '31 de Mayo, 2026';
+}
+updateCountdown();
 </script>
 </body>
 </html>
