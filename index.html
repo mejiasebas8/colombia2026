@@ -212,8 +212,39 @@
       grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
       gap: 20px;
     }
-    @media (max-width: 500px) {
-      .candidates-grid { grid-template-columns: 1fr; }
+    @media (max-width: 768px) {
+      .candidates-grid { grid-template-columns: 1fr; gap: 16px; }
+      .container { padding: 24px 16px; }
+      .hero { padding: 70px 16px 50px; min-height: 400px; }
+      .hero h1 { font-size: 2rem; }
+      .hero .subtitle { font-size: 1rem; }
+      .hero .tagline { font-size: 0.75rem; }
+      .filter-bar { padding: 10px 12px; gap: 6px; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .filter-bar::-webkit-scrollbar { display: none; }
+      .filter-btn { padding: 6px 14px; font-size: 0.72rem; flex-shrink: 0; }
+      .section-title { font-size: 1.3rem; }
+      .section-desc { font-size: 0.85rem; margin-bottom: 24px; }
+      .macro-banner { padding: 20px 16px; }
+      .macro-stats { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .macro-stat .value { font-size: 1.1rem; }
+      .macro-stat .label { font-size: 0.65rem; }
+      .vote-section { padding: 24px 16px; }
+      .vote-section h2 { font-size: 1.3rem; }
+      .steps { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .step { padding: 12px; }
+      .dates-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .date-card { padding: 12px; }
+      .date-card .date { font-size: 1.1rem; }
+      .card-top { padding: 16px 16px 0; gap: 12px; }
+      .card-body { padding: 14px 16px 16px; }
+      .avatar { width: 52px; height: 52px; font-size: 1.2rem; }
+      .card-name { font-size: 1.05rem; }
+    }
+    @media (max-width: 420px) {
+      .macro-stats { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.7rem; }
+      .flag-wave { width: 100px; height: 66px; }
     }
 
     /* Card */
@@ -358,6 +389,7 @@
       position: relative;
       animation: modalIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
       margin: auto;
+      -webkit-overflow-scrolling: touch;
     }
     @keyframes modalIn {
       from { opacity: 0; transform: translateY(30px) scale(0.97); }
@@ -502,11 +534,25 @@
     .modal-tag.con { background: var(--left-bg); border-color: var(--left-border); color: var(--left); }
     .modal-tag.neutral { background: var(--center-bg); border-color: var(--center-border); color: var(--center); }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .modal-overlay { padding: 12px 8px; }
+      .modal { border-radius: 18px; max-height: 90vh; overflow-y: auto; }
       .modal-header { padding: 24px 20px 0; flex-direction: column; align-items: center; text-align: center; }
-      .modal-bio { padding: 16px 20px; }
+      .modal-bio { padding: 16px 20px; font-size: 0.84rem; }
       .modal-body { padding: 20px 20px 24px; }
-      .modal-overlay { padding: 20px 8px; }
+      .modal-header-info h2 { font-size: 1.3rem; }
+      .modal-stat-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .modal-stat { padding: 10px 12px; }
+      .modal-stat .value { font-size: 1.1rem; }
+      .modal-section-title { font-size: 0.68rem; }
+      .modal-policy-item { font-size: 0.8rem; }
+      .modal-close { top: 12px; right: 12px; width: 32px; height: 32px; font-size: 1rem; }
+    }
+    @media (max-width: 420px) {
+      .modal-stat-grid { grid-template-columns: 1fr 1fr; }
+      .modal-header { padding: 20px 16px 0; }
+      .modal-bio { padding: 14px 16px; }
+      .modal-body { padding: 16px 16px 20px; }
     }
 
     /* How to vote section */
