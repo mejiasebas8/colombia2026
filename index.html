@@ -4,476 +4,410 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elecciones Colombia 2026 - Candidatos Presidenciales</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
+    /* ========== shadcn/ui Design Tokens ========== */
     :root {
-      --bg: #fafaf9;
-      --card: #ffffff;
-      --text: #1a1a1a;
-      --text-mid: #555;
-      --text-light: #888;
-      --border: #e5e5e5;
-      --accent: #1d4ed8;
-      --accent-light: #dbeafe;
-      --left: #dc2626;
-      --left-bg: #fef2f2;
-      --left-border: #fca5a5;
-      --center-left: #f59e0b;
-      --center-left-bg: #fffbeb;
-      --center-left-border: #fcd34d;
-      --center: #8b5cf6;
-      --center-bg: #f5f3ff;
-      --center-border: #c4b5fd;
-      --right: #2563eb;
-      --right-bg: #eff6ff;
-      --right-border: #93c5fd;
-      --far-right: #0f172a;
-      --far-right-bg: #f1f5f9;
-      --far-right-border: #94a3b8;
-      --green-bg: #f0fdf4;
-      --green-border: #86efac;
-      --green: #16a34a;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      --background: 0 0% 100%;
+      --foreground: 240 10% 3.9%;
+      --card: 0 0% 100%;
+      --card-foreground: 240 10% 3.9%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 240 10% 3.9%;
+      --primary: 240 5.9% 10%;
+      --primary-foreground: 0 0% 98%;
+      --secondary: 240 4.8% 95.9%;
+      --secondary-foreground: 240 5.9% 10%;
+      --muted: 240 4.8% 95.9%;
+      --muted-foreground: 240 3.8% 46.1%;
+      --accent: 240 4.8% 95.9%;
+      --accent-foreground: 240 5.9% 10%;
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 0 0% 98%;
+      --border: 240 5.9% 90%;
+      --input: 240 5.9% 90%;
+      --ring: 240 5.9% 10%;
+      --radius: 0.5rem;
+      /* spectrum colors */
+      --left: 0 72% 51%;
+      --left-bg: 0 86% 97%;
+      --center-left: 38 92% 50%;
+      --center-left-bg: 48 96% 89%;
+      --center-col: 263 70% 50%;
+      --center-bg: 263 87% 97%;
+      --right-col: 221 83% 53%;
+      --right-bg: 214 95% 93%;
+      --far-right: 222 47% 11%;
+      --far-right-bg: 210 40% 96%;
     }
 
-    /* Hero */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Cascadia Code', 'Consolas', 'Liberation Mono', monospace;
+      background: hsl(var(--background));
+      color: hsl(var(--foreground));
+      line-height: 1.6;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== HERO ========== */
     .hero {
-      background: #0a0a0a;
-      color: white;
+      background: hsl(var(--foreground));
+      color: hsl(var(--primary-foreground));
       text-align: center;
-      padding: 100px 24px 70px;
+      padding: 80px 24px 60px;
       position: relative;
       overflow: hidden;
-      min-height: 480px;
+      min-height: 440px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .hero-canvas {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 0;
-    }
-    .hero-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+    .hero-canvas { position: absolute; inset: 0; z-index: 0; }
+    .hero-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
 
-    .flag-container {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 40px;
-      perspective: 600px;
-    }
+    .flag-container { display: flex; justify-content: center; margin-bottom: 32px; perspective: 600px; }
     .flag-wave {
-      width: 120px;
-      height: 80px;
-      border-radius: 6px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      width: 100px; height: 66px; border-radius: var(--radius); overflow: hidden;
+      display: flex; flex-direction: column;
       animation: flagFloat 3s ease-in-out infinite;
-      box-shadow: 0 8px 30px rgba(252, 209, 22, 0.25), 0 4px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 24px rgba(252,209,22,0.2);
       transform-style: preserve-3d;
     }
-    .flag-stripe-yellow { flex: 2; background: #FCD116; position: relative; overflow: hidden; }
-    .flag-stripe-blue { flex: 1; background: #003893; position: relative; overflow: hidden; }
-    .flag-stripe-red { flex: 1; background: #CE1126; position: relative; overflow: hidden; }
-    .flag-stripe-yellow::after, .flag-stripe-blue::after, .flag-stripe-red::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%; width: 200%; height: 100%;
-      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
-      animation: flagShine 3s ease-in-out infinite;
-    }
+    .flag-stripe-yellow { flex: 2; background: #FCD116; }
+    .flag-stripe-blue { flex: 1; background: #003893; }
+    .flag-stripe-red { flex: 1; background: #CE1126; }
     @keyframes flagFloat {
       0%, 100% { transform: rotateY(-5deg) rotateX(2deg); }
       50% { transform: rotateY(5deg) rotateX(-2deg); }
     }
-    @keyframes flagShine {
-      0% { left: -200%; }
-      100% { left: 200%; }
-    }
 
     .flag-glow {
-      height: 3px;
-      max-width: 200px;
-      margin: 0 auto;
-      border-radius: 2px;
+      height: 2px; max-width: 160px; margin: 0 auto; border-radius: 1px;
       background: linear-gradient(90deg, #FCD116, #003893, #CE1126);
-      opacity: 0.5;
-      filter: blur(4px);
+      opacity: 0.4; filter: blur(4px);
       animation: glowPulse 2s ease-in-out infinite alternate;
     }
     @keyframes glowPulse {
-      0% { opacity: 0.3; transform: scaleX(0.8); }
-      100% { opacity: 0.7; transform: scaleX(1.2); }
+      0% { opacity: 0.2; transform: scaleX(0.8); }
+      100% { opacity: 0.6; transform: scaleX(1.2); }
     }
 
     .hero h1 {
-      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
-      font-weight: 900;
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-weight: 700;
       letter-spacing: -0.04em;
-      margin-bottom: 12px;
-      background: linear-gradient(135deg, #ffffff 0%, #FCD116 25%, #ffffff 50%, #003893 75%, #CE1126 100%);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: titleGradient 6s ease infinite;
+      margin-bottom: 8px;
+      color: hsl(var(--primary-foreground));
     }
-    @keyframes titleGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .hero .subtitle { font-size: 1.15rem; font-weight: 300; opacity: 0.7; margin-bottom: 8px; }
-    .hero .tagline { font-size: 0.85rem; opacity: 0.4; margin-bottom: 24px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .hero .subtitle { font-size: 0.85rem; font-weight: 400; opacity: 0.6; margin-bottom: 6px; }
+    .hero .tagline { font-size: 0.7rem; opacity: 0.35; margin-bottom: 20px; letter-spacing: 0.1em; text-transform: uppercase; }
     .hero .date-badge {
       display: inline-block;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      padding: 10px 28px;
-      border-radius: 100px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      backdrop-filter: blur(8px);
-      transition: all 0.3s;
-    }
-    .hero .date-badge:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(252,209,22,0.4);
-      box-shadow: 0 0 20px rgba(252,209,22,0.15);
+      background: hsla(0,0%,100%,0.06);
+      border: 1px solid hsla(0,0%,100%,0.1);
+      padding: 8px 20px;
+      border-radius: var(--radius);
+      font-size: 0.75rem;
+      font-weight: 500;
     }
 
-    /* Nav filter */
+    /* ========== FILTER BAR ========== */
     .filter-bar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 24px;
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      flex-wrap: wrap;
+      position: sticky; top: 0; z-index: 100;
+      background: hsla(0,0%,100%,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid hsl(var(--border));
+      padding: 10px 24px;
+      display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;
     }
     .filter-btn {
-      border: 1px solid var(--border);
-      background: white;
-      padding: 7px 18px;
-      border-radius: 100px;
-      font-size: 0.8rem;
+      border: 1px solid hsl(var(--border));
+      background: hsl(var(--background));
+      padding: 6px 14px;
+      border-radius: var(--radius);
+      font-size: 0.7rem;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.15s ease;
       font-family: inherit;
+      color: hsl(var(--muted-foreground));
     }
-    .filter-btn:hover { border-color: #0a0a0a; color: #0a0a0a; transform: translateY(-1px); }
-    .filter-btn.active { background: #0a0a0a; color: white; border-color: #0a0a0a; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .filter-btn:hover { border-color: hsl(var(--foreground)); color: hsl(var(--foreground)); }
+    .filter-btn.active {
+      background: hsl(var(--foreground));
+      color: hsl(var(--primary-foreground));
+      border-color: hsl(var(--foreground));
+    }
 
-    /* Main */
-    .container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
-    .section-title { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
-    .section-desc { color: var(--text-mid); font-size: 0.95rem; margin-bottom: 32px; max-width: 700px; }
+    /* ========== LAYOUT ========== */
+    .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
+    .section-title { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .section-desc { color: hsl(var(--muted-foreground)); font-size: 0.78rem; margin-bottom: 28px; max-width: 600px; }
 
-    /* Candidate grid */
+    /* ========== CARDS ========== */
     .candidates-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 20px;
-    }
-    @media (max-width: 768px) {
-      .candidates-grid { grid-template-columns: 1fr; gap: 16px; }
-      .container { padding: 24px 16px; }
-      .hero { padding: 70px 16px 50px; min-height: 400px; }
-      .hero h1 { font-size: 2rem; }
-      .hero .subtitle { font-size: 1rem; }
-      .hero .tagline { font-size: 0.75rem; }
-      .filter-bar { padding: 10px 12px; gap: 6px; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-      .filter-bar::-webkit-scrollbar { display: none; }
-      .filter-btn { padding: 6px 14px; font-size: 0.72rem; flex-shrink: 0; }
-      .section-title { font-size: 1.3rem; }
-      .section-desc { font-size: 0.85rem; margin-bottom: 24px; }
-      .macro-banner { padding: 20px 16px; }
-      .macro-stats { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-      .macro-stat .value { font-size: 1.1rem; }
-      .macro-stat .label { font-size: 0.65rem; }
-      .vote-section { padding: 24px 16px; }
-      .vote-section h2 { font-size: 1.3rem; }
-      .steps { grid-template-columns: 1fr 1fr; gap: 16px; }
-      .step { padding: 12px; }
-      .dates-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .date-card { padding: 12px; }
-      .date-card .date { font-size: 1.1rem; }
-      .card-top { padding: 16px 16px 0; gap: 12px; }
-      .card-body { padding: 14px 16px 16px; }
-      .avatar { width: 52px; height: 52px; font-size: 1.2rem; }
-      .card-name { font-size: 1.05rem; }
-      .polymarket-section { padding: 24px 16px; }
-      .polymarket-section iframe { height: 500px; }
-    }
-    @media (max-width: 420px) {
-      .macro-stats { grid-template-columns: repeat(2, 1fr); }
-      .steps { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 1.7rem; }
-      .flag-wave { width: 100px; height: 66px; }
-      .polymarket-section iframe { height: 400px; }
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
     }
 
-    /* Card */
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
+      background: hsl(var(--card));
+      border: 1px solid hsl(var(--border));
+      border-radius: var(--radius);
       overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
-      position: relative;
+      transition: box-shadow 0.2s ease;
       cursor: pointer;
+      position: relative;
     }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #FCD116, #003893, #CE1126);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .card:hover::before { opacity: 1; }
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.1), 0 4px 20px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 16px hsla(var(--foreground), 0.08);
     }
-    .card-top { display: flex; align-items: center; gap: 16px; padding: 20px 20px 0; }
+    .card-top { display: flex; align-items: center; gap: 12px; padding: 16px 16px 0; }
     .avatar {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: #e2e8f0; display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; font-weight: 700; color: #475569; flex-shrink: 0;
+      width: 48px; height: 48px; border-radius: var(--radius);
+      background: hsl(var(--muted)); display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700; color: hsl(var(--muted-foreground)); flex-shrink: 0;
     }
-    .card-name { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
-    .card-party { font-size: 0.78rem; color: var(--text-mid); margin-top: 2px; }
-    .card-vp { font-size: 0.75rem; color: var(--text-light); margin-top: 2px; }
-    .spectrum-tag {
-      display: inline-block; padding: 2px 10px; border-radius: 100px;
-      font-size: 0.68rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.04em; margin-top: 4px;
-    }
-    .tag-left { background: var(--left-bg); color: var(--left); border: 1px solid var(--left-border); }
-    .tag-center-left { background: var(--center-left-bg); color: #92400e; border: 1px solid var(--center-left-border); }
-    .tag-center { background: var(--center-bg); color: var(--center); border: 1px solid var(--center-border); }
-    .tag-right { background: var(--right-bg); color: var(--right); border: 1px solid var(--right-border); }
-    .tag-far-right { background: var(--far-right-bg); color: var(--far-right); border: 1px solid var(--far-right-border); }
+    .card-name { font-size: 0.85rem; font-weight: 600; }
+    .card-party { font-size: 0.7rem; color: hsl(var(--muted-foreground)); margin-top: 1px; }
+    .card-vp { font-size: 0.65rem; color: hsl(var(--muted-foreground)); margin-top: 1px; opacity: 0.7; }
 
-    .card-body { padding: 16px 20px 20px; }
+    /* spectrum badges */
+    .badge {
+      display: inline-block; padding: 2px 8px; border-radius: calc(var(--radius) - 2px);
+      font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+      margin-top: 4px; border: 1px solid;
+    }
+    .tag-left { background: hsl(var(--left-bg)); color: hsl(var(--left)); border-color: hsl(var(--left) / 0.3); }
+    .tag-center-left { background: hsl(var(--center-left-bg)); color: hsl(38 92% 30%); border-color: hsl(var(--center-left) / 0.3); }
+    .tag-center { background: hsl(var(--center-bg)); color: hsl(var(--center-col)); border-color: hsl(var(--center-col) / 0.3); }
+    .tag-right { background: hsl(var(--right-bg)); color: hsl(var(--right-col)); border-color: hsl(var(--right-col) / 0.3); }
+    .tag-far-right { background: hsl(var(--far-right-bg)); color: hsl(var(--far-right)); border-color: hsl(var(--far-right) / 0.3); }
+
+    .card-body { padding: 12px 16px 16px; }
     .card-bio {
-      font-size: 0.82rem; color: var(--text-mid); line-height: 1.5;
-      margin-bottom: 14px; border-bottom: 1px solid var(--border); padding-bottom: 14px;
+      font-size: 0.72rem; color: hsl(var(--muted-foreground)); line-height: 1.55;
+      margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid hsl(var(--border));
     }
     .policies-title {
-      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.06em; color: var(--text-light); margin-bottom: 8px;
+      font-size: 0.6rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: hsl(var(--muted-foreground)); margin-bottom: 6px;
     }
-    .policy-item { display: flex; gap: 8px; margin-bottom: 6px; font-size: 0.8rem; color: var(--text); line-height: 1.45; }
-    .policy-icon { flex-shrink: 0; width: 18px; text-align: center; }
+    .policy-item { display: flex; gap: 6px; margin-bottom: 4px; font-size: 0.7rem; line-height: 1.45; }
+    .policy-icon { flex-shrink: 0; width: 16px; text-align: center; }
     .policy-text { flex: 1; }
 
     .card-cta {
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-      margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
-      font-size: 0.78rem; font-weight: 600; color: var(--accent); transition: color 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 4px;
+      margin-top: 12px; padding-top: 12px; border-top: 1px solid hsl(var(--border));
+      font-size: 0.65rem; font-weight: 600; color: hsl(var(--muted-foreground));
+      transition: color 0.15s;
     }
-    .card:hover .card-cta { color: #1e40af; }
-    .card-cta svg { width: 14px; height: 14px; transition: transform 0.2s; }
-    .card:hover .card-cta svg { transform: translateX(3px); }
+    .card:hover .card-cta { color: hsl(var(--foreground)); }
+    .card-cta svg { width: 12px; height: 12px; transition: transform 0.15s; }
+    .card:hover .card-cta svg { transform: translateX(2px); }
 
-    /* ========== MODAL ========== */
+    /* ========== MODAL (shadcn dialog) ========== */
     .modal-overlay {
       display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+      background: hsla(var(--foreground), 0.8); backdrop-filter: blur(4px);
       z-index: 1000; justify-content: center; align-items: flex-start;
-      padding: 40px 16px; overflow-y: auto;
+      padding: 32px 16px; overflow-y: auto;
     }
     .modal-overlay.open { display: flex; }
     .modal {
-      background: var(--card); border-radius: 24px; max-width: 760px; width: 100%;
-      position: relative; animation: modalIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      background: hsl(var(--card)); border: 1px solid hsl(var(--border));
+      border-radius: calc(var(--radius) + 4px); max-width: 700px; width: 100%;
+      position: relative; animation: modalIn 0.2s ease-out;
       margin: auto; -webkit-overflow-scrolling: touch;
+      box-shadow: 0 16px 48px hsla(var(--foreground), 0.15);
     }
     @keyframes modalIn {
-      from { opacity: 0; transform: translateY(30px) scale(0.97); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
     }
     .modal-close {
-      position: absolute; top: 16px; right: 16px; width: 36px; height: 36px;
-      border-radius: 50%; border: 1px solid var(--border); background: white;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: 1.1rem; color: var(--text-mid);
-      transition: all 0.2s; z-index: 2;
+      position: absolute; top: 12px; right: 12px; width: 32px; height: 32px;
+      border-radius: var(--radius); border: 1px solid hsl(var(--border));
+      background: hsl(var(--background)); display: flex; align-items: center;
+      justify-content: center; cursor: pointer; font-size: 0.9rem;
+      color: hsl(var(--muted-foreground)); transition: all 0.15s; z-index: 2;
     }
-    .modal-close:hover { background: #f5f5f5; color: var(--text); }
+    .modal-close:hover { background: hsl(var(--muted)); color: hsl(var(--foreground)); }
 
-    .modal-header { padding: 32px 32px 0; display: flex; gap: 20px; align-items: flex-start; }
+    .modal-header { padding: 24px 24px 0; display: flex; gap: 16px; align-items: flex-start; }
     .modal-avatar {
-      width: 80px; height: 80px; border-radius: 50%; background: #e2e8f0;
+      width: 56px; height: 56px; border-radius: var(--radius); background: hsl(var(--muted));
       display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; font-weight: 700; color: #475569; flex-shrink: 0;
+      font-size: 1.2rem; font-weight: 700; color: hsl(var(--muted-foreground)); flex-shrink: 0;
     }
-    .modal-header-info h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; }
-    .modal-header-info .modal-party { font-size: 0.85rem; color: var(--text-mid); margin-top: 2px; }
-    .modal-header-info .modal-vp { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
-    .modal-bio { padding: 20px 32px; font-size: 0.88rem; color: var(--text-mid); line-height: 1.65; border-bottom: 1px solid var(--border); }
-
-    .modal-body { padding: 24px 32px 32px; }
+    .modal-header-info h2 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; }
+    .modal-header-info .modal-party { font-size: 0.7rem; color: hsl(var(--muted-foreground)); margin-top: 2px; }
+    .modal-header-info .modal-vp { font-size: 0.65rem; color: hsl(var(--muted-foreground)); margin-top: 2px; opacity: 0.7; }
+    .modal-bio {
+      padding: 16px 24px; font-size: 0.75rem; color: hsl(var(--muted-foreground));
+      line-height: 1.6; border-bottom: 1px solid hsl(var(--border));
+    }
+    .modal-body { padding: 20px 24px 24px; }
 
     /* Modal tabs */
     .modal-tabs {
-      display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid var(--border);
+      display: flex; gap: 0; margin-bottom: 20px; border-bottom: 1px solid hsl(var(--border));
       overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
     }
     .modal-tabs::-webkit-scrollbar { display: none; }
     .modal-tab {
-      padding: 10px 16px; font-size: 0.75rem; font-weight: 600; cursor: pointer;
-      border: none; background: none; color: var(--text-light); white-space: nowrap;
-      border-bottom: 2px solid transparent; transition: all 0.2s; font-family: inherit;
+      padding: 8px 12px; font-size: 0.65rem; font-weight: 500; cursor: pointer;
+      border: none; background: none; color: hsl(var(--muted-foreground)); white-space: nowrap;
+      border-bottom: 2px solid transparent; transition: all 0.15s; font-family: inherit;
     }
-    .modal-tab:hover { color: var(--text); }
-    .modal-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .modal-tab:hover { color: hsl(var(--foreground)); }
+    .modal-tab.active { color: hsl(var(--foreground)); border-bottom-color: hsl(var(--foreground)); }
     .modal-tab-panel { display: none; }
     .modal-tab-panel.active { display: block; }
 
-    .modal-section { margin-bottom: 24px; }
+    .modal-section { margin-bottom: 20px; }
     .modal-section:last-child { margin-bottom: 0; }
     .modal-section-title {
-      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 10px;
+      font-size: 0.6rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: hsl(var(--muted-foreground)); margin-bottom: 8px;
       display: flex; align-items: center; gap: 8px;
     }
-    .modal-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .modal-section-title::after { content: ''; flex: 1; height: 1px; background: hsl(var(--border)); }
 
-    .modal-policy-item { display: flex; gap: 10px; margin-bottom: 8px; font-size: 0.84rem; line-height: 1.5; }
-    .modal-policy-item .icon { flex-shrink: 0; width: 20px; text-align: center; }
+    .modal-policy-item { display: flex; gap: 8px; margin-bottom: 6px; font-size: 0.72rem; line-height: 1.5; }
+    .modal-policy-item .icon { flex-shrink: 0; width: 16px; text-align: center; color: hsl(var(--muted-foreground)); }
 
     .modal-stat-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 12px; margin-bottom: 8px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 8px; margin-bottom: 8px;
     }
     .modal-stat {
-      background: #f8f8f8; border: 1px solid var(--border); border-radius: 12px;
-      padding: 14px 16px; text-align: center;
+      background: hsl(var(--muted)); border: 1px solid hsl(var(--border));
+      border-radius: var(--radius); padding: 12px; text-align: center;
     }
-    .modal-stat .value { font-size: 1.3rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
-    .modal-stat .label { font-size: 0.72rem; color: var(--text-light); margin-top: 2px; }
+    .modal-stat .value { font-size: 1rem; font-weight: 700; color: hsl(var(--foreground)); }
+    .modal-stat .label { font-size: 0.6rem; color: hsl(var(--muted-foreground)); margin-top: 2px; }
 
-    .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .modal-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
     .modal-tag {
-      display: inline-block; padding: 4px 12px; border-radius: 100px;
-      font-size: 0.72rem; font-weight: 600; border: 1px solid var(--border); background: #f8f8f8;
+      padding: 3px 10px; border-radius: calc(var(--radius) - 2px);
+      font-size: 0.6rem; font-weight: 500; border: 1px solid hsl(var(--border));
+      background: hsl(var(--muted)); color: hsl(var(--muted-foreground));
     }
 
-    .modal-empty {
-      font-size: 0.82rem; color: var(--text-light); font-style: italic; padding: 8px 0;
-    }
+    .modal-empty { font-size: 0.72rem; color: hsl(var(--muted-foreground)); font-style: italic; padding: 4px 0; }
 
-    @media (max-width: 768px) {
-      .modal-overlay { padding: 12px 8px; }
-      .modal { border-radius: 18px; max-height: 92vh; overflow-y: auto; }
-      .modal-header { padding: 24px 20px 0; flex-direction: column; align-items: center; text-align: center; }
-      .modal-bio { padding: 16px 20px; font-size: 0.84rem; }
-      .modal-body { padding: 20px 20px 24px; }
-      .modal-header-info h2 { font-size: 1.3rem; }
-      .modal-stat-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-      .modal-stat { padding: 10px 12px; }
-      .modal-stat .value { font-size: 1.1rem; }
-      .modal-section-title { font-size: 0.68rem; }
-      .modal-policy-item { font-size: 0.8rem; }
-      .modal-close { top: 12px; right: 12px; width: 32px; height: 32px; font-size: 1rem; }
-      .modal-tab { padding: 8px 12px; font-size: 0.7rem; }
-    }
-    @media (max-width: 420px) {
-      .modal-stat-grid { grid-template-columns: 1fr 1fr; }
-      .modal-header { padding: 20px 16px 0; }
-      .modal-bio { padding: 14px 16px; }
-      .modal-body { padding: 16px 16px 20px; }
-    }
-
-    /* Polymarket section */
+    /* ========== POLYMARKET ========== */
     .polymarket-section {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      margin-top: 32px;
-      margin-bottom: 16px;
+      background: hsl(var(--card)); border: 1px solid hsl(var(--border));
+      border-radius: var(--radius); padding: 24px; margin-top: 24px;
     }
-    .polymarket-section h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 6px; }
-    .polymarket-section .pm-desc { font-size: 0.85rem; color: var(--text-mid); margin-bottom: 20px; }
+    .polymarket-section h2 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .polymarket-section .pm-desc { font-size: 0.72rem; color: hsl(var(--muted-foreground)); margin-bottom: 16px; }
     .pm-link {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      background: #0a0a0a;
-      border-radius: 14px;
-      padding: 24px 28px;
-      text-decoration: none;
-      color: white;
-      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex; align-items: center; gap: 16px;
+      background: hsl(var(--foreground)); border-radius: var(--radius);
+      padding: 16px 20px; text-decoration: none; color: hsl(var(--primary-foreground));
+      transition: opacity 0.15s;
     }
-    .pm-link:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
-    }
+    .pm-link:hover { opacity: 0.9; }
     .pm-logo {
-      width: 48px; height: 48px; border-radius: 12px; background: #1652f0;
+      width: 40px; height: 40px; border-radius: var(--radius); background: #1652f0;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; font-weight: 900; color: white; flex-shrink: 0;
+      font-size: 1.1rem; font-weight: 900; flex-shrink: 0;
     }
     .pm-info { flex: 1; }
-    .pm-info .pm-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
-    .pm-info .pm-sub { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
-    .pm-arrow { font-size: 1.3rem; opacity: 0.4; transition: opacity 0.2s, transform 0.2s; }
-    .pm-link:hover .pm-arrow { opacity: 1; transform: translateX(4px); }
+    .pm-info .pm-title { font-size: 0.78rem; font-weight: 600; margin-bottom: 2px; }
+    .pm-info .pm-sub { font-size: 0.65rem; opacity: 0.5; }
+    .pm-arrow { font-size: 1rem; opacity: 0.4; transition: transform 0.15s; }
+    .pm-link:hover .pm-arrow { transform: translateX(3px); opacity: 0.8; }
 
-    /* How to vote section */
-    .vote-section {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 40px; margin-top: 32px;
+    /* ========== MACRO BANNER ========== */
+    .macro-banner {
+      background: hsl(var(--foreground)); border-radius: var(--radius);
+      padding: 20px 24px; margin-bottom: 24px; color: hsl(var(--primary-foreground));
     }
-    .vote-section h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 24px; }
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
-    .step { text-align: center; padding: 20px; }
-    .step-number {
-      width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: white;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 1.1rem; margin: 0 auto 12px;
+    .macro-banner h3 {
+      font-size: 0.6rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; opacity: 0.5; margin-bottom: 12px;
     }
-    .step h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
-    .step p { font-size: 0.82rem; color: var(--text-mid); }
-
-    .dates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 24px; }
-    .date-card { background: var(--green-bg); border: 1px solid var(--green-border); border-radius: 12px; padding: 16px; text-align: center; }
-    .date-card .date { font-size: 1.3rem; font-weight: 800; color: var(--green); }
-    .date-card .label { font-size: 0.8rem; color: var(--text-mid); margin-top: 4px; }
-
-    /* Macro context banner */
-    .macro-banner { background: #0a0a0a; border-radius: 16px; padding: 28px 32px; margin-bottom: 32px; color: white; }
-    .macro-banner h3 { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
-    .macro-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
-    .macro-stat .value { font-size: 1.4rem; font-weight: 800; }
-    .macro-stat .label { font-size: 0.72rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+    .macro-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+    .macro-stat .value { font-size: 1.1rem; font-weight: 700; }
+    .macro-stat .label { font-size: 0.6rem; opacity: 0.5; margin-top: 1px; }
     .macro-stat .value.red { color: #f87171; }
     .macro-stat .value.green { color: #4ade80; }
     .macro-stat .value.yellow { color: #FCD116; }
-    .macro-source { margin-top: 14px; font-size: 0.68rem; color: rgba(255,255,255,0.3); }
+    .macro-source { margin-top: 10px; font-size: 0.55rem; opacity: 0.25; }
 
-    .disclaimer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: var(--text-light); max-width: 700px; margin: 0 auto; }
-    .disclaimer a { color: var(--accent); text-decoration: none; }
-    footer { text-align: center; padding: 24px; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-light); }
+    /* ========== VOTE SECTION ========== */
+    .vote-section {
+      background: hsl(var(--card)); border: 1px solid hsl(var(--border));
+      border-radius: var(--radius); padding: 28px; margin-top: 24px;
+    }
+    .vote-section h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .step { text-align: center; padding: 16px; }
+    .step-number {
+      width: 32px; height: 32px; border-radius: var(--radius);
+      background: hsl(var(--foreground)); color: hsl(var(--primary-foreground));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.8rem; margin: 0 auto 8px;
+    }
+    .step h3 { font-size: 0.78rem; font-weight: 600; margin-bottom: 4px; }
+    .step p { font-size: 0.7rem; color: hsl(var(--muted-foreground)); }
+
+    .dates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 20px; }
+    .date-card {
+      background: hsl(var(--muted)); border: 1px solid hsl(var(--border));
+      border-radius: var(--radius); padding: 12px; text-align: center;
+    }
+    .date-card .date { font-size: 1rem; font-weight: 700; }
+    .date-card .label { font-size: 0.65rem; color: hsl(var(--muted-foreground)); margin-top: 2px; }
+
+    /* ========== FOOTER ========== */
+    .disclaimer {
+      text-align: center; padding: 32px 20px; font-size: 0.65rem;
+      color: hsl(var(--muted-foreground)); max-width: 600px; margin: 0 auto;
+    }
+    .disclaimer a { color: hsl(var(--foreground)); text-decoration: underline; text-underline-offset: 2px; }
+    footer {
+      text-align: center; padding: 20px;
+      border-top: 1px solid hsl(var(--border));
+      font-size: 0.6rem; color: hsl(var(--muted-foreground));
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .candidates-grid { grid-template-columns: 1fr; gap: 12px; }
+      .container { padding: 20px 12px; }
+      .hero { padding: 60px 16px 48px; min-height: 360px; }
+      .hero h1 { font-size: 1.6rem; }
+      .filter-bar { padding: 8px 10px; gap: 4px; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .filter-bar::-webkit-scrollbar { display: none; }
+      .filter-btn { flex-shrink: 0; }
+      .macro-banner { padding: 16px; }
+      .macro-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .macro-stat .value { font-size: 0.9rem; }
+      .vote-section { padding: 20px 16px; }
+      .steps { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .dates-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .polymarket-section { padding: 20px 16px; }
+      .modal-overlay { padding: 12px 6px; }
+      .modal { border-radius: var(--radius); max-height: 92vh; overflow-y: auto; }
+      .modal-header { padding: 20px 16px 0; flex-direction: column; align-items: center; text-align: center; }
+      .modal-bio { padding: 12px 16px; }
+      .modal-body { padding: 16px; }
+      .modal-stat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 420px) {
+      .macro-stats { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.4rem; }
+      .flag-wave { width: 80px; height: 52px; }
+    }
   </style>
 </head>
 <body>
@@ -492,7 +426,7 @@
     <div class="flag-glow"></div>
     <h1>Elecciones Colombia 2026</h1>
     <p class="subtitle">Candidatos Presidenciales &mdash; Primera Vuelta</p>
-    <p class="tagline">12 candidatos &middot; Una decision &middot; Tu voto importa</p>
+    <p class="tagline">12 candidatos &middot; una decision &middot; tu voto importa</p>
     <div class="date-badge">31 de Mayo, 2026</div>
   </div>
 </header>
@@ -510,7 +444,7 @@
 <!-- Candidates -->
 <main class="container">
   <h2 class="section-title">Los Candidatos</h2>
-  <p class="section-desc">Conoce a los aspirantes a la Presidencia de Colombia, sus propuestas clave, presupuestos, planes economicos, comercio exterior, tecnologia y educacion. Haz clic en cualquier candidato para ver sus propuestas detalladas.</p>
+  <p class="section-desc">Propuestas de IA, comercio, IED, educacion STEM y politica economica. Clic en cualquier candidato para ver detalles.</p>
 
   <!-- Macro Context -->
   <div class="macro-banner">
@@ -523,7 +457,7 @@
       <div class="macro-stat"><div class="value">$547B</div><div class="label">Presupuesto Nacional (COP)</div></div>
       <div class="macro-stat"><div class="value">10.5%</div><div class="label">Tasa de Interes (est.)</div></div>
     </div>
-    <div class="macro-source">Fuente: Oxford Economics, Feb 2026 &middot; Presupuesto: $327B funcionamiento, $112B deuda, $82B inversion</div>
+    <div class="macro-source">Fuente: Oxford Economics, Feb 2026 // $327B funcionamiento, $112B deuda, $82B inversion</div>
   </div>
 
   <div class="candidates-grid" id="grid"></div>
@@ -536,7 +470,7 @@
       <div class="pm-logo">P</div>
       <div class="pm-info">
         <div class="pm-title">Colombia Presidential Election 2026 &mdash; Polymarket</div>
-        <div class="pm-sub">Ver probabilidades en tiempo real, volumen de apuestas y tendencias del mercado de prediccion</div>
+        <div class="pm-sub">Ver probabilidades en tiempo real, volumen de apuestas y tendencias</div>
       </div>
       <div class="pm-arrow">&rarr;</div>
     </a>
@@ -545,18 +479,18 @@
   <!-- How to Vote -->
   <div class="vote-section">
     <h2>&#127464;&#127476; Como Votar</h2>
-    <p style="color:var(--text-mid); margin-bottom:24px; font-size:0.9rem;">Tu voto es tu voz. Asi puedes participar en las elecciones presidenciales de 2026:</p>
+    <p style="color:hsl(var(--muted-foreground)); margin-bottom:16px; font-size:0.72rem;">Tu voto es tu voz. Asi puedes participar en las elecciones presidenciales de 2026:</p>
     <div class="steps">
-      <div class="step"><div class="step-number">1</div><h3>Verifica tu cedula</h3><p>Necesitas tu cedula de ciudadania original (amarilla con hologramas) o la cedula digital desde la app de la Registraduria.</p></div>
-      <div class="step"><div class="step-number">2</div><h3>Consulta tu puesto</h3><p>Ingresa a <strong>registraduria.gov.co</strong> para verificar tu puesto de votacion, direccion y mesa asignada.</p></div>
-      <div class="step"><div class="step-number">3</div><h3>Inscribe tu cedula</h3><p>Si cambiaste de residencia, inscribe tu cedula antes del <strong>31 de marzo de 2026</strong> para votar cerca de tu nuevo domicilio.</p></div>
-      <div class="step"><div class="step-number">4</div><h3>Vota el 31 de mayo</h3><p>Las mesas abren de <strong>8:00 AM a 4:00 PM</strong>. Si estas en fila a las 4 PM, podras votar. Lleva tu cedula original.</p></div>
+      <div class="step"><div class="step-number">1</div><h3>Verifica tu cedula</h3><p>Cedula original (amarilla con hologramas) o cedula digital desde la app de la Registraduria.</p></div>
+      <div class="step"><div class="step-number">2</div><h3>Consulta tu puesto</h3><p>Ingresa a <strong>registraduria.gov.co</strong> para verificar puesto, direccion y mesa.</p></div>
+      <div class="step"><div class="step-number">3</div><h3>Inscribe tu cedula</h3><p>Si cambiaste de residencia, inscribe antes del <strong>31 de marzo de 2026</strong>.</p></div>
+      <div class="step"><div class="step-number">4</div><h3>Vota el 31 de mayo</h3><p>Mesas abren <strong>8:00 AM a 4:00 PM</strong>. Si estas en fila a las 4 PM, podras votar.</p></div>
     </div>
-    <h3 style="margin-top:32px; margin-bottom:8px; font-size:1.1rem;">Fechas Clave</h3>
+    <h3 style="margin-top:24px; margin-bottom:6px; font-size:0.85rem;">Fechas Clave</h3>
     <div class="dates-grid">
-      <div class="date-card"><div class="date">13 Mar</div><div class="label">Cierre de inscripcion de candidatos</div></div>
-      <div class="date-card"><div class="date">31 Mar</div><div class="label">Limite inscripcion de cedulas</div></div>
-      <div class="date-card"><div class="date">31 May</div><div class="label">Primera Vuelta Presidencial</div></div>
+      <div class="date-card"><div class="date">13 Mar</div><div class="label">Cierre inscripcion candidatos</div></div>
+      <div class="date-card"><div class="date">31 Mar</div><div class="label">Limite inscripcion cedulas</div></div>
+      <div class="date-card"><div class="date">31 May</div><div class="label">Primera Vuelta</div></div>
       <div class="date-card"><div class="date">21 Jun</div><div class="label">Segunda Vuelta (si aplica)</div></div>
     </div>
   </div>
@@ -565,17 +499,18 @@
 <!-- Disclaimer -->
 <div class="disclaimer">
   <p>Este sitio tiene fines informativos y educativos. No esta afiliado a ningun candidato, partido o movimiento politico.
-  Las propuestas fueron recopiladas de fuentes publicas y pueden estar sujetas a actualizaciones por parte de las campanas.</p>
-  <p style="margin-top:8px;">Fuentes: <a href="https://www.registraduria.gov.co" target="_blank">Registraduria Nacional</a> &middot;
-  <a href="https://www.infobae.com/colombia/" target="_blank">Infobae Colombia</a> &middot;
-  <a href="https://www.eltiempo.com" target="_blank">El Tiempo</a> &middot;
-  <a href="https://www.portafolio.co" target="_blank">Portafolio</a> &middot;
-  <a href="https://www.lasillavacia.com" target="_blank">La Silla Vacia</a> &middot;
-  <a href="https://www.as-coa.org" target="_blank">AS/COA</a></p>
+  Propuestas recopiladas de fuentes publicas, sujetas a actualizaciones de las campanas.</p>
+  <p style="margin-top:6px;">
+    <a href="https://www.registraduria.gov.co" target="_blank">Registraduria</a> &middot;
+    <a href="https://www.infobae.com/colombia/" target="_blank">Infobae</a> &middot;
+    <a href="https://www.eltiempo.com" target="_blank">El Tiempo</a> &middot;
+    <a href="https://www.portafolio.co" target="_blank">Portafolio</a> &middot;
+    <a href="https://www.lasillavacia.com" target="_blank">La Silla Vacia</a>
+  </p>
 </div>
 
 <footer>
-  <p>Elecciones Colombia 2026 &middot; Informacion Ciudadana &middot; Tu voto decide el futuro</p>
+  <p>Elecciones Colombia 2026 // Informacion Ciudadana // Tu voto decide el futuro</p>
 </footer>
 
 <!-- Modal -->
@@ -603,68 +538,19 @@ const candidates = [
     economic: {
       model: "Economia dirigida por el Estado con redistribucion social. Continuidad del modelo progresivo del gobierno Petro.",
       modelTags: ["Estado intervencionista", "Redistributivo", "Anti-austeridad neoliberal"],
-      tax: [
-        "Ley de Austeridad Republicana: reducir gastos suntuarios del gobierno para redirigir a bienestar social",
-        "Reduccion del salario presidencial y de gabinete progresivamente",
-        "Distingue 'austeridad republicana' (cortar privilegios) de 'austeridad neoliberal' (cortar gasto social)"
-      ],
-      budget: [
-        "Prioridad: bienestar social y reduccion de pobreza",
-        "Redirigir ahorros de austeridad gubernamental a programas sociales",
-        "Cortar gastos de lujo del gobierno (vehiculos, viajes, contratos innecesarios)"
-      ],
-      infrastructure: [
-        "Construccion de acueductos rurales y plantas de purificacion",
-        "Acceso universal al agua potable como prioridad"
-      ],
-      social: [
-        "Reforma agraria y distribucion de tierras ('Avanzare en entregar tierras')",
-        "Continuar y profundizar programas sociales del gobierno Petro",
-        "Apoyo a victimas del conflicto armado"
-      ],
-      energy: [
-        "Prohibir nuevas licencias de exploracion de hidrocarburos",
-        "Prohibir exploracion de yacimientos no convencionales y fracking",
-        "Transicion energetica completa en 15 anos"
-      ],
-      employment: [
-        "Apoya aumento del 23% en salario minimo",
-        "Creacion de empleo via intervencion estatal y economia productiva"
-      ],
-      fiscal: [
-        "Oxford Economics: bonos a 10 anos ~12.5%, peso se debilita",
-        "Impacto fiscal negativo por prohibicion de exploracion (petroleo = 35% de exportaciones)",
-        "Escenario de continuidad mantiene estres fiscal"
-      ],
-      stats: [
-        { value: "~31%", label: "Encuestas" },
-        { value: "15 anos", label: "Transicion energetica" },
-        { value: "12.5%", label: "Bonos 10Y (est.)" }
-      ]
+      tax: ["Ley de Austeridad Republicana: reducir gastos suntuarios del gobierno para redirigir a bienestar social","Reduccion del salario presidencial y de gabinete progresivamente","Distingue 'austeridad republicana' (cortar privilegios) de 'austeridad neoliberal' (cortar gasto social)"],
+      budget: ["Prioridad: bienestar social y reduccion de pobreza","Redirigir ahorros de austeridad gubernamental a programas sociales","Cortar gastos de lujo del gobierno (vehiculos, viajes, contratos innecesarios)"],
+      infrastructure: ["Construccion de acueductos rurales y plantas de purificacion","Acceso universal al agua potable como prioridad"],
+      social: ["Reforma agraria y distribucion de tierras ('Avanzare en entregar tierras')","Continuar y profundizar programas sociales del gobierno Petro","Apoyo a victimas del conflicto armado"],
+      energy: ["Prohibir nuevas licencias de exploracion de hidrocarburos","Prohibir exploracion de yacimientos no convencionales y fracking","Transicion energetica completa en 15 anos"],
+      employment: ["Apoya aumento del 23% en salario minimo","Creacion de empleo via intervencion estatal y economia productiva"],
+      fiscal: ["Oxford Economics: bonos a 10 anos ~12.5%, peso se debilita","Impacto fiscal negativo por prohibicion de exploracion (petroleo = 35% de exportaciones)","Escenario de continuidad mantiene estres fiscal"],
+      stats: [{value:"~31%",label:"Encuestas"},{value:"15 anos",label:"Transicion energetica"},{value:"12.5%",label:"Bonos 10Y (est.)"}]
     },
-    trade: [
-      "Diversificar comercio mas alla de EE.UU., abrir mercados en China para productos colombianos",
-      "Estado debe controlar sectores estrategicos de la economia — posible restriccion a IED en ciertas industrias",
-      "Colombia como 'potencia agroalimentaria y biodiversa' — exportaciones basadas en agricultura y biodiversidad, no extractivas",
-      "Conectar economias rurales a mercados nacionales e internacionales via infraestructura vial terciaria",
-      "Sin posiciones especificas sobre aranceles, TLCs o zonas francas"
-    ],
-    international: [
-      "Continuidad con politica exterior de Petro: 'Daria continuidad a la politica del Presidente Petro'",
-      "Defiende dialogo politico con el regimen de Maduro; mantener relaciones diplomaticas con Venezuela",
-      "Opuesto a intervencion militar de EE.UU.: 'amenaza directa contra la paz regional'",
-      "Acuso a EE.UU. de intentar influir en elecciones de Colombia 2026",
-      "Favorable a expansion de lazos economicos y diplomaticos con China",
-      "Enfoque no alineado, cooperacion Sur-Sur"
-    ],
-    ai_tech: [
-      "Sin propuestas especificas publicadas sobre IA, transformacion digital, criptomonedas/fintech o desarrollo de la industria tecnologica",
-      "Brecha notable en su plataforma publica"
-    ],
-    education_stem: [
-      "Sin propuestas especificas sobre educacion STEM, reforma del SENA, o desarrollo de fuerza laboral",
-      "Declaraciones enfocadas en garantizar acceso educativo para hijos de victimas del conflicto"
-    ]
+    trade: ["Diversificar comercio mas alla de EE.UU., abrir mercados en China para productos colombianos","Estado debe controlar sectores estrategicos de la economia — posible restriccion a IED en ciertas industrias","Colombia como 'potencia agroalimentaria y biodiversa' — exportaciones basadas en agricultura y biodiversidad, no extractivas","Conectar economias rurales a mercados nacionales e internacionales via infraestructura vial terciaria","Sin posiciones especificas sobre aranceles, TLCs o zonas francas"],
+    international: ["Continuidad con politica exterior de Petro: 'Daria continuidad a la politica del Presidente Petro'","Defiende dialogo politico con el regimen de Maduro; mantener relaciones diplomaticas con Venezuela","Opuesto a intervencion militar de EE.UU.: 'amenaza directa contra la paz regional'","Acuso a EE.UU. de intentar influir en elecciones de Colombia 2026","Favorable a expansion de lazos economicos y diplomaticos con China","Enfoque no alineado, cooperacion Sur-Sur"],
+    ai_tech: ["Sin propuestas especificas publicadas sobre IA, transformacion digital, criptomonedas/fintech o desarrollo de la industria tecnologica","Brecha notable en su plataforma publica"],
+    education_stem: ["Sin propuestas especificas sobre educacion STEM, reforma del SENA, o desarrollo de fuerza laboral","Declaraciones enfocadas en garantizar acceso educativo para hijos de victimas del conflicto"]
   },
   {
     id: "espriella", name: "Abelardo de la Espriella", initials: "AE",
@@ -672,72 +558,23 @@ const candidates = [
     spectrum: "far-right", spectrumLabel: "Derecha Dura", tagClass: "tag-far-right",
     polls: "~31-32% (Atlas Intel) — Empate tecnico con Cepeda",
     bio: "Reduciria el Estado en 40% (de 18 a 9-10 ministerios). VP Restrepo (ex-Min. Hacienda) lideraria agenda de IED. Eliminaria 4x1.000 e impuestos a gasolina. Romperia relaciones con Venezuela/Cuba/Nicaragua; reunion con Rubio en ene. 2026. Sin propuestas de IA ni STEM. Modelo Bukele.",
-    policies: [
-      { icon: "&#128170;", text: "'Mano dura': mega-carceles, bombardeos a narcotrafico" },
-      { icon: "&#127981;", text: "Reactivacion total de hidrocarburos y mineria" },
-      { icon: "&#9878;", text: "Reduccion del Estado en un 40%, de 18 a 9-10 ministerios" },
-      { icon: "&#128176;", text: "Eliminar impuesto 4x1.000 e impuestos a gasolina" }
-    ],
+    policies: [{icon:"&#128170;",text:"'Mano dura': mega-carceles, bombardeos a narcotrafico"},{icon:"&#127981;",text:"Reactivacion total de hidrocarburos y mineria"},{icon:"&#9878;",text:"Reduccion del Estado en un 40%, de 18 a 9-10 ministerios"},{icon:"&#128176;",text:"Eliminar impuesto 4x1.000 e impuestos a gasolina"}],
     economic: {
       model: "Libre mercado, pro-empresa, reduccion masiva del Estado. Cuatro motores economicos: hidrocarburos/mineria, infraestructura, agricultura y turismo.",
       modelTags: ["Libre mercado", "Reduccion masiva del Estado", "Pro-hidrocarburos"],
-      tax: [
-        "Eliminar el impuesto del 4x1.000 (gravamen a movimientos financieros)",
-        "Eliminar impuestos a la gasolina",
-        "Bajar impuestos a empresas para estimular crecimiento"
-      ],
-      budget: [
-        "Cortar el aparato estatal en un 40%",
-        "Reducir ministerios de 18 a 9 o 10",
-        "90 decretos el primer dia cubriendo seguridad, salud y economia"
-      ],
-      infrastructure: [
-        "Infraestructura como uno de cuatro 'motores economicos'"
-      ],
-      social: [
-        "'Colombia pais de propietarios': credito vivienda al 2% maximo, 30 anos, casas de dos pisos con negocio en primer piso",
-        "$10 billones COP de inversion de emergencia en sector salud"
-      ],
-      energy: [
-        "Reactivacion total de exploracion y explotacion de hidrocarburos y mineria",
-        "Erradicacion de coca con fumigacion aerea"
-      ],
-      employment: [
-        "Enfoque en microempresarios, comerciantes, trabajadores independientes"
-      ],
-      fiscal: [
-        "Reduccion del 40% del Estado como herramienta fiscal principal",
-        "Oxford Economics: bonos ~9.5%, peso se fortalece, superavit primario 1.3% para 2028"
-      ],
-      stats: [
-        { value: "~32%", label: "Encuestas" },
-        { value: "-40%", label: "Reduccion del Estado" },
-        { value: "$10B", label: "COP emergencia salud" },
-        { value: "90", label: "Decretos dia 1" }
-      ]
+      tax: ["Eliminar el impuesto del 4x1.000 (gravamen a movimientos financieros)","Eliminar impuestos a la gasolina","Bajar impuestos a empresas para estimular crecimiento"],
+      budget: ["Cortar el aparato estatal en un 40%","Reducir ministerios de 18 a 9 o 10","90 decretos el primer dia cubriendo seguridad, salud y economia"],
+      infrastructure: ["Infraestructura como uno de cuatro 'motores economicos'"],
+      social: ["'Colombia pais de propietarios': credito vivienda al 2% maximo, 30 anos, casas de dos pisos con negocio en primer piso","$10 billones COP de inversion de emergencia en sector salud"],
+      energy: ["Reactivacion total de exploracion y explotacion de hidrocarburos y mineria","Erradicacion de coca con fumigacion aerea"],
+      employment: ["Enfoque en microempresarios, comerciantes, trabajadores independientes"],
+      fiscal: ["Reduccion del 40% del Estado como herramienta fiscal principal","Oxford Economics: bonos ~9.5%, peso se fortalece, superavit primario 1.3% para 2028"],
+      stats: [{value:"~32%",label:"Encuestas"},{value:"-40%",label:"Reduccion del Estado"},{value:"$10B",label:"COP emergencia salud"},{value:"90",label:"Decretos dia 1"}]
     },
-    trade: [
-      "VP Jose Manuel Restrepo (ex-Min. Comercio y Hacienda) manejaría 'toda la agenda internacional' incluyendo atraccion de IED",
-      "Venezuela como oportunidad comercial: 'Una Venezuela libre necesitaria reconstruirse — Colombia podria ser el gran proveedor, reactivando nuestra economia e industria nacional'",
-      "Agenda de promocion comercial 'Venezuela 2.0'",
-      "Cuatro motores economicos priorizados: hidrocarburos/mineria, infraestructura, agricultura, turismo",
-      "Eliminacion de 4x1.000 y impuestos a gasolina como incentivo a inversion"
-    ],
-    international: [
-      "Romperia relaciones diplomaticas con Venezuela, Cuba y Nicaragua: 'Con ninguna tirania del mundo'",
-      "Reunion privada con el Secretario de Estado Marco Rubio en enero 2026",
-      "Fuerte alineacion pro-EE.UU. en seguridad y contranacoticos",
-      "Describio a su VP Restrepo como 'el Marco Rubio' de su gobierno",
-      "Cooperacion militar con EE.UU. e Israel"
-    ],
-    ai_tech: [
-      "Sin propuestas especificas publicadas sobre IA, transformacion digital o politica tecnologica",
-      "Brecha notable en su plataforma pese a ser uno de los lideres en encuestas"
-    ],
-    education_stem: [
-      "Sin propuestas especificas sobre educacion STEM, reforma del SENA, o desarrollo de fuerza laboral",
-      "Plataforma enfocada casi exclusivamente en seguridad, salud y reforma fiscal"
-    ]
+    trade: ["VP Jose Manuel Restrepo (ex-Min. Comercio y Hacienda) manejaria 'toda la agenda internacional' incluyendo atraccion de IED","Venezuela como oportunidad comercial: 'Una Venezuela libre necesitaria reconstruirse — Colombia podria ser el gran proveedor'","Agenda de promocion comercial 'Venezuela 2.0'","Cuatro motores economicos priorizados: hidrocarburos/mineria, infraestructura, agricultura, turismo","Eliminacion de 4x1.000 y impuestos a gasolina como incentivo a inversion"],
+    international: ["Romperia relaciones diplomaticas con Venezuela, Cuba y Nicaragua: 'Con ninguna tirania del mundo'","Reunion privada con el Secretario de Estado Marco Rubio en enero 2026","Fuerte alineacion pro-EE.UU. en seguridad y contranacoticos","Describio a su VP Restrepo como 'el Marco Rubio' de su gobierno","Cooperacion militar con EE.UU. e Israel"],
+    ai_tech: ["Sin propuestas especificas publicadas sobre IA, transformacion digital o politica tecnologica","Brecha notable en su plataforma pese a ser uno de los lideres en encuestas"],
+    education_stem: ["Sin propuestas especificas sobre educacion STEM, reforma del SENA, o desarrollo de fuerza laboral","Plataforma enfocada casi exclusivamente en seguridad, salud y reforma fiscal"]
   },
   {
     id: "valencia", name: "Paloma Valencia", initials: "PV",
@@ -745,82 +582,23 @@ const candidates = [
     spectrum: "right", spectrumLabel: "Derecha", tagClass: "tag-right",
     polls: "Gano Gran Consulta (3.2M votos)",
     bio: "IA, robotica y programacion desde la educacion basica. Exportar gas offshore via Ecopetrol. Incentivar IED con estabilidad juridica y eliminacion de impuesto al patrimonio. STEM desde primaria; revivir Ser Pilo Paga. Plan Colombia 2.0 con EE.UU. Senadora, nieta del expresidente Valencia. 3.2M votos en consulta.",
-    policies: [
-      { icon: "&#128274;", text: "Estrategia 4R de seguridad: reducir ingresos criminales" },
-      { icon: "&#127968;", text: "'Casa Semilla': viviendas ampliables antisismicas" },
-      { icon: "&#128218;", text: "IA, robotica y programacion desde educacion basica" },
-      { icon: "&#128739;", text: "10,000 km de vias terciarias rurales" }
-    ],
+    policies: [{icon:"&#128274;",text:"Estrategia 4R de seguridad: reducir ingresos criminales"},{icon:"&#127968;",text:"'Casa Semilla': viviendas ampliables antisismicas"},{icon:"&#128218;",text:"IA, robotica y programacion desde educacion basica"},{icon:"&#128739;",text:"10,000 km de vias terciarias rurales"}],
     economic: {
       model: "Libre mercado con eficiencia estatal. Colombia como 'potencia energetica'. Reducir Estado y bajar impuestos.",
       modelTags: ["Libre mercado", "Pro-empresa", "Potencia energetica"],
-      tax: [
-        "Eliminar impuesto al patrimonio",
-        "Bajar impuesto de renta",
-        "Impuesto unico simplificado para mipymes",
-        "Revisar impuestos prediales"
-      ],
-      budget: [
-        "Fusionar ministerios, reducir cada uno en 20%",
-        "Redirigir ahorros a inversion social"
-      ],
-      infrastructure: [
-        "10,000 km de vias terciarias mejoradas con tecnologia de bajo costo"
-      ],
-      social: [
-        "'Casa Semilla': viviendas ampliables con muros antisismicos",
-        "Vouchers educativos para familias de bajos ingresos",
-        "Reforma pensional: contribucion desde el nacimiento"
-      ],
-      energy: [
-        "Colombia como 'potencia energetica': eolica, solar, hidro, nuclear, geotermica",
-        "Reactivar exploracion de hidrocarburos",
-        "Transformar Ecopetrol para extraccion de gas offshore para exportacion",
-        "Apoya proyectos piloto de fracking"
-      ],
-      employment: [
-        "Facilitar acceso al credito",
-        "Combatir extorsion y 'gota a gota'"
-      ],
-      fiscal: [
-        "Reduccion del Estado (20% por ministerio)",
-        "Oxford Economics: bonos ~9.5%, superavit primario 1.3% para 2028"
-      ],
-      stats: [
-        { value: "3.2M", label: "Votos consulta" },
-        { value: "-20%", label: "Reduccion ministerios" },
-        { value: "10,000km", label: "Vias terciarias" },
-        { value: "9.5%", label: "Bonos 10Y (est.)" }
-      ]
+      tax: ["Eliminar impuesto al patrimonio","Bajar impuesto de renta","Impuesto unico simplificado para mipymes","Revisar impuestos prediales"],
+      budget: ["Fusionar ministerios, reducir cada uno en 20%","Redirigir ahorros a inversion social"],
+      infrastructure: ["10,000 km de vias terciarias mejoradas con tecnologia de bajo costo"],
+      social: ["'Casa Semilla': viviendas ampliables con muros antisismicos","Vouchers educativos para familias de bajos ingresos","Reforma pensional: contribucion desde el nacimiento"],
+      energy: ["Colombia como 'potencia energetica': eolica, solar, hidro, nuclear, geotermica","Reactivar exploracion de hidrocarburos","Transformar Ecopetrol para extraccion de gas offshore para exportacion","Apoya proyectos piloto de fracking"],
+      employment: ["Facilitar acceso al credito","Combatir extorsion y 'gota a gota'"],
+      fiscal: ["Reduccion del Estado (20% por ministerio)","Oxford Economics: bonos ~9.5%, superavit primario 1.3% para 2028"],
+      stats: [{value:"3.2M",label:"Votos consulta"},{value:"-20%",label:"Reduccion ministerios"},{value:"10,000km",label:"Vias terciarias"},{value:"9.5%",label:"Bonos 10Y (est.)"}]
     },
-    trade: [
-      "Incentivos a la inversion y estabilidad juridica para impulsar crecimiento y empleo formal",
-      "Exportar combustibles minerales-energeticos para financiar desarrollo y transicion energetica",
-      "Transformar Ecopetrol para extraccion de gas offshore para exportacion",
-      "Modificar Ley Escalera de Formalidad: regimen simplificado para mipymes con acceso a credito",
-      "10,000 km de vias terciarias para conectar productores agricolas a mercados"
-    ],
-    international: [
-      "Fuerte alineacion pro-EE.UU., critica a Petro por 'danar relaciones internacionales'",
-      "Apoyo a administracion temporal de EE.UU. en Venezuela mientras se convocan elecciones",
-      "Plan Colombia 2.0: cooperacion de seguridad internacional actualizada",
-      "Cooperacion binacional de seguridad (no incursion militar directa de EE.UU. en Colombia)",
-      "Buscaría consejo del expresidente Alvaro Uribe",
-      "No clasifica situacion Israel-Palestina como genocidio"
-    ],
-    ai_tech: [
-      "Integrar IA, automatizacion, robotica y programacion desde la educacion basica",
-      "IA en justicia: tecnologia para mejorar capacidad de respuesta judicial",
-      "Framework de seguridad 4R incluye tecnologia, drones y sistemas de inteligencia",
-      "Compromiso de acceso a internet en todas las escuelas"
-    ],
-    education_stem: [
-      "Programas STEM desde primaria: automatizacion, IA, robotica y programacion",
-      "Vouchers educativos ('bonos escolares') para que familias elijan entre instituciones publicas y privadas",
-      "Cursos de capacitacion por competencias de corto plazo para insercion laboral directa",
-      "Revivir programa 'Ser Pilo Paga' + Generacion E para aliviar deuda Icetex",
-      "Desarrollo de energia nuclear requeriria formacion tecnica asociada"
-    ]
+    trade: ["Incentivos a la inversion y estabilidad juridica para impulsar crecimiento y empleo formal","Exportar combustibles minerales-energeticos para financiar desarrollo y transicion energetica","Transformar Ecopetrol para extraccion de gas offshore para exportacion","Modificar Ley Escalera de Formalidad: regimen simplificado para mipymes con acceso a credito","10,000 km de vias terciarias para conectar productores agricolas a mercados"],
+    international: ["Fuerte alineacion pro-EE.UU., critica a Petro por 'danar relaciones internacionales'","Apoyo a administracion temporal de EE.UU. en Venezuela mientras se convocan elecciones","Plan Colombia 2.0: cooperacion de seguridad internacional actualizada","Cooperacion binacional de seguridad (no incursion militar directa de EE.UU. en Colombia)","Buscaria consejo del expresidente Alvaro Uribe","No clasifica situacion Israel-Palestina como genocidio"],
+    ai_tech: ["Integrar IA, automatizacion, robotica y programacion desde la educacion basica","IA en justicia: tecnologia para mejorar capacidad de respuesta judicial","Framework de seguridad 4R incluye tecnologia, drones y sistemas de inteligencia","Compromiso de acceso a internet en todas las escuelas"],
+    education_stem: ["Programas STEM desde primaria: automatizacion, IA, robotica y programacion","Vouchers educativos ('bonos escolares') para que familias elijan entre instituciones publicas y privadas","Cursos de capacitacion por competencias de corto plazo para insercion laboral directa","Revivir programa 'Ser Pilo Paga' + Generacion E para aliviar deuda Icetex","Desarrollo de energia nuclear requeriria formacion tecnica asociada"]
   },
   {
     id: "clopez", name: "Claudia Lopez", initials: "CL",
@@ -828,78 +606,23 @@ const candidates = [
     spectrum: "center", spectrumLabel: "Centro", tagClass: "tag-center",
     polls: "Gano Consulta de las Soluciones",
     bio: "1M becas educacion-trabajo con componente de innovacion. Convertir SENA en universidad para que tecnicos lleguen a grado profesional. Contratos de aprendizaje de 1 ano. Reducir impuesto corporativo; IED via pacto fiscal. Tecnologia para Fiscalia Antimafia. Ex-alcaldesa de Bogota, primera mujer y persona LGBT en dirigir la capital.",
-    policies: [
-      { icon: "&#128274;", text: "Fiscalia Antimafia con nueva inversion en tecnologia" },
-      { icon: "&#127891;", text: "Un millon de becas educacion-trabajo" },
-      { icon: "&#128105;", text: "1,000 'Manzanas del Cuidado' nacionales" },
-      { icon: "&#127968;", text: "600,000 subsidios de vivienda (reactivar Mi Casa Ya)" }
-    ],
+    policies: [{icon:"&#128274;",text:"Fiscalia Antimafia con nueva inversion en tecnologia"},{icon:"&#127891;",text:"Un millon de becas educacion-trabajo"},{icon:"&#128105;",text:"1,000 'Manzanas del Cuidado' nacionales"},{icon:"&#127968;",text:"600,000 subsidios de vivienda (reactivar Mi Casa Ya)"}],
     economic: {
       model: "Economia mixta con disciplina fiscal. Tributacion progresiva con incentivos pro-empresa. 'No va a alcanzar para todo' — enfoque pragmatico.",
       modelTags: ["Economia mixta", "Disciplina fiscal", "Pragmatica"],
-      tax: [
-        "Impuestos progresivos, transparentes y oportunos",
-        "Reducir impuestos a empresas para impulsar produccion y empleo",
-        "Contribucion de seguridad solo de los 5,000 colombianos mas ricos",
-        "Reducir impuesto de renta en 2pp si PIB crece al 4% e inversion privada al 20%"
-      ],
-      budget: [
-        "Disciplina fiscal: mas ingresos, recortes de gastos, eficiencia presupuestal",
-        "'Pacto fiscal': fortalecer instituciones, reducir gasto estatal, actualizar catastro"
-      ],
-      infrastructure: [
-        "Proyectos de emergencia: agua, saneamiento y electrificacion en el Pacifico",
-        "Corredores ferroviarios: Pacifico y Belencito, Boyaca",
-        "Rehabilitacion de vias secundarias y terciarias"
-      ],
-      social: [
-        "1 millon de becas educacion-trabajo para jovenes y mujeres",
-        "600,000 subsidios de vivienda (reactivar Mi Casa Ya)",
-        "1,000 'Manzanas del cuidado': infraestructura para mujeres",
-        "Asistencia tecnica y precios garantizados de compra para productos agricolas"
-      ],
-      energy: [
-        "Enfoque en desarrollo regional sostenible"
-      ],
-      employment: [
-        "1 millon de becas para reducir fuga de talento",
-        "Microempresas como motor de creacion de empleo"
-      ],
-      fiscal: [
-        "Disciplina fiscal como pilar",
-        "Reduccion tributaria condicional vinculada a metas de crecimiento"
-      ],
-      stats: [
-        { value: "1M", label: "Becas educacion-trabajo" },
-        { value: "600K", label: "Subsidios vivienda" },
-        { value: "1,000", label: "Manzanas del Cuidado" },
-        { value: "-2pp", label: "Renta si PIB crece 4%" }
-      ]
+      tax: ["Impuestos progresivos, transparentes y oportunos","Reducir impuestos a empresas para impulsar produccion y empleo","Contribucion de seguridad solo de los 5,000 colombianos mas ricos","Reducir impuesto de renta en 2pp si PIB crece al 4% e inversion privada al 20%"],
+      budget: ["Disciplina fiscal: mas ingresos, recortes de gastos, eficiencia presupuestal","'Pacto fiscal': fortalecer instituciones, reducir gasto estatal, actualizar catastro"],
+      infrastructure: ["Proyectos de emergencia: agua, saneamiento y electrificacion en el Pacifico","Corredores ferroviarios: Pacifico y Belencito, Boyaca","Rehabilitacion de vias secundarias y terciarias"],
+      social: ["1 millon de becas educacion-trabajo para jovenes y mujeres","600,000 subsidios de vivienda (reactivar Mi Casa Ya)","1,000 'Manzanas del cuidado': infraestructura para mujeres","Asistencia tecnica y precios garantizados de compra para productos agricolas"],
+      energy: ["Enfoque en desarrollo regional sostenible"],
+      employment: ["1 millon de becas para reducir fuga de talento","Microempresas como motor de creacion de empleo"],
+      fiscal: ["Disciplina fiscal como pilar","Reduccion tributaria condicional vinculada a metas de crecimiento"],
+      stats: [{value:"1M",label:"Becas educacion-trabajo"},{value:"600K",label:"Subsidios vivienda"},{value:"1,000",label:"Manzanas del Cuidado"},{value:"-2pp",label:"Renta si PIB crece 4%"}]
     },
-    trade: [
-      "'Pacto fiscal' para fortalecer instituciones y reducir carga tributaria sobre renta y propiedad",
-      "Estrategia de 'construir mercado' para crecimiento economico",
-      "Asistencia tecnica y precios garantizados para comercializacion agricola",
-      "Corredores ferroviarios regionales para mejorar logistica comercial"
-    ],
-    international: [
-      "Posicion pragmatica de centro: contra la izquierda de Petro y la derecha de Uribe",
-      "Como alcaldesa, agradecio a Petro por restablecer relaciones con Venezuela, apoyando solidaridad con migrantes venezolanos",
-      "Sin plataforma detallada de politica exterior sobre EE.UU., China, UE o alianzas de defensa"
-    ],
-    ai_tech: [
-      "Comando contra crimen organizado con 'nueva inversion en tecnologia'",
-      "Ministerio de Seguridad y Justicia Ciudadana con mas recursos y tecnologia",
-      "Sin propuestas especificas sobre IA, criptomonedas o fintech"
-    ],
-    education_stem: [
-      "1 millon de becas de educacion superior con componentes de emprendimiento e innovacion",
-      "Convertir SENA en universidad: estudiantes tecnicos pueden continuar a grado profesional sin cambiar de institucion",
-      "Contratos de aprendizaje de un ano para que graduados obtengan primer empleo y experiencia requerida",
-      "Mantener matricula cero en universidades publicas, aumentar inscripcion en programas tecnicos y tecnologicos con garantia de empleo",
-      "Fortalecio aprendizaje STEM con educacion socioemocional y civica en todas las escuelas publicas de Bogota durante su alcaldia",
-      "800,000 unidades de vivienda para construir riqueza familiar"
-    ]
+    trade: ["'Pacto fiscal' para fortalecer instituciones y reducir carga tributaria sobre renta y propiedad","Estrategia de 'construir mercado' para crecimiento economico","Asistencia tecnica y precios garantizados para comercializacion agricola","Corredores ferroviarios regionales para mejorar logistica comercial"],
+    international: ["Posicion pragmatica de centro: contra la izquierda de Petro y la derecha de Uribe","Como alcaldesa, agradecio a Petro por restablecer relaciones con Venezuela, apoyando solidaridad con migrantes venezolanos","Sin plataforma detallada de politica exterior sobre EE.UU., China, UE o alianzas de defensa"],
+    ai_tech: ["Comando contra crimen organizado con 'nueva inversion en tecnologia'","Ministerio de Seguridad y Justicia Ciudadana con mas recursos y tecnologia","Sin propuestas especificas sobre IA, criptomonedas o fintech"],
+    education_stem: ["1 millon de becas de educacion superior con componentes de emprendimiento e innovacion","Convertir SENA en universidad: estudiantes tecnicos pueden continuar a grado profesional sin cambiar de institucion","Contratos de aprendizaje de un ano para que graduados obtengan primer empleo y experiencia requerida","Mantener matricula cero en universidades publicas, aumentar inscripcion en programas tecnicos y tecnologicos con garantia de empleo","Fortalecio aprendizaje STEM con educacion socioemocional y civica en todas las escuelas publicas de Bogota durante su alcaldia"]
   },
   {
     id: "fajardo", name: "Sergio Fajardo", initials: "SF",
@@ -907,78 +630,23 @@ const candidates = [
     spectrum: "center", spectrumLabel: "Centro", tagClass: "tag-center",
     polls: "Tercer intento presidencial",
     bio: "BANDERA: triplicar gasto en I+D del 0.3% al 1% del PIB — el compromiso mas especifico entre candidatos. Universidad Publica Digital para municipios lejanos. Diversificar exportaciones mas alla de petroleo/carbon. Bajar impuestos corporativos, ampliar base. 1.5M empleos formales. Matematico, ex-alcalde de Medellin.",
-    policies: [
-      { icon: "&#128269;", text: "Anti-corrupcion: transparencia radical" },
-      { icon: "&#128218;", text: "Triplicar gasto en I+D del 0.3% al 1% del PIB" },
-      { icon: "&#127891;", text: "Universidad Publica Digital para municipios lejanos" },
-      { icon: "&#128101;", text: "1.5 millones de empleos formales" }
-    ],
+    policies: [{icon:"&#128269;",text:"Anti-corrupcion: transparencia radical"},{icon:"&#128218;",text:"Triplicar gasto en I+D del 0.3% al 1% del PIB"},{icon:"&#127891;",text:"Universidad Publica Digital para municipios lejanos"},{icon:"&#128101;",text:"1.5 millones de empleos formales"}],
     economic: {
       model: "Economia mixta impulsada por educacion, ciencia, tecnologia y productividad. 'Sin justicia social no hay desarrollo.'",
       modelTags: ["Economia mixta", "Productividad", "Educacion como motor"],
-      tax: [
-        "Reforma fiscal estructural para disminuir tributacion corporativa",
-        "Ampliar la base tributaria (mas personas pagando, a tasas menores)",
-        "Implementar catastro multiproposito",
-        "Eliminar exenciones tributarias injustificadas",
-        "Modernizar la DIAN e incentivar facturacion electronica"
-      ],
-      budget: [
-        "Educacion, ciencia y tecnologia como areas de inversion primaria"
-      ],
-      infrastructure: [
-        "Consolidar plan de vias 4G",
-        "Recuperar la red ferroviaria",
-        "Construir vias terciarias y caminos veredales"
-      ],
-      social: [
-        "Educacion como eje central de transformacion",
-        "Inversion en biotecnologia, ecoturismo, energias renovables y economia digital"
-      ],
-      energy: [
-        "Desarrollo de energias renovables",
-        "Apoya proyectos piloto de fracking basados en evidencia cientifica (cambio desde 2018)",
-        "Enfoque equilibrado en transicion energetica"
-      ],
-      employment: [
-        "1.5 millones de empleos formales a traves de desarrollo sectorial",
-        "'Salario suficiente para garantizar una vida justa para las familias'"
-      ],
-      fiscal: [
-        "Reforma fiscal estructural (no parches anuales)",
-        "Encaja en escenario 'ortodoxo' de Oxford Economics"
-      ],
-      stats: [
-        { value: "0.3%→1%", label: "I+D (% PIB)" },
-        { value: "1.5M", label: "Empleos formales" },
-        { value: "4G", label: "Consolidar plan vial" },
-        { value: "Digital", label: "Universidad Publica" }
-      ]
+      tax: ["Reforma fiscal estructural para disminuir tributacion corporativa","Ampliar la base tributaria (mas personas pagando, a tasas menores)","Implementar catastro multiproposito","Eliminar exenciones tributarias injustificadas","Modernizar la DIAN e incentivar facturacion electronica"],
+      budget: ["Educacion, ciencia y tecnologia como areas de inversion primaria"],
+      infrastructure: ["Consolidar plan de vias 4G","Recuperar la red ferroviaria","Construir vias terciarias y caminos veredales"],
+      social: ["Educacion como eje central de transformacion","Inversion en biotecnologia, ecoturismo, energias renovables y economia digital"],
+      energy: ["Desarrollo de energias renovables","Apoya proyectos piloto de fracking basados en evidencia cientifica (cambio desde 2018)","Enfoque equilibrado en transicion energetica"],
+      employment: ["1.5 millones de empleos formales a traves de desarrollo sectorial","'Salario suficiente para garantizar una vida justa para las familias'"],
+      fiscal: ["Reforma fiscal estructural (no parches anuales)","Encaja en escenario 'ortodoxo' de Oxford Economics"],
+      stats: [{value:"0.3%→1%",label:"I+D (% PIB)"},{value:"1.5M",label:"Empleos formales"},{value:"4G",label:"Consolidar plan vial"},{value:"Digital",label:"Universidad Publica"}]
     },
-    trade: [
-      "Construir estructura exportadora 'mas diversificada y competitiva', reduciendo dependencia del petroleo y carbon",
-      "'Quiero una Colombia donde la inversion responsable sea respetada'",
-      "Apoyar acceso de productos colombianos a mercados globales via agencias de promocion de exportaciones",
-      "Incentivar exportadores pioneros en nuevas categorias de producto",
-      "Ampliar oferta exportable"
-    ],
-    international: [
-      "Reconoce necesidad de 'transformacion democratica en Venezuela'",
-      "Sin posiciones detalladas sobre EE.UU., China, UE o alianzas de defensa"
-    ],
-    ai_tech: [
-      "Apoya proyectos piloto de fracking basados en evidencia cientifica",
-      "Tecnologia para bloquear comunicaciones ilegales desde carceles contra extorsion",
-      "Sin propuestas especificas amplias sobre IA, economia digital o criptomonedas"
-    ],
-    education_stem: [
-      "BANDERA: Triplicar gasto en I+D del 0.3% al 1% del PIB en cuatro anos, via fondo publico-privado para ciencia, tecnologia, innovacion y emprendimiento — el compromiso de I+D mas especifico entre todos los candidatos",
-      "Universidad Publica Digital para llevar educacion de calidad a municipios lejanos de ciudades universitarias",
-      "Flexibilizar planes de estudio, calendarios y horarios para que estudiantes con sobre-edad, mujeres con cargas de cuidado y poblaciones diversas puedan trabajar y estudiar",
-      "1.5 millones de empleos formales a traves de desarrollo sectorial en agricultura, industria y servicios con nueva tecnologia",
-      "Cobertura total de primera infancia",
-      "Mayor gasto en infancia, ciencia y tecnologia"
-    ]
+    trade: ["Construir estructura exportadora 'mas diversificada y competitiva', reduciendo dependencia del petroleo y carbon","'Quiero una Colombia donde la inversion responsable sea respetada'","Apoyar acceso de productos colombianos a mercados globales via agencias de promocion de exportaciones","Incentivar exportadores pioneros en nuevas categorias de producto","Ampliar oferta exportable"],
+    international: ["Reconoce necesidad de 'transformacion democratica en Venezuela'","Sin posiciones detalladas sobre EE.UU., China, UE o alianzas de defensa"],
+    ai_tech: ["Apoya proyectos piloto de fracking basados en evidencia cientifica","Tecnologia para bloquear comunicaciones ilegales desde carceles contra extorsion","Sin propuestas especificas amplias sobre IA, economia digital o criptomonedas"],
+    education_stem: ["BANDERA: Triplicar gasto en I+D del 0.3% al 1% del PIB en cuatro anos, via fondo publico-privado para ciencia, tecnologia, innovacion y emprendimiento — el compromiso de I+D mas especifico entre todos los candidatos","Universidad Publica Digital para llevar educacion de calidad a municipios lejanos de ciudades universitarias","Flexibilizar planes de estudio, calendarios y horarios para que estudiantes con sobre-edad, mujeres con cargas de cuidado y poblaciones diversas puedan trabajar y estudiar","1.5 millones de empleos formales a traves de desarrollo sectorial en agricultura, industria y servicios con nueva tecnologia","Cobertura total de primera infancia","Mayor gasto en infancia, ciencia y tecnologia"]
   },
   {
     id: "barreras", name: "Roy Barreras", initials: "RB",
@@ -986,76 +654,23 @@ const candidates = [
     spectrum: "center-left", spectrumLabel: "Centro-Izquierda", tagClass: "tag-center-left",
     polls: "Gano consulta Frente por la Vida (257K votos)",
     bio: "Reducir impuesto corporativo 30-40% para mipymes. Atraer IED con estabilidad y reglas claras. Refinar petroleo venezolano en Cucuta/Barrancabermeja. Acuerdos de transferencia tecnologica. Programa F-18: bono educativo garantizando universidad a los 18. Drones y vigilancia IA para seguridad. Medico y exembajador en Reino Unido, negociador del Acuerdo de Paz.",
-    policies: [
-      { icon: "&#127973;", text: "Reforma de salud: tecnologia y medicina preventiva" },
-      { icon: "&#127959;", text: "Puertos, aeropuertos, trenes — infraestructura moderna" },
-      { icon: "&#128188;", text: "Reducir impuesto corporativo 30-40% para mipymes" },
-      { icon: "&#9774;", text: "Consolidacion de procesos de paz" }
-    ],
+    policies: [{icon:"&#127973;",text:"Reforma de salud: tecnologia y medicina preventiva"},{icon:"&#127959;",text:"Puertos, aeropuertos, trenes — infraestructura moderna"},{icon:"&#128188;",text:"Reducir impuesto corporativo 30-40% para mipymes"},{icon:"&#9774;",text:"Consolidacion de procesos de paz"}],
     economic: {
       model: "Centro-izquierda progresista con responsabilidad fiscal. 'Progresista moderado' — MinHacienda con PhD que 'a veces diga no'.",
       modelTags: ["Progresista moderado", "Responsabilidad fiscal", "Pro-crecimiento"],
-      tax: [
-        "Reducir impuesto corporativo 30-40% para micro y pequenas empresas",
-        "Advierte contra el populismo y las promesas sin financiamiento"
-      ],
-      budget: [
-        "Primera decision: MinHacienda con doctorado en economia 'que a veces diga no'",
-        "Cancelaria contrato de aviones Gripen del gobierno Petro",
-        "Restaurar confianza fiscal"
-      ],
-      infrastructure: [
-        "Puertos, aeropuertos y ferrocarril modernos",
-        "Construccion como motor de empleo"
-      ],
-      social: [
-        "Reforma de salud (autor ley estatutaria de salud)",
-        "Reducir pobreza via crecimiento economico, no solo transferencias"
-      ],
-      energy: [
-        "Restaurar exploracion de hidrocarburos (diferenciacion clave vs. Cepeda)",
-        "Sindicato USO de Ecopetrol respaldo a Barreras sobre Cepeda en este tema"
-      ],
-      employment: [
-        "Reactivar sectores: agricultura, turismo, infraestructura, construccion"
-      ],
-      fiscal: [
-        "Critico de suspension de regla fiscal y deterioro de calificacion soberana",
-        "MinHacienda que pueda decir 'no' a gastos"
-      ],
-      stats: [
-        { value: "257K", label: "Votos consulta" },
-        { value: "-30-40%", label: "Imp. corp. mipymes" },
-        { value: "PhD", label: "MinHacienda" }
-      ]
+      tax: ["Reducir impuesto corporativo 30-40% para micro y pequenas empresas","Advierte contra el populismo y las promesas sin financiamiento"],
+      budget: ["Primera decision: MinHacienda con doctorado en economia 'que a veces diga no'","Cancelaria contrato de aviones Gripen del gobierno Petro","Restaurar confianza fiscal"],
+      infrastructure: ["Puertos, aeropuertos y ferrocarril modernos","Construccion como motor de empleo"],
+      social: ["Reforma de salud (autor ley estatutaria de salud)","Reducir pobreza via crecimiento economico, no solo transferencias"],
+      energy: ["Restaurar exploracion de hidrocarburos (diferenciacion clave vs. Cepeda)","Sindicato USO de Ecopetrol respaldo a Barreras sobre Cepeda en este tema"],
+      employment: ["Reactivar sectores: agricultura, turismo, infraestructura, construccion"],
+      fiscal: ["Critico de suspension de regla fiscal y deterioro de calificacion soberana","MinHacienda que pueda decir 'no' a gastos"],
+      stats: [{value:"257K",label:"Votos consulta"},{value:"-30-40%",label:"Imp. corp. mipymes"},{value:"PhD",label:"MinHacienda"}]
     },
-    trade: [
-      "Atraer IED con 'estabilidad y reglas claras'",
-      "Venezuela como oportunidad: refinar petroleo venezolano en Cucuta y Barrancabermeja para bajar precios de combustible domestico",
-      "'Abrir la frontera es urgente para reactivar el comercio'",
-      "Infraestructura moderna — 'puentes, trenes, puertos y aeropuertos' — para competitividad internacional",
-      "Acuerdos inteligentes con otros paises: transferencia de tecnologia y capacitacion",
-      "Sectores clave: agricultura, turismo, infraestructura, construccion, mineria, energias limpias"
-    ],
-    international: [
-      "Pidio al gobierno Petro 'cuidar las relaciones internacionales con EE.UU., Europa y China'",
-      "Insto al gobierno a abrir frontera con Ecuador",
-      "Traeria al expresidente Juan Manuel Santos como asesor de seguridad, paz y relaciones internacionales",
-      "Propuso ofrecer a Petro la Cancilleria para 'renegociar la guerra contra las drogas'",
-      "Compromiso pragmatico con Venezuela: apoya reapertura fronteriza para comercio"
-    ],
-    ai_tech: [
-      "Desplegar drones inteligentes y sistemas de vigilancia avanzada; repotenciar 140 helicopteros",
-      "Implementar telemedicina",
-      "Sin propuestas especificas amplias sobre IA, economia digital o criptomonedas"
-    ],
-    education_stem: [
-      "Programa F-18: bono-seguro educativo garantizando acceso universitario a los 18 anos",
-      "Formacion tecnica desde la educacion secundaria",
-      "Expansion de matricula universitaria gratuita",
-      "Alineacion de carreras con sectores productivos",
-      "Capital semilla para emprendimiento juvenil"
-    ]
+    trade: ["Atraer IED con 'estabilidad y reglas claras'","Venezuela como oportunidad: refinar petroleo venezolano en Cucuta y Barrancabermeja para bajar precios de combustible domestico","'Abrir la frontera es urgente para reactivar el comercio'","Infraestructura moderna — 'puentes, trenes, puertos y aeropuertos' — para competitividad internacional","Acuerdos inteligentes con otros paises: transferencia de tecnologia y capacitacion","Sectores clave: agricultura, turismo, infraestructura, construccion, mineria, energias limpias"],
+    international: ["Pidio al gobierno Petro 'cuidar las relaciones internacionales con EE.UU., Europa y China'","Insto al gobierno a abrir frontera con Ecuador","Traeria al expresidente Juan Manuel Santos como asesor de seguridad, paz y relaciones internacionales","Propuso ofrecer a Petro la Cancilleria para 'renegociar la guerra contra las drogas'","Compromiso pragmatico con Venezuela: apoya reapertura fronteriza para comercio"],
+    ai_tech: ["Desplegar drones inteligentes y sistemas de vigilancia avanzada; repotenciar 140 helicopteros","Implementar telemedicina","Sin propuestas especificas amplias sobre IA, economia digital o criptomonedas"],
+    education_stem: ["Programa F-18: bono-seguro educativo garantizando acceso universitario a los 18 anos","Formacion tecnica desde la educacion secundaria","Expansion de matricula universitaria gratuita","Alineacion de carreras con sectores productivos","Capital semilla para emprendimiento juvenil"]
   },
   {
     id: "murillo", name: "Luis Gilberto Murillo", initials: "LM",
@@ -1063,69 +678,23 @@ const candidates = [
     spectrum: "center-left", spectrumLabel: "Centro-Izquierda", tagClass: "tag-center-left",
     polls: "Ex-Canciller, ex-Embajador en EE.UU.",
     bio: "Economia verde: mercados de carbono (~1M hectareas), biodiversidad como base de desarrollo. IED 'bajo modelos distintos'. Alianzas estrategicas con EE.UU. y Reino Unido para seguridad/inteligencia. Diplomacia de biodiversidad. Sin propuestas de IA ni STEM. Ex-Canciller y exembajador en EE.UU., ex-gobernador del Choco.",
-    policies: [
-      { icon: "&#127758;", text: "Politica exterior activa — experiencia diplomatica directa" },
-      { icon: "&#127795;", text: "Mercados de carbono: ~1M hectareas cubiertas" },
-      { icon: "&#128101;", text: "Inclusion de comunidades afro e indigenas" },
-      { icon: "&#9878;", text: "Descentralizacion y desarrollo territorial" }
-    ],
+    policies: [{icon:"&#127758;",text:"Politica exterior activa — experiencia diplomatica directa"},{icon:"&#127795;",text:"Mercados de carbono: ~1M hectareas cubiertas"},{icon:"&#128101;",text:"Inclusion de comunidades afro e indigenas"},{icon:"&#9878;",text:"Descentralizacion y desarrollo territorial"}],
     economic: {
       model: "Desarrollo impulsado por regiones. 'El desarrollo del pais depende de como se desarrollen esas regiones.' Economia verde y biodiversidad como bases.",
       modelTags: ["Economia verde", "Descentralizado", "Regional"],
-      tax: [
-        "Atraer inversion extranjera 'bajo modelos distintos'"
-      ],
-      budget: [
-        "Mayor participacion de entidades territoriales en recursos nacionales",
-        "Descentralizacion del gasto",
-        "Modernizar instituciones estatales del siglo XX"
-      ],
-      infrastructure: [
-        "Infraestructura 'sostenible y regenerativa' que cierre brechas territoriales",
-        "Adaptacion al cambio climatico de infraestructura existente"
-      ],
-      social: [
-        "Servicios basicos universales en regiones desatendidas (Pacifico/Choco)",
-        "Sacar jovenes de economias ilegales con oportunidades legitimas"
-      ],
-      energy: [
-        "Mercados de carbono: ~1 millon de hectareas con potencial de crecimiento via digitalizacion",
-        "Turismo de naturaleza como herramienta de inclusion social",
-        "Biodiversidad como base de desarrollo economico"
-      ],
-      employment: [
-        "Empleo juvenil como alternativa a economias ilegales",
-        "Empleos via construccion de infraestructura sostenible"
-      ],
-      fiscal: [
-        "Descentralizar gestion fiscal",
-        "IED para llenar brechas fiscales"
-      ],
-      stats: [
-        { value: "~1M ha", label: "Mercados de carbono" },
-        { value: "Regional", label: "Enfoque desarrollo" },
-        { value: "EE.UU.", label: "Relacion estrategica" }
-      ]
+      tax: ["Atraer inversion extranjera 'bajo modelos distintos'"],
+      budget: ["Mayor participacion de entidades territoriales en recursos nacionales","Descentralizacion del gasto","Modernizar instituciones estatales del siglo XX"],
+      infrastructure: ["Infraestructura 'sostenible y regenerativa' que cierre brechas territoriales","Adaptacion al cambio climatico de infraestructura existente"],
+      social: ["Servicios basicos universales en regiones desatendidas (Pacifico/Choco)","Sacar jovenes de economias ilegales con oportunidades legitimas"],
+      energy: ["Mercados de carbono: ~1 millon de hectareas con potencial de crecimiento via digitalizacion","Turismo de naturaleza como herramienta de inclusion social","Biodiversidad como base de desarrollo economico"],
+      employment: ["Empleo juvenil como alternativa a economias ilegales","Empleos via construccion de infraestructura sostenible"],
+      fiscal: ["Descentralizar gestion fiscal","IED para llenar brechas fiscales"],
+      stats: [{value:"~1M ha",label:"Mercados de carbono"},{value:"Regional",label:"Enfoque desarrollo"},{value:"EE.UU.",label:"Relacion estrategica"}]
     },
-    trade: [
-      "Como canciller, creo aperturas comerciales, oportunidades de inversion y alianzas internacionales",
-      "Inversion extranjera 'bajo modelos distintos' para enfrentar desafios fiscales",
-      "Expansion de mercados de carbono (~1M hectareas) con digitalizacion",
-      "Aprovechar biodiversidad de Colombia para mercados internacionales",
-      "Turismo de naturaleza como motor de desarrollo"
-    ],
-    international: [
-      "Alianzas estrategicas con EE.UU. y Reino Unido para seguridad transnacional e inteligencia coordinada",
-      "Defiende 'relaciones de Estado' (institucionales, no personales/politicas) con Venezuela y EE.UU.",
-      "Critico del 'Frente Amplio' de Petro como 'inexistente' y declaro que 'la paz total fracaso'",
-      "Diplomacia de biodiversidad: aprovechar estatus de Colombia como 'pais mas biodiverso del mundo'"
-    ],
-    ai_tech: [
-      "Sin propuestas especificas publicadas sobre IA, transformacion digital o politica tecnologica"
-    ],
-    education_stem: [
-      "Sin propuestas especificas. Plataforma enfocada en equidad territorial y desarrollo regional"
-    ]
+    trade: ["Como canciller, creo aperturas comerciales, oportunidades de inversion y alianzas internacionales","Inversion extranjera 'bajo modelos distintos' para enfrentar desafios fiscales","Expansion de mercados de carbono (~1M hectareas) con digitalizacion","Aprovechar biodiversidad de Colombia para mercados internacionales","Turismo de naturaleza como motor de desarrollo"],
+    international: ["Alianzas estrategicas con EE.UU. y Reino Unido para seguridad transnacional e inteligencia coordinada","Defiende 'relaciones de Estado' (institucionales, no personales/politicas) con Venezuela y EE.UU.","Critico del 'Frente Amplio' de Petro como 'inexistente' y declaro que 'la paz total fracaso'","Diplomacia de biodiversidad: aprovechar estatus de Colombia como 'pais mas biodiverso del mundo'"],
+    ai_tech: ["Sin propuestas especificas publicadas sobre IA, transformacion digital o politica tecnologica"],
+    education_stem: ["Sin propuestas especificas. Plataforma enfocada en equidad territorial y desarrollo regional"]
   },
   {
     id: "lizcano", name: "Mauricio Lizcano", initials: "ML",
@@ -1133,79 +702,23 @@ const candidates = [
     spectrum: "center", spectrumLabel: "Centro", tagClass: "tag-center",
     polls: "Ex-Ministro TIC — Harvard y MIT",
     bio: "PLATAFORMA TECH MAS FUERTE: Plan PotencIA para 1M colombianos capacitados en IA. Primera Facultad de IA en Colombia. SenaTIC: 35,000 estudiantes con certificaciones en nube, IA, programacion, ciberseguridad. VP Reyes: impuesto corp. 35%→30%, certeza juridica para inversionistas. Ex-MinTIC, Harvard y MIT.",
-    policies: [
-      { icon: "&#128187;", text: "PotencIA: 1 millon de colombianos capacitados en IA" },
-      { icon: "&#127891;", text: "SenaTIC: 35,000 estudiantes con certificaciones digitales" },
-      { icon: "&#128176;", text: "VP Reyes: impuesto corporativo de 35% a 30%" },
-      { icon: "&#9878;", text: "Reducir el Congreso en un 30%" }
-    ],
+    policies: [{icon:"&#128187;",text:"PotencIA: 1 millon de colombianos capacitados en IA"},{icon:"&#127891;",text:"SenaTIC: 35,000 estudiantes con certificaciones digitales"},{icon:"&#128176;",text:"VP Reyes: impuesto corporativo de 35% a 30%"},{icon:"&#9878;",text:"Reducir el Congreso en un 30%"}],
     economic: {
       model: "Centrismo pragmatico. Meta: 'duplicar el ingreso de los colombianos.' Formula VP tecnocrata especialista en sistema tributario.",
       modelTags: ["Centrista", "Tecnocratico", "Pro-crecimiento"],
-      tax: [
-        "Disminuir la carga tributaria sobre empresas e individuos",
-        "VP Reyes: reducir impuesto corporativo de 35% a 30% gradualmente",
-        "VP Reyes: simplificar sistema tributario, penas de carcel por evasion",
-        "Trabajadores que ganan menos de $10M COP/mes no pagarian mas"
-      ],
-      budget: [
-        "Reducir el Congreso en un 30% ('mi primera accion como presidente')",
-        "VP Reyes: presupuesto programatico, regionalizado y transparente"
-      ],
-      infrastructure: [
-        "Expansion de vivienda como motor economico",
-        "Inversion en infraestructura digital"
-      ],
-      social: [
-        "Tecnificar agricultura rural",
-        "Eliminar intermediarios en asignacion de recursos hospitalarios via tecnologia",
-        "Educacion digital conectando talento con industria global"
-      ],
-      energy: [
-        "Aumentar produccion de hidrocarburos",
-        "VP Reyes: nuevos proyectos de exploracion",
-        "VP Reyes: legalizar mercado recreativo de marihuana (ingresos tributarios)"
-      ],
-      employment: [
-        "Duplicar ingresos colombianos (meta aspiracional)",
-        "Economia digital y educacion como herramientas de empleo"
-      ],
-      fiscal: [
-        "Reducir tamano del aparato estatal",
-        "VP Reyes: sistema tributario sostenible, detener ciclo de reformas cada 18 meses"
-      ],
-      stats: [
-        { value: "-30%", label: "Reducir Congreso" },
-        { value: "35%→30%", label: "Impuesto corp." },
-        { value: "1M", label: "Capacitados en IA" },
-        { value: "x2", label: "Meta ingresos" }
-      ]
+      tax: ["Disminuir la carga tributaria sobre empresas e individuos","VP Reyes: reducir impuesto corporativo de 35% a 30% gradualmente","VP Reyes: simplificar sistema tributario, penas de carcel por evasion","Trabajadores que ganan menos de $10M COP/mes no pagarian mas"],
+      budget: ["Reducir el Congreso en un 30% ('mi primera accion como presidente')","VP Reyes: presupuesto programatico, regionalizado y transparente"],
+      infrastructure: ["Expansion de vivienda como motor economico","Inversion en infraestructura digital"],
+      social: ["Tecnificar agricultura rural","Eliminar intermediarios en asignacion de recursos hospitalarios via tecnologia","Educacion digital conectando talento con industria global"],
+      energy: ["Aumentar produccion de hidrocarburos","VP Reyes: nuevos proyectos de exploracion","VP Reyes: legalizar mercado recreativo de marihuana (ingresos tributarios)"],
+      employment: ["Duplicar ingresos colombianos (meta aspiracional)","Economia digital y educacion como herramientas de empleo"],
+      fiscal: ["Reducir tamano del aparato estatal","VP Reyes: sistema tributario sostenible, detener ciclo de reformas cada 18 meses"],
+      stats: [{value:"-30%",label:"Reducir Congreso"},{value:"35%→30%",label:"Impuesto corp."},{value:"1M",label:"Capacitados en IA"},{value:"x2",label:"Meta ingresos"}]
     },
-    trade: [
-      "Consolidar a Colombia como productor energetico estrategico",
-      "Mayor produccion de hidrocarburos como camino a crecimiento",
-      "VP Reyes: certeza juridica para inversionistas, detener ciclo de reformas cada 18 meses",
-      "Meta de duplicar ingresos colombianos via reduccion de carga tributaria y expansion productiva"
-    ],
-    international: [
-      "Sin posiciones especificas detalladas sobre relaciones bilaterales u organizaciones multilaterales"
-    ],
-    ai_tech: [
-      "AREA MAS FUERTE — como ex-Ministro TIC:",
-      "Plan PotencIA: convertir a Colombia en potencia digital con conectividad, ecosistemas de innovacion y educacion tecnologica",
-      "1 millon de colombianos capacitados en habilidades de IA",
-      "Anuncio la primera Facultad de Inteligencia Artificial en Colombia",
-      "Programa SenaTIC con SENA: 35,000 estudiantes de bachillerato tecnico graduandose con certificacion en nube, IA, programacion, ciberseguridad y analitica de datos",
-      "Educacion digital como puente entre talento colombiano e industria global",
-      "Mecanizacion agricola y avance tecnologico para areas rurales",
-      "Eliminacion de intermediarios en recursos hospitalarios via tecnologia"
-    ],
-    education_stem: [
-      "Programa SenaTIC (detallado arriba): 35,000 estudiantes con certificaciones en habilidades digitales (nube, IA, programacion, ciberseguridad, analitica de datos)",
-      "Primera Facultad de IA en Colombia",
-      "Formacion Harvard/MIT informa su filosofia de educacion-como-desarrollo",
-      "Educacion digital como pilar central de su plataforma"
-    ]
+    trade: ["Consolidar a Colombia como productor energetico estrategico","Mayor produccion de hidrocarburos como camino a crecimiento","VP Reyes: certeza juridica para inversionistas, detener ciclo de reformas cada 18 meses","Meta de duplicar ingresos colombianos via reduccion de carga tributaria y expansion productiva"],
+    international: ["Sin posiciones especificas detalladas sobre relaciones bilaterales u organizaciones multilaterales"],
+    ai_tech: ["AREA MAS FUERTE — como ex-Ministro TIC:","Plan PotencIA: convertir a Colombia en potencia digital con conectividad, ecosistemas de innovacion y educacion tecnologica","1 millon de colombianos capacitados en habilidades de IA","Anuncio la primera Facultad de Inteligencia Artificial en Colombia","Programa SenaTIC con SENA: 35,000 estudiantes de bachillerato tecnico graduandose con certificacion en nube, IA, programacion, ciberseguridad y analitica de datos","Educacion digital como puente entre talento colombiano e industria global","Mecanizacion agricola y avance tecnologico para areas rurales","Eliminacion de intermediarios en recursos hospitalarios via tecnologia"],
+    education_stem: ["Programa SenaTIC (detallado arriba): 35,000 estudiantes con certificaciones en habilidades digitales (nube, IA, programacion, ciberseguridad, analitica de datos)","Primera Facultad de IA en Colombia","Formacion Harvard/MIT informa su filosofia de educacion-como-desarrollo","Educacion digital como pilar central de su plataforma"]
   },
   {
     id: "claralopez", name: "Clara Lopez", initials: "CL",
@@ -1213,26 +726,19 @@ const candidates = [
     spectrum: "left", spectrumLabel: "Izquierda", tagClass: "tag-left",
     polls: "Primera inscrita oficialmente (Ene 31)",
     bio: "Tres ejes: Estado que cuida, economia productiva, seguridad humana. Continuidad de reformas sociales de Petro. Sin propuestas especificas de IA, STEM, comercio exterior o IED publicadas. Exsenadora, exministra de Trabajo y exconcejala de Bogota.",
-    policies: [
-      { icon: "&#128101;", text: "Defensa de derechos sociales y laborales" },
-      { icon: "&#9878;", text: "Fortalecimiento del Estado social de derecho" },
-      { icon: "&#127973;", text: "Salud publica universal de calidad" },
-      { icon: "&#128269;", text: "Lucha contra la desigualdad economica" }
-    ],
+    policies: [{icon:"&#128101;",text:"Defensa de derechos sociales y laborales"},{icon:"&#9878;",text:"Fortalecimiento del Estado social de derecho"},{icon:"&#127973;",text:"Salud publica universal de calidad"},{icon:"&#128269;",text:"Lucha contra la desigualdad economica"}],
     economic: {
       model: "Estado intervencionista con redistribucion. Tres ejes: Estado que cuida, economia productiva, seguridad humana.",
       modelTags: ["Estado social", "Redistributivo", "Derechos laborales"],
       tax: ["Orientacion hacia tributacion progresiva y redistribucion"],
-      budget: ["Ampliar y fortalecer el Estado social", "Continuidad con transformacion social del gobierno Petro"],
-      infrastructure: [],
-      social: ["Ampliar derechos laborales", "Promover equidad economica", "Expansion de proteccion social"],
-      energy: [],
-      employment: ["Fortalecer protecciones y derechos laborales", "Dignidad en condiciones laborales"],
+      budget: ["Ampliar y fortalecer el Estado social","Continuidad con transformacion social del gobierno Petro"],
+      infrastructure: [],social: ["Ampliar derechos laborales","Promover equidad economica","Expansion de proteccion social"],
+      energy: [],employment: ["Fortalecer protecciones y derechos laborales","Dignidad en condiciones laborales"],
       fiscal: ["Expansion del rol del Estado en la economia"],
-      stats: [{ value: "3 ejes", label: "Cuidar, Producir, Proteger" }]
+      stats: [{value:"3 ejes",label:"Cuidar, Producir, Proteger"}]
     },
-    trade: ["Continuidad probable con enfoque del gobierno Petro", "Sin propuestas comerciales o de IED especificas publicadas"],
-    international: ["Mantendria enfoque de politica exterior del gobierno Petro", "Sin posiciones especificas detalladas"],
+    trade: ["Continuidad probable con enfoque del gobierno Petro","Sin propuestas comerciales o de IED especificas publicadas"],
+    international: ["Mantendria enfoque de politica exterior del gobierno Petro","Sin posiciones especificas detalladas"],
     ai_tech: ["Sin propuestas especificas publicadas sobre IA o tecnologia"],
     education_stem: ["Plataforma centrada en derechos laborales, redistribucion social y consolidacion de reformas del gobierno Petro"]
   },
@@ -1242,74 +748,23 @@ const candidates = [
     spectrum: "right", spectrumLabel: "Derecha", tagClass: "tag-right",
     polls: "Ex-Contralor General",
     bio: "NUMEROS MAS DETALLADOS: IVA 19%→7%, impuesto corp. 35%→22-24%, estabilidad tributaria constitucional por 10 anos para atraer IED. Fusionar 45 entidades ($80-100B COP ahorro). Plan Colombia $600M→$2B con EE.UU. IA y vigilancia: drones, reconocimiento facial. Subsidiar credito Icetex. Ex-Contralor que recupero $39B COP.",
-    policies: [
-      { icon: "&#128176;", text: "IVA del 19% al 7% progresivamente (costo: $65B COP ano 1)" },
-      { icon: "&#128269;", text: "Fusionar 45 entidades: ahorro $80-100B COP" },
-      { icon: "&#127981;", text: "Reactivar petroleo, gas y fracking responsable" },
-      { icon: "&#9878;", text: "Impuesto corporativo de 35% a 22-24%" }
-    ],
+    policies: [{icon:"&#128176;",text:"IVA del 19% al 7% progresivamente (costo: $65B COP ano 1)"},{icon:"&#128269;",text:"Fusionar 45 entidades: ahorro $80-100B COP"},{icon:"&#127981;",text:"Reactivar petroleo, gas y fracking responsable"},{icon:"&#9878;",text:"Impuesto corporativo de 35% a 22-24%"}],
     economic: {
       model: "Libre mercado con racionalizacion masiva del Estado. Plan fiscal mas cuantificado entre candidatos.",
       modelTags: ["Libre mercado", "Racionalizacion estatal", "Numeros concretos"],
-      tax: [
-        "BANDERA: Reducir IVA del 19% al 7% progresivamente (costo ano 1: ~$65B COP)",
-        "Impuesto corporativo de 35% a 22-24%",
-        "Blindaje constitucional: estabilidad tributaria por 10 anos",
-        "Combatir evasion y contrabando: ~$100B COP recuperables"
-      ],
-      budget: [
-        "$80-100B COP en ahorros via fusion de 45 entidades estatales (sin recortes de empleo)",
-        "Redirigir ahorros a inversion social"
-      ],
+      tax: ["BANDERA: Reducir IVA del 19% al 7% progresivamente (costo ano 1: ~$65B COP)","Impuesto corporativo de 35% a 22-24%","Blindaje constitucional: estabilidad tributaria por 10 anos","Combatir evasion y contrabando: ~$100B COP recuperables"],
+      budget: ["$80-100B COP en ahorros via fusion de 45 entidades estatales (sin recortes de empleo)","Redirigir ahorros a inversion social"],
       infrastructure: ["Expandir programas de 'obras por impuestos'"],
-      social: ["Redirigir $80-100B COP de ahorros a inversion social", "Subsidiar credito Icetex con ahorros de austeridad"],
-      energy: [
-        "Reactivar exploracion de petroleo y gas",
-        "Desarrollar proyectos piloto de fracking bajo estandares ambientales",
-        "Colombia actualmente importa gas 35% mas costoso"
-      ],
-      employment: ["Menor IVA estimula crecimiento empresarial y contratacion", "120,000 reservistas militares movilizados"],
-      fiscal: [
-        "Austeridad + reforma institucional + compras digitales + licitaciones transparentes + controles anti-fraude",
-        "Recupero $39B COP durante gestion como contralor via tecnologia"
-      ],
-      stats: [
-        { value: "19%→7%", label: "IVA progresivo" },
-        { value: "$80-100B", label: "COP ahorro estatal" },
-        { value: "35%→22%", label: "Impuesto corporativo" },
-        { value: "$100B", label: "COP anti-evasion" },
-        { value: "45", label: "Entidades a fusionar" },
-        { value: "10 anos", label: "Estabilidad tributaria" }
-      ]
+      social: ["Redirigir $80-100B COP de ahorros a inversion social","Subsidiar credito Icetex con ahorros de austeridad"],
+      energy: ["Reactivar exploracion de petroleo y gas","Desarrollar proyectos piloto de fracking bajo estandares ambientales","Colombia actualmente importa gas 35% mas costoso"],
+      employment: ["Menor IVA estimula crecimiento empresarial y contratacion","120,000 reservistas militares movilizados"],
+      fiscal: ["Austeridad + reforma institucional + compras digitales + licitaciones transparentes + controles anti-fraude","Recupero $39B COP durante gestion como contralor via tecnologia"],
+      stats: [{value:"19%→7%",label:"IVA progresivo"},{value:"$80-100B",label:"COP ahorro estatal"},{value:"35%→22%",label:"Impuesto corporativo"},{value:"$100B",label:"COP anti-evasion"},{value:"45",label:"Entidades a fusionar"},{value:"10 anos",label:"Estabilidad tributaria"}]
     },
-    trade: [
-      "Clausula constitucional de estabilidad tributaria por 10 anos para atraer IED",
-      "Expansion de programas 'obras por impuestos' para incentivos de inversion",
-      "IVA al 7% espera triplicar recaudo via efecto multiplicador en 1-1.5 anos",
-      "Impuesto corporativo de 35% a 22-24% para competitividad",
-      "Compras digitales del gobierno: subastas inversas, analitica de precios, controles anti-fraude",
-      "Reactivar petroleo/gas: Colombia importa gas 35% mas costoso externamente"
-    ],
-    international: [
-      "Expandir Plan Colombia de $600M a $2,000M en asistencia de EE.UU.",
-      "Cooperacion de seguridad con EE.UU. e Israel para lucha antinarcoticos",
-      "Obtener apoyo militar, de inteligencia y social de la UE",
-      "Restaurar exportaciones de carbon a Israel valoradas en $400M anuales",
-      "Abordo el aumento arancelario del 10% impuesto a bienes colombianos (aranceles Trump)",
-      "Frontera con Venezuela: mantener comercio legitimo, prevenir cruces de grupos armados",
-      "Desplegar 120,000 reservistas para recuperacion territorial"
-    ],
-    ai_tech: [
-      "IA y vigilancia: drones, camaras de reconocimiento facial, sistemas de IA y sensores para seguridad",
-      "Tecnologia de salud: pulseras inteligentes, atencion medica remota, monitoreo de signos vitales",
-      "Compras digitales del gobierno: plataformas con analitica de precios y controles anti-fraude",
-      "Recupero $39B COP como contralor a traves de supervision habilitada por tecnologia"
-    ],
-    education_stem: [
-      "Subsidiar tasas de credito Icetex con ahorros de austeridad",
-      "Educacion y oportunidades de empleo como prioridad de primeros 100 dias",
-      "Reconstruir Mi Casa Ya y programas de vivienda social"
-    ]
+    trade: ["Clausula constitucional de estabilidad tributaria por 10 anos para atraer IED","Expansion de programas 'obras por impuestos' para incentivos de inversion","IVA al 7% espera triplicar recaudo via efecto multiplicador en 1-1.5 anos","Impuesto corporativo de 35% a 22-24% para competitividad","Compras digitales del gobierno: subastas inversas, analitica de precios, controles anti-fraude","Reactivar petroleo/gas: Colombia importa gas 35% mas costoso externamente"],
+    international: ["Expandir Plan Colombia de $600M a $2,000M en asistencia de EE.UU.","Cooperacion de seguridad con EE.UU. e Israel para lucha antinarcoticos","Obtener apoyo militar, de inteligencia y social de la UE","Restaurar exportaciones de carbon a Israel valoradas en $400M anuales","Abordo el aumento arancelario del 10% impuesto a bienes colombianos (aranceles Trump)","Frontera con Venezuela: mantener comercio legitimo, prevenir cruces de grupos armados","Desplegar 120,000 reservistas para recuperacion territorial"],
+    ai_tech: ["IA y vigilancia: drones, camaras de reconocimiento facial, sistemas de IA y sensores para seguridad","Tecnologia de salud: pulseras inteligentes, atencion medica remota, monitoreo de signos vitales","Compras digitales del gobierno: plataformas con analitica de precios y controles anti-fraude","Recupero $39B COP como contralor a traves de supervision habilitada por tecnologia"],
+    education_stem: ["Subsidiar tasas de credito Icetex con ahorros de austeridad","Educacion y oportunidades de empleo como prioridad de primeros 100 dias","Reconstruir Mi Casa Ya y programas de vivienda social"]
   },
   {
     id: "palacios", name: "Daniel Palacios", initials: "DP",
@@ -1317,35 +772,19 @@ const candidates = [
     spectrum: "right", spectrumLabel: "Derecha", tagClass: "tag-right",
     polls: "Ex-Min. Interior (Duque) — Perdio Gran Consulta",
     bio: "Expandir Plan Colombia de $600M a $2B en asistencia de EE.UU. Restaurar exportaciones de carbon a Israel ($400M). Bajar impuestos y gasolina para reducir costo de vida. Sin propuestas de IA, STEM o IED especificas. Ex-Min. Interior (Duque), perdio Gran Consulta ante Valencia.",
-    policies: [
-      { icon: "&#128274;", text: "Restablecer autoridad estatal en zonas de conflicto" },
-      { icon: "&#128176;", text: "Bajar impuestos y precios de gasolina" },
-      { icon: "&#9878;", text: "Eficiencia en gestion publica" },
-      { icon: "&#128274;", text: "Lucha frontal contra el narcotrafico" }
-    ],
+    policies: [{icon:"&#128274;",text:"Restablecer autoridad estatal en zonas de conflicto"},{icon:"&#128176;",text:"Bajar impuestos y precios de gasolina"},{icon:"&#9878;",text:"Eficiencia en gestion publica"},{icon:"&#128274;",text:"Lucha frontal contra el narcotrafico"}],
     economic: {
       model: "Libre mercado con enfoque en reduccion del costo de vida.",
       modelTags: ["Libre mercado", "Costo de vida", "Pro-seguridad"],
-      tax: ["Bajar impuestos ampliamente", "Bajar precios de gasolina (reducir impuestos a combustibles)"],
+      tax: ["Bajar impuestos ampliamente","Bajar precios de gasolina (reducir impuestos a combustibles)"],
       budget: ["Tres pilares: seguridad, salud, reduccion del costo de vida"],
-      infrastructure: [],
-      social: ["Reducir costo de vida como politica social", "Mejoras al sistema de salud"],
-      energy: ["Generalmente pro-hidrocarburos"],
-      employment: ["Mayores oportunidades via menores costos"],
+      infrastructure: [],social: ["Reducir costo de vida como politica social","Mejoras al sistema de salud"],
+      energy: ["Generalmente pro-hidrocarburos"],employment: ["Mayores oportunidades via menores costos"],
       fiscal: ["Menores impuestos y precios de gasolina"],
-      stats: [{ value: "3 pilares", label: "Seguridad, Salud, Costos" }, { value: "↓", label: "Gasolina" }]
+      stats: [{value:"3 pilares",label:"Seguridad, Salud, Costos"},{value:"↓",label:"Gasolina"}]
     },
-    trade: [
-      "Reduccion de impuestos como incentivo general a inversion",
-      "Sin propuestas especificas de IED, acuerdos comerciales o aranceles"
-    ],
-    international: [
-      "Expandir Plan Colombia de $600M a $2,000M en asistencia de EE.UU.",
-      "Obtener apoyo militar, de inteligencia y social de la UE",
-      "Restaurar exportaciones de carbon a Israel valoradas en $400M anuales",
-      "Abordo el aumento arancelario del 10% sobre bienes colombianos",
-      "Frontera con Venezuela: mantener comercio legitimo, desplegar fuerza militar contra grupos ilegales"
-    ],
+    trade: ["Reduccion de impuestos como incentivo general a inversion","Sin propuestas especificas de IED, acuerdos comerciales o aranceles"],
+    international: ["Expandir Plan Colombia de $600M a $2,000M en asistencia de EE.UU.","Obtener apoyo militar, de inteligencia y social de la UE","Restaurar exportaciones de carbon a Israel valoradas en $400M anuales","Abordo el aumento arancelario del 10% sobre bienes colombianos","Frontera con Venezuela: mantener comercio legitimo, desplegar fuerza militar contra grupos ilegales"],
     ai_tech: ["Sin propuestas especificas publicadas sobre IA o politica tecnologica"],
     education_stem: ["Educacion entre prioridades de primeros 100 dias, pero sin propuestas STEM o vocacionales detalladas"]
   },
@@ -1355,50 +794,22 @@ const candidates = [
     spectrum: "right", spectrumLabel: "Derecha", tagClass: "tag-right",
     polls: "Empresario — SBOLab (35+ empresas en tech/finanzas)",
     bio: "IVA 19%→10%, gasolina de $16K a $8K COP. Dirigir el pais como empresa — fundo 35+ empresas en tech/finanzas (SBOLab). Educacion basada en valores estilo japones + educacion financiera via Fundacion Fin Social. Salir de la Corte Penal Internacional. Sin propuestas especificas de IA o STEM. Autofinancia campana.",
-    policies: [
-      { icon: "&#128176;", text: "Reducir IVA del 19% al 10%" },
-      { icon: "&#127806;", text: "Soberania alimentaria y desarrollo agroindustrial" },
-      { icon: "&#128739;", text: "Infraestructura vial para el campo" },
-      { icon: "&#9878;", text: "Salir de la Corte Penal Internacional" }
-    ],
+    policies: [{icon:"&#128176;",text:"Reducir IVA del 19% al 10%"},{icon:"&#127806;",text:"Soberania alimentaria y desarrollo agroindustrial"},{icon:"&#128739;",text:"Infraestructura vial para el campo"},{icon:"&#9878;",text:"Salir de la Corte Penal Internacional"}],
     economic: {
       model: "Dirigir el pais como empresa. 'El problema de la economia comienza con lideres que no dan confianza.'",
       modelTags: ["Empresarial", "Eficiencia", "Credibilidad"],
-      tax: [
-        "Reducir IVA al 10% (desde 19%)",
-        "Propuesta: cortar precio gasolina de $16,000 a $8,000 COP",
-        "Menores impuestos generan mas recaudo via crecimiento (curva de Laffer)"
-      ],
-      budget: [
-        "Eliminar ineficiencia estatal y subsidios innecesarios",
-        "No cortar programas sociales, sino eliminar desperdicio"
-      ],
+      tax: ["Reducir IVA al 10% (desde 19%)","Propuesta: cortar precio gasolina de $16,000 a $8,000 COP","Menores impuestos generan mas recaudo via crecimiento (curva de Laffer)"],
+      budget: ["Eliminar ineficiencia estatal y subsidios innecesarios","No cortar programas sociales, sino eliminar desperdicio"],
       infrastructure: ["Infraestructura vial para el campo"],
       social: ["Aumento significativo del salario minimo ajustado a costo real de vida"],
-      energy: [],
-      employment: ["35+ empresas creadas como prueba de capacidad"],
-      fiscal: ["Gestion fiscal por eficiencia", "Campana autofinanciada (sin deudas politicas)"],
-      stats: [{ value: "19%→10%", label: "Reduccion IVA" }, { value: "35+", label: "Empresas fundadas" }]
+      energy: [],employment: ["35+ empresas creadas como prueba de capacidad"],
+      fiscal: ["Gestion fiscal por eficiencia","Campana autofinanciada (sin deudas politicas)"],
+      stats: [{value:"19%→10%",label:"Reduccion IVA"},{value:"35+",label:"Empresas fundadas"}]
     },
-    trade: [
-      "Perfil empresarial (SBOLab venture builder) sugiere orientacion pro-mercado",
-      "Fundacion Fin Social: microfinanzas y emprendimiento para poblaciones vulnerables",
-      "Sin propuestas especificas de comercio, IED o aranceles publicadas"
-    ],
-    international: [
-      "Propone salir de la Corte Penal Internacional (Estatuto de Roma)",
-      "Enviar prisioneros potencialmente a instalaciones estilo El Salvador",
-      "Reformas constitucionales sugieren enfoque nacionalista de soberania",
-      "Sin posiciones especificas sobre EE.UU., China, UE o Venezuela"
-    ],
-    ai_tech: [
-      "Experiencia en emprendimiento tecnologico (SBOLab) pero sin propuestas especificas de IA, digital o cripto en su plataforma de campana"
-    ],
-    education_stem: [
-      "Educacion basada en valores y convivencia civica desde la infancia, inspirada en modelos japoneses",
-      "Via Fundacion Fin Social: educacion financiera y acceso a credito para pequenos empresarios",
-      "Sin propuestas especificas de STEM, SENA, universidades o I+D"
-    ]
+    trade: ["Perfil empresarial (SBOLab venture builder) sugiere orientacion pro-mercado","Fundacion Fin Social: microfinanzas y emprendimiento para poblaciones vulnerables","Sin propuestas especificas de comercio, IED o aranceles publicadas"],
+    international: ["Propone salir de la Corte Penal Internacional (Estatuto de Roma)","Enviar prisioneros potencialmente a instalaciones estilo El Salvador","Reformas constitucionales sugieren enfoque nacionalista de soberania","Sin posiciones especificas sobre EE.UU., China, UE o Venezuela"],
+    ai_tech: ["Experiencia en emprendimiento tecnologico (SBOLab) pero sin propuestas especificas de IA, digital o cripto en su plataforma de campana"],
+    education_stem: ["Educacion basada en valores y convivencia civica desde la infancia, inspirada en modelos japoneses","Via Fundacion Fin Social: educacion financiera y acceso a credito para pequenos empresarios","Sin propuestas especificas de STEM, SENA, universidades o I+D"]
   }
 ];
 
@@ -1408,7 +819,6 @@ candidates.forEach(c => {
   const card = document.createElement('div');
   card.className = 'card';
   card.dataset.spectrum = c.spectrum;
-  card.dataset.id = c.id;
   card.innerHTML = `
     <div class="card-top">
       <div class="avatar">${c.initials}</div>
@@ -1416,7 +826,7 @@ candidates.forEach(c => {
         <div class="card-name">${c.name}</div>
         <div class="card-party">${c.party}</div>
         <div class="card-vp">VP: ${c.vp}</div>
-        <span class="spectrum-tag ${c.tagClass}">${c.spectrumLabel}</span>
+        <span class="badge ${c.tagClass}">${c.spectrumLabel}</span>
       </div>
     </div>
     <div class="card-body">
@@ -1424,7 +834,7 @@ candidates.forEach(c => {
       <div class="policies-title">Propuestas Clave</div>
       ${c.policies.map(p => `<div class="policy-item"><span class="policy-icon">${p.icon}</span><span class="policy-text">${p.text}</span></div>`).join('')}
       <div class="card-cta">
-        Ver propuestas detalladas
+        ver propuestas detalladas
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
       </div>
     </div>
@@ -1440,7 +850,7 @@ const modalClose = document.getElementById('modal-close');
 
 function renderList(items) {
   if (!items || items.length === 0) return '<p class="modal-empty">Sin propuestas especificas publicadas en este tema.</p>';
-  return items.map(item => `<div class="modal-policy-item"><span class="icon">&#8226;</span><span>${item}</span></div>`).join('');
+  return items.map(item => `<div class="modal-policy-item"><span class="icon">&mdash;</span><span>${item}</span></div>`).join('');
 }
 
 function openModal(c) {
@@ -1450,78 +860,49 @@ function openModal(c) {
       <div class="modal-avatar">${c.initials}</div>
       <div class="modal-header-info">
         <h2>${c.name}</h2>
-        <div class="modal-party">${c.party} &middot; <span class="spectrum-tag ${c.tagClass}" style="font-size:0.7rem;">${c.spectrumLabel}</span></div>
-        <div class="modal-vp">Formula VP: ${c.vp}</div>
-        <div style="font-size:0.78rem; color:var(--text-light); margin-top:4px;">${c.polls}</div>
+        <div class="modal-party">${c.party} &middot; <span class="badge ${c.tagClass}" style="font-size:0.55rem;">${c.spectrumLabel}</span></div>
+        <div class="modal-vp">VP: ${c.vp}</div>
+        <div style="font-size:0.65rem; color:hsl(var(--muted-foreground)); margin-top:3px;">${c.polls}</div>
       </div>
     </div>
     <div class="modal-bio">${c.bio}</div>
     <div class="modal-body">
-      <!-- Tabs -->
       <div class="modal-tabs">
         <button class="modal-tab active" data-tab="economia">Economia</button>
-        <button class="modal-tab" data-tab="comercio">Comercio e IED</button>
-        <button class="modal-tab" data-tab="internacional">Rel. Internacionales</button>
-        <button class="modal-tab" data-tab="tecnologia">IA y Tecnologia</button>
+        <button class="modal-tab" data-tab="comercio">Comercio / IED</button>
+        <button class="modal-tab" data-tab="internacional">Internacional</button>
+        <button class="modal-tab" data-tab="tecnologia">IA / Tech</button>
         <button class="modal-tab" data-tab="educacion">Educacion STEM</button>
       </div>
-
-      <!-- Tab: Economia -->
       <div class="modal-tab-panel active" data-panel="economia">
         <div class="modal-section">
-          <div class="modal-section-title">Modelo Economico</div>
-          <p style="font-size:0.88rem; line-height:1.6; margin-bottom:10px;">${e.model}</p>
+          <div class="modal-section-title">modelo economico</div>
+          <p style="font-size:0.75rem; line-height:1.55; margin-bottom:8px;">${e.model}</p>
           <div class="modal-tags">${e.modelTags.map(t => `<span class="modal-tag">${t}</span>`).join('')}</div>
         </div>
-        ${e.stats && e.stats.length ? `
-        <div class="modal-section">
-          <div class="modal-section-title">Cifras Clave</div>
-          <div class="modal-stat-grid">${e.stats.map(s => `<div class="modal-stat"><div class="value">${s.value}</div><div class="label">${s.label}</div></div>`).join('')}</div>
-        </div>` : ''}
-        <div class="modal-section"><div class="modal-section-title">&#128176; Politica Tributaria</div>${renderList(e.tax)}</div>
-        <div class="modal-section"><div class="modal-section-title">&#128202; Presupuesto y Gasto</div>${renderList(e.budget)}</div>
-        <div class="modal-section"><div class="modal-section-title">&#127959; Infraestructura</div>${renderList(e.infrastructure)}</div>
-        <div class="modal-section"><div class="modal-section-title">&#128101; Gasto Social</div>${renderList(e.social)}</div>
-        <div class="modal-section"><div class="modal-section-title">&#9889; Energia y Medio Ambiente</div>${renderList(e.energy)}</div>
-        <div class="modal-section"><div class="modal-section-title">&#128188; Empleo y Trabajo</div>${renderList(e.employment)}</div>
-        <div class="modal-section"><div class="modal-section-title">&#128200; Politica Fiscal</div>${renderList(e.fiscal)}</div>
+        ${e.stats && e.stats.length ? `<div class="modal-section"><div class="modal-section-title">cifras clave</div><div class="modal-stat-grid">${e.stats.map(s => `<div class="modal-stat"><div class="value">${s.value}</div><div class="label">${s.label}</div></div>`).join('')}</div></div>` : ''}
+        <div class="modal-section"><div class="modal-section-title">politica tributaria</div>${renderList(e.tax)}</div>
+        <div class="modal-section"><div class="modal-section-title">presupuesto y gasto</div>${renderList(e.budget)}</div>
+        <div class="modal-section"><div class="modal-section-title">infraestructura</div>${renderList(e.infrastructure)}</div>
+        <div class="modal-section"><div class="modal-section-title">gasto social</div>${renderList(e.social)}</div>
+        <div class="modal-section"><div class="modal-section-title">energia y medio ambiente</div>${renderList(e.energy)}</div>
+        <div class="modal-section"><div class="modal-section-title">empleo y trabajo</div>${renderList(e.employment)}</div>
+        <div class="modal-section"><div class="modal-section-title">politica fiscal</div>${renderList(e.fiscal)}</div>
       </div>
-
-      <!-- Tab: Comercio e IED -->
       <div class="modal-tab-panel" data-panel="comercio">
-        <div class="modal-section">
-          <div class="modal-section-title">&#127758; Comercio Exterior e Inversion Extranjera Directa</div>
-          ${renderList(c.trade)}
-        </div>
+        <div class="modal-section"><div class="modal-section-title">comercio exterior e inversion extranjera directa</div>${renderList(c.trade)}</div>
       </div>
-
-      <!-- Tab: Internacional -->
       <div class="modal-tab-panel" data-panel="internacional">
-        <div class="modal-section">
-          <div class="modal-section-title">&#127760; Alianzas Internacionales y Geopolitica</div>
-          ${renderList(c.international)}
-        </div>
+        <div class="modal-section"><div class="modal-section-title">alianzas internacionales y geopolitica</div>${renderList(c.international)}</div>
       </div>
-
-      <!-- Tab: Tecnologia -->
       <div class="modal-tab-panel" data-panel="tecnologia">
-        <div class="modal-section">
-          <div class="modal-section-title">&#129302; Inteligencia Artificial y Tecnologia</div>
-          ${renderList(c.ai_tech)}
-        </div>
+        <div class="modal-section"><div class="modal-section-title">inteligencia artificial y tecnologia</div>${renderList(c.ai_tech)}</div>
       </div>
-
-      <!-- Tab: Educacion -->
       <div class="modal-tab-panel" data-panel="educacion">
-        <div class="modal-section">
-          <div class="modal-section-title">&#127891; Educacion STEM, Vocacional y Habilidades</div>
-          ${renderList(c.education_stem)}
-        </div>
+        <div class="modal-section"><div class="modal-section-title">educacion stem, vocacional y habilidades</div>${renderList(c.education_stem)}</div>
       </div>
     </div>
   `;
-
-  // Tab switching
   modalContent.querySelectorAll('.modal-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       modalContent.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
@@ -1530,26 +911,20 @@ function openModal(c) {
       modalContent.querySelector(`[data-panel="${tab.dataset.tab}"]`).classList.add('active');
     });
   });
-
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
-function closeModal() {
-  overlay.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
+function closeModal() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
 modalClose.addEventListener('click', closeModal);
 overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-// ========== Particle Background ==========
+// ========== Particles ==========
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 let particles = [];
-const COLORS = ['#FCD116', '#003893', '#CE1126', 'rgba(255,255,255,0.3)'];
-
+const COLORS = ['#FCD116','#003893','#CE1126','rgba(255,255,255,0.2)'];
 function resizeCanvas() {
   canvas.width = canvas.offsetWidth * window.devicePixelRatio;
   canvas.height = canvas.offsetHeight * window.devicePixelRatio;
@@ -1557,62 +932,34 @@ function resizeCanvas() {
 }
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
-
 class Particle {
   constructor() { this.reset(); }
   reset() {
-    this.x = Math.random() * canvas.offsetWidth;
-    this.y = Math.random() * canvas.offsetHeight;
-    this.size = Math.random() * 2.5 + 0.5;
-    this.speedX = (Math.random() - 0.5) * 0.4;
-    this.speedY = (Math.random() - 0.5) * 0.4;
-    this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
-    this.opacity = Math.random() * 0.5 + 0.1;
-    this.pulse = Math.random() * Math.PI * 2;
+    this.x = Math.random()*canvas.offsetWidth; this.y = Math.random()*canvas.offsetHeight;
+    this.size = Math.random()*2+0.5; this.speedX = (Math.random()-0.5)*0.3;
+    this.speedY = (Math.random()-0.5)*0.3;
+    this.color = COLORS[Math.floor(Math.random()*COLORS.length)];
+    this.opacity = Math.random()*0.4+0.1; this.pulse = Math.random()*Math.PI*2;
   }
   update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    this.pulse += 0.02;
-    if (this.x < 0 || this.x > canvas.offsetWidth || this.y < 0 || this.y > canvas.offsetHeight) this.reset();
+    this.x += this.speedX; this.y += this.speedY; this.pulse += 0.02;
+    if(this.x<0||this.x>canvas.offsetWidth||this.y<0||this.y>canvas.offsetHeight) this.reset();
   }
   draw() {
-    const o = this.opacity + Math.sin(this.pulse) * 0.15;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = this.color;
-    ctx.globalAlpha = Math.max(0, o);
-    ctx.fill();
-    ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fillStyle = this.color; ctx.globalAlpha = Math.max(0,this.opacity+Math.sin(this.pulse)*0.1);
+    ctx.fill(); ctx.globalAlpha = 1;
   }
 }
-
-for (let i = 0; i < 80; i++) particles.push(new Particle());
-
+for(let i=0;i<60;i++) particles.push(new Particle());
 function drawLines() {
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 120) {
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `rgba(255,255,255,${0.04 * (1 - dist / 120)})`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-      }
-    }
+  for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++) {
+    const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<100){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle=`rgba(255,255,255,${0.03*(1-dist/100)})`;ctx.lineWidth=0.5;ctx.stroke();}
   }
 }
-
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-  particles.forEach(p => { p.update(); p.draw(); });
-  drawLines();
-  requestAnimationFrame(animateParticles);
-}
+function animateParticles(){ctx.clearRect(0,0,canvas.offsetWidth,canvas.offsetHeight);particles.forEach(p=>{p.update();p.draw();});drawLines();requestAnimationFrame(animateParticles);}
 animateParticles();
 
 // ========== Filter ==========
@@ -1625,15 +972,8 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
       if (filter === 'all' || card.dataset.spectrum === filter) {
         card.style.display = '';
         card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        setTimeout(() => {
-          card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
-        }, i * 50);
-      } else {
-        card.style.display = 'none';
-      }
+        setTimeout(() => { card.style.transition = 'opacity 0.3s ease'; card.style.opacity = '1'; }, i * 30);
+      } else { card.style.display = 'none'; }
     });
   });
 });
@@ -1641,30 +981,21 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 // ========== Scroll Reveal ==========
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-      observer.unobserve(entry.target);
-    }
+    if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; observer.unobserve(entry.target); }
   });
 }, { threshold: 0.1 });
-
 document.querySelectorAll('.card, .vote-section, .step, .macro-banner, .polymarket-section').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(30px)';
-  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  observer.observe(el);
+  el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.4s ease, transform 0.4s ease'; observer.observe(el);
 });
 
 // ========== Countdown ==========
 const badge = document.querySelector('.date-badge');
 const electionDate = new Date('2026-05-31');
 function updateCountdown() {
-  const now = new Date();
-  const diff = electionDate - now;
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  if (days > 0) badge.textContent = `31 de Mayo, 2026 — Faltan ${days} dias`;
-  else badge.textContent = '31 de Mayo, 2026';
+  const diff = electionDate - new Date();
+  const days = Math.floor(diff / (1000*60*60*24));
+  badge.textContent = days > 0 ? `31 de Mayo, 2026 — faltan ${days} dias` : '31 de Mayo, 2026';
 }
 updateCountdown();
 </script>
